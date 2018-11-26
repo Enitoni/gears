@@ -22,16 +22,17 @@ export interface ClientRegisterReturn<C, M> {
   getMessageContent: (message: M) => string
 }
 
-export abstract class ClientAdapter<Client, ClientOptions, Message = unknown> extends Emitter<
-  ClientAdapterEvents<Message>
-> {
-  protected client: ClientRegisterReturn<Client, Message>["client"]
-  public start: ClientRegisterReturn<Client, Message>["start"]
+export abstract class ClientAdapter<Client, ClientOptions, Message = unknown>
+  extends Emitter<ClientAdapterEvents<Message>>
+  implements ClientRegisterReturn<Client, Message> {
+  public client: Client
+  public start: () => Promise<void>
+  public getMessageContent: (message: Message) => string
 
   constructor(options: ClientOptions) {
     super()
 
-    const { client, start } = this.register(options, {
+    const { client, start, getMessageContent } = this.register(options, {
       message: message => this.emit("message", message),
       connect: () => this.emit("connect", undefined),
       reconnecting: () => this.emit("reconnecting", undefined),
@@ -41,6 +42,7 @@ export abstract class ClientAdapter<Client, ClientOptions, Message = unknown> ex
 
     this.client = client
     this.start = start
+    this.getMessageContent = getMessageContent
   }
 
   protected abstract register(
