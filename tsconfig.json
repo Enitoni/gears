@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "lib": ["esnext"],
+    "strict": true,
+    "sourceRoot": "./src",
+    "rootDir": "./src",
+    "outDir": "build",
+    "declaration": true,
+    "declarationDir": "build"
+  },
+  "exclude": ["node_modules", "build"]
+}

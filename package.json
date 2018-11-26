@@ -1,0 +1,21 @@
+{
+  "name": "@enitoni/gears",
+  "version": "2.0.0",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "repository": "https://gitlab.com/enitoni/gears-next.git",
+  "author": "enitoni <enitoni@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "build/*",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^10.3.2",
+    "decko": "^1.2.0",
+    "typescript": "^3.0.1"
+  }
+}
