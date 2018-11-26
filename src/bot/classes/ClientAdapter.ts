@@ -1,6 +1,6 @@
 import { Emitter } from "../../core/classes"
 
-export interface ClientAdapterEvents<M> {
+export interface AdapterEvents<M> {
   message: M
   connect: void
   reconnecting: void
@@ -8,7 +8,7 @@ export interface ClientAdapterEvents<M> {
   error: any
 }
 
-export interface ClientRegisterHooks<M> {
+export interface AdapterHooks<M> {
   message: (message: M) => void
   connect: () => void
   reconnecting: () => void
@@ -16,23 +16,24 @@ export interface ClientRegisterHooks<M> {
   error: (error: any) => void
 }
 
-export interface ClientRegisterReturn<C, M> {
+export interface AdapterResult<C, M> {
   client: C
-  start: () => Promise<void>
-  getMessageContent: (message: M) => string
+  methods: {
+    start: () => Promise<void>
+    getMessageContent: (message: M) => string
+  }
 }
 
-export abstract class ClientAdapter<Client, ClientOptions, Message = unknown>
-  extends Emitter<ClientAdapterEvents<Message>>
-  implements ClientRegisterReturn<Client, Message> {
-  public client: Client
-  public start: () => Promise<void>
-  public getMessageContent: (message: Message) => string
+export abstract class ClientAdapter<C = unknown, CO = unknown, M = unknown>
+  extends Emitter<AdapterEvents<M>>
+  implements AdapterResult<C, M> {
+  public client: C
+  public methods: AdapterResult<C, M>["methods"]
 
-  constructor(options: ClientOptions) {
+  constructor(options: CO) {
     super()
 
-    const { client, start, getMessageContent } = this.register(options, {
+    const { client, methods } = this.register(options, {
       message: message => this.emit("message", message),
       connect: () => this.emit("connect", undefined),
       reconnecting: () => this.emit("reconnecting", undefined),
@@ -41,12 +42,8 @@ export abstract class ClientAdapter<Client, ClientOptions, Message = unknown>
     })
 
     this.client = client
-    this.start = start
-    this.getMessageContent = getMessageContent
+    this.methods = methods
   }
 
-  protected abstract register(
-    options: ClientOptions,
-    hooks: ClientRegisterHooks<Message>
-  ): ClientRegisterReturn<Client, Message>
+  protected abstract register(options: CO, hooks: AdapterHooks<M>): AdapterResult<C, M>
 }
