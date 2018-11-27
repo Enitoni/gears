@@ -48,4 +48,19 @@ export class Emitter<Events extends object> {
 
     this.listeners.set(type, listeners)
   }
+
+  @bind
+  public getListenerCount<E extends keyof Events>(type: E) {
+    return (this.listeners.get(type) || []).length
+  }
+
+  @bind
+  public hasListeners<E extends keyof Events>(type: E) {
+    return this.getListenerCount(type) > 0
+  }
+
+  @bind
+  public pipe<E extends keyof Events, T extends Emitter<Events>>(type: E, emitter: T) {
+    this.on(type, (value: Events[E]) => emitter.emit(type, value))
+  }
 }
