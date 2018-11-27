@@ -16,7 +16,7 @@ export class Emitter<Events extends object> {
   }
 
   @bind
-  protected emit<E extends keyof Events>(type: E, data: Events[E]) {
+  public emit<E extends keyof Events>(type: E, data: Events[E]) {
     const listeners = this.listeners.get(type)
     if (!listeners) return
 
