@@ -6,6 +6,7 @@
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "sourceMap": true,
     "lib": ["esnext"],
     "strict": true,
