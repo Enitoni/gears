@@ -11,11 +11,16 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.9",
     "@types/node": "^10.3.2",
     "decko": "^1.2.0",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
     "typescript": "^3.0.1"
-  }
+  },
+  "dependencies": {}
 }
