@@ -11,7 +11,10 @@ export class Emitter<Events extends object> {
   private listeners = new Map<keyof Events, EventListener[]>()
 
   private addListener<E extends keyof Events>(type: E, listener: EventListener) {
-    const listeners = this.listeners.get(type) || []
+    const listeners = (this.listeners.get(type) || []).filter(
+      l => l.handler !== listener.handler
+    )
+
     this.listeners.set(type, [...listeners, listener])
   }
 
