@@ -27,7 +27,7 @@ test("Service", async () => {
   }
 
   const bot = getMockBot()
-  const manager = getMockServiceManager(bot, [Service])
+  const manager = getMockServiceManager(bot, [TestService])
 
   manager._initialize()
   manager._start()
