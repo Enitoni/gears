@@ -86,4 +86,8 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
   private handleError(error: any) {
     emitOrThrow(this, error)
   }
+
+  public get client() {
+    return this.adapter.client
+  }
 }

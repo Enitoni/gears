@@ -1,6 +1,6 @@
 import { MockCommand, MockCommandGroup, MockContext } from "../../command/mocks"
 import { MatchResult } from "../../command/types"
-import { getMockBot } from "../mocks"
+import { getMockBot, MockClient } from "../mocks"
 
 test("Bot", async () => {
   const action = jest.fn(() => {
@@ -47,6 +47,8 @@ test("Bot", async () => {
 
   bot.on("match", handleMatch)
   bot.on("response", handleResponse)
+
+  expect(bot.client).toBeInstanceOf(MockClient)
 
   /**
    * Check that the bot throws if no error handler on the emitter is set
