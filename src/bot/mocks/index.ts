@@ -1,3 +1,3 @@
+export * from "./getMockBot"
 export * from "./MockAdapter"
 export * from "./MockClient"
-export * from "./mockBot"

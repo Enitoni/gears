@@ -1,6 +1,6 @@
 import { Emitter } from "../classes"
 
-type ErrorEmitter = Emitter<{ error: any }>
+type ErrorEmitter = Emitter<{ error: any; [key: string]: any }>
 
 export const emitOrThrow = <T extends ErrorEmitter>(
   emitter: T,
