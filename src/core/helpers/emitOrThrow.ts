@@ -1,14 +1,12 @@
 import { Emitter } from "../classes"
 
-type ErrorEmitter = Emitter<{ error: any; [key: string]: any }>
-
-export const emitOrThrow = <T extends ErrorEmitter>(
-  emitter: T,
-  emit: ErrorEmitter["emit"],
+export interface ErrorEvents {
   error: any
-) => {
+}
+
+export const emitOrThrow = <T extends ErrorEvents>(emitter: Emitter<T>, error: any) => {
   if (emitter.hasListeners("error")) {
-    emit("error", error)
+    emitter.emit("error", error)
   } else {
     throw error
   }

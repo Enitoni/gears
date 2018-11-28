@@ -62,6 +62,6 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
 
   @bind
   private handleError(error: any) {
-    emitOrThrow(this, this.emit, error)
+    emitOrThrow(this, error)
   }
 }
