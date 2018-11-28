@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
-  "repository": "https://gitlab.com/enitoni/gears-next.git",
+  "repository": "https://gitlab.com/enitoni/gears.git",
   "author": "enitoni <enitoni@gmail.com>",
   "license": "MIT",
   "files": [
@@ -11,7 +11,9 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "run-s test clean tsc",
+    "clean": "rimraf build",
+    "tsc": "tsc",
     "test": "jest"
   },
   "devDependencies": {
@@ -19,6 +21,8 @@
     "@types/node": "^10.3.2",
     "decko": "^1.2.0",
     "jest": "^23.6.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
     "typescript": "^3.0.1"
   },

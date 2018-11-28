@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2015",
     "noImplicitAny": true,
@@ -16,5 +16,5 @@
     "declaration": true,
     "declarationDir": "build"
   },
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "build", "**/mocks/*", "**/*.test.ts"]
 }
