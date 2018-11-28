@@ -32,7 +32,6 @@ const getTestCommand = (matcher: CommandMatcher<TestContext>) =>
 const getContext = (): TestContext => ({
   message: "Hey!",
   content: "Hey!",
-  rawContent: "Hey!",
   test: TEST_STRING,
   bot: undefined
 })
