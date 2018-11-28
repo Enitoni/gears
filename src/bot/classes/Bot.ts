@@ -34,6 +34,10 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
     this.adapter.on("error", this.handleError)
   }
 
+  public async start() {
+    await this.adapter.methods.start()
+  }
+
   @bind
   public async processMessage(message: M) {
     const content = this.adapter.methods.getMessageContent(message)

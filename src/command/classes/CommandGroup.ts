@@ -24,7 +24,7 @@ export class CommandGroup<C extends Context, D extends object = {}>
 
     for (const command of this.privateCommands) {
       const result = await command.getMatch(context)
-      return result
+      if (result) return result
     }
   }
 
