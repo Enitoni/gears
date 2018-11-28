@@ -8,4 +8,3 @@ export interface BaseContext<M> {
 }
 
 export type Context<D = {}, M = any> = BaseContext<M> & D
-export type UnknownBaseContext = BaseContext<unknown>

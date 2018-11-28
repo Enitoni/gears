@@ -1,11 +1,11 @@
 import { Command } from "../classes"
-import { UnknownBaseContext } from "./Context"
+import { Context } from "./Context"
 
-export interface MatchResult<C extends UnknownBaseContext> {
+export interface MatchResult<C extends Context> {
   command: Command<C>
   context: C
 }
 
-export interface CommandLike<C extends UnknownBaseContext> {
+export interface CommandLike<C extends Context> {
   getMatch: (context: C) => Promise<MatchResult<C> | undefined>
 }
