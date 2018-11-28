@@ -6,9 +6,8 @@ export class MockAdapter extends ClientAdapter<MockClient, undefined, MockClient
     const client = new MockClient()
 
     client.on("message", hooks.message)
-    client.on("connect", hooks.connect)
-    client.on("reconnecting", hooks.reconnecting)
-    client.on("disconnect", hooks.disconnect)
+    client.on("ready", hooks.ready)
+    client.on("unready", hooks.unready)
     client.on("error", hooks.error)
 
     return {

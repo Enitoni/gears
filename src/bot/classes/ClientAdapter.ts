@@ -2,17 +2,15 @@ import { Emitter } from "../../core/classes"
 
 export interface AdapterEvents<M> {
   message: M
-  connect: void
-  reconnecting: void
-  disconnect: void
+  ready: void
+  unready: void
   error: any
 }
 
 export interface AdapterHooks<M> {
   message: (message: M) => void
-  connect: () => void
-  reconnecting: () => void
-  disconnect: () => void
+  ready: () => void
+  unready: () => void
   error: (error: any) => void
 }
 
@@ -35,9 +33,8 @@ export abstract class ClientAdapter<C = unknown, CO = unknown, M = unknown>
 
     const { client, methods } = this.register(options, {
       message: message => this.emit("message", message),
-      connect: () => this.emit("connect", undefined),
-      reconnecting: () => this.emit("reconnecting", undefined),
-      disconnect: () => this.emit("disconnect", undefined),
+      ready: () => this.emit("ready", undefined),
+      unready: () => this.emit("unready", undefined),
       error: error => this.emit("error", error)
     })
 

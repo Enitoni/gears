@@ -8,9 +8,8 @@ export interface MockClientMessage {
 
 export class MockClient extends Emitter<AdapterEvents<MockClientMessage>> {
   public async start() {
-    this.emit("connect", undefined)
-    this.emit("reconnecting", undefined)
-    this.emit("disconnect", undefined)
+    this.emit("ready", undefined)
+    this.emit("unready", undefined)
     this.emit("error", new Error("Failed to reconnect"))
     this.emit("message", {
       content: "Hello",
