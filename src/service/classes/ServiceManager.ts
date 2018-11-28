@@ -21,14 +21,14 @@ export class ServiceManager<M> {
   @bind
   public async _start() {
     for (const service of this.services) {
-      await service._initialize()
+      await service._start()
     }
   }
 
   @bind
   public async _stop() {
     for (const service of this.services) {
-      await service._initialize()
+      await service._stop()
     }
   }
 
