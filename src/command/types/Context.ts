@@ -1,10 +1,10 @@
 import { Bot } from "../../bot/classes/Bot"
 
-export interface BaseContext<M> {
+export interface BaseContext<M, B = Bot<M>> {
   message: M
   content: string
   rawContent: string
-  bot: Bot<M>
+  bot: B
 }
 
-export type Context<D = {}, M = any> = BaseContext<M> & D
+export type Context<D = {}, M = any, B = Bot<M>> = BaseContext<M, B> & D
