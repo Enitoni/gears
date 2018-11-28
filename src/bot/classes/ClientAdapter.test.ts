@@ -1,59 +1,14 @@
-import { Emitter } from "../../core/classes"
-import { AdapterHooks, ClientAdapter } from "./ClientAdapter"
-
-interface Message {
-  content: string
-}
-
-interface TestClientEvents {
-  message: Message
-  connect: undefined
-  reconnecting: undefined
-  disconnect: undefined
-  error: any
-}
-
-class TestClient extends Emitter<TestClientEvents> {
-  async start() {
-    this.emit("connect", undefined)
-    this.emit("reconnecting", undefined)
-    this.emit("disconnect", undefined)
-    this.emit("error", new Error("Failed to reconnect"))
-    this.emit("message", {
-      content: "Hello"
-    })
-  }
-}
-
-class TestAdapter extends ClientAdapter<TestClient, undefined, Message> {
-  protected register(options: undefined, hooks: AdapterHooks<Message>) {
-    const client = new TestClient()
-
-    client.on("message", hooks.message)
-    client.on("connect", hooks.connect)
-    client.on("reconnecting", hooks.reconnecting)
-    client.on("disconnect", hooks.disconnect)
-    client.on("error", hooks.error)
-
-    return {
-      client,
-      methods: {
-        start: () => client.start(),
-        getMessageContent: (message: Message) => message.content
-      }
-    }
-  }
-}
+import { MockAdapter, MockClientMessage } from "../mocks"
 
 test("ClientAdapter", done => {
-  const adapter = new TestAdapter(undefined)
+  const adapter = new MockAdapter(undefined)
 
   const handleConnect = jest.fn()
   const handleReconnecting = jest.fn()
   const handleDisconnect = jest.fn()
   const handleError = jest.fn()
 
-  const handleMessage = (message: Message) => {
+  const handleMessage = (message: MockClientMessage) => {
     expect(message.content).toBe("Hello")
 
     expect(handleConnect).toBeCalled()
