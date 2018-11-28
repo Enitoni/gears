@@ -44,8 +44,7 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
     const context: BotContext<M> = {
       bot: this,
       message,
-      content,
-      rawContent: content
+      content
     }
 
     const result = await this.group.getMatch(context)
