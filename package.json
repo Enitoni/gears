@@ -1,6 +1,6 @@
 {
   "name": "@enitoni/gears",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "repository": "https://gitlab.com/enitoni/gears.git",
@@ -19,12 +19,13 @@
   "devDependencies": {
     "@types/jest": "^23.3.9",
     "@types/node": "^10.3.2",
-    "decko": "^1.2.0",
     "jest": "^23.6.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
     "typescript": "^3.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "decko": "^1.2.0"
+  }
 }
