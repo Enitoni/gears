@@ -37,3 +37,7 @@ export class Command<C extends Context, D extends object = {}> implements Comman
     return this.action(context)
   }
 }
+
+export type CommandClass<C extends Context, D extends object = {}> = new (
+  options: CommandOptions<C, D>
+) => Command<C, D>
