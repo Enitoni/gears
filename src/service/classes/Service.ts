@@ -1,12 +1,15 @@
 import { Bot } from "../../bot/classes"
+import { ServiceManager } from "./ServiceManager"
 
 export class Service<M> {
   private didStart = false
 
   protected bot: Bot<M>
+  protected manager: ServiceManager<M>
 
-  constructor(bot: Bot<M>) {
+  constructor(bot: Bot<M>, manager: ServiceManager<M>) {
     this.bot = bot
+    this.manager = manager
   }
 
   public async _initialize() {
@@ -39,4 +42,4 @@ export class Service<M> {
   protected async serviceDidStop() {}
 }
 
-export type ServiceClass<M> = new (bot: Bot<M>) => Service<M>
+export type ServiceClass<M> = new (bot: Bot<M>, manager: ServiceManager<M>) => Service<M>
