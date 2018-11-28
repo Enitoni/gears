@@ -1,11 +1,11 @@
 import { Bot } from "../../bot/classes/Bot"
 import { ServiceManager } from "../../service/classes"
 
-export interface BaseContext<M, B = Bot<M>> {
+export interface BaseContext<M> {
   content: string
   message: M
   manager: ServiceManager<M>
-  bot: B
+  bot: Bot<M>
 }
 
-export type Context<D = {}, M = any, B = Bot<M>> = BaseContext<M, B> & D
+export type Context<D = {}, M = any> = BaseContext<M> & D

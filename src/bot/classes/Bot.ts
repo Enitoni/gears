@@ -18,7 +18,7 @@ export interface BotOptions<M, C extends Context> {
   services?: ServiceClass<M>[]
 }
 
-export type BotContext<M> = Context<unknown, M, Bot<M>>
+export type BotContext<M> = Context<unknown, M>
 
 export class Bot<M> extends Emitter<BotEvents<M>> {
   private adapter: ClientAdapter<unknown, unknown, M>
