@@ -18,7 +18,7 @@ export class Service<M> {
 
   public async _start() {
     if (this.didStart) {
-      await this.servicdeDidRestart()
+      await this.serviceDidRestart()
     } else {
       this.didStart = true
       await this.serviceDidStart()
@@ -36,7 +36,7 @@ export class Service<M> {
   protected async serviceDidStart() {}
 
   /** Hook called when the service has started after stopping */
-  protected async servicdeDidRestart() {}
+  protected async serviceDidRestart() {}
 
   /** Hook called when the service has stopped and the bot is offline */
   protected async serviceDidStop() {}
