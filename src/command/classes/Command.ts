@@ -6,7 +6,7 @@ import {
   MatchResult
 } from "../types"
 
-export interface CommandOptions<C extends Context, D> {
+export interface CommandOptions<C extends Context, D = unknown> {
   matcher: CommandMatcher<C>
   action: CommandAction<C>
   data?: D

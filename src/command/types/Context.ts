@@ -7,4 +7,5 @@ export interface BaseContext<M> {
   bot: Bot<M>
 }
 
-export type Context<D = unknown, M = unknown> = BaseContext<M> & D
+export type Context<D = {}, M = any> = BaseContext<M> & D
+export type UnknownBaseContext = BaseContext<unknown>
