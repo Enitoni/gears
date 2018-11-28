@@ -25,8 +25,7 @@ export class Command<C extends Context, D extends object = {}> implements Comman
 
   public async getMatch(testingContext: C): Promise<MatchResult<C> | undefined> {
     const context = await this.matcher(testingContext)
-
-    if (!context) return undefined
+    if (!context) return
 
     return {
       command: this,

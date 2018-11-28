@@ -7,5 +7,5 @@ export interface MatchResult<C extends Context> {
 }
 
 export interface CommandLike<C extends Context> {
-  getMatch: (context: C) => Promise<MatchResult<C> | undefined>
+  getMatch: (context: C) => Promise<MatchResult<C> | void>
 }
