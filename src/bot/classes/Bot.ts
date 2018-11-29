@@ -69,9 +69,8 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
     try {
       const response = await command.run(context)
       this.emit("response", response)
-    } catch (e) {
-      const error = new CommandError(result, e)
-      this.handleError(error)
+    } catch (error) {
+      this.handleCommandError(error, result)
     }
   }
 
@@ -87,7 +86,13 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
 
   @bind
   private handleError(error: any) {
-    emitOrThrow(this, error)
+    emitOrThrow(this, "error", error)
+  }
+
+  @bind
+  private handleCommandError(error: any, result: MatchResult<Context>) {
+    error = new CommandError(result, error)
+    emitOrThrow(this, "commandError", error)
   }
 
   public get client() {
