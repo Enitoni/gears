@@ -5,7 +5,7 @@
 ![Coverage](https://gitlab.com/enitoni-gears/gears/badges/master/coverage.svg)
 
 ## About
-Gears is a simplistic library to create command interfaces, such as chat bots and more. It is fully generic so you can make it work with anything, even the command line!
+Gears is a library used to create command interfaces, such as chat bots and more. It is fully generic so you can make it work with anything that exposes a messaging interface.
 
 ## Installing
 

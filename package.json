@@ -1,6 +1,6 @@
 {
   "name": "@enitoni/gears",
-  "description": "A simplistic library for creating command interfaces easily",
+  "description": "A library for creating command interfaces easily",
   "version": "2.0.4",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
