@@ -1,0 +1,23 @@
+image: node:10.13.0
+
+before_script:
+  - apt-get update -qq && apt-get install
+
+cache:
+  paths:
+    - node_modules/
+    - .yarn
+
+stages:
+  - test
+
+Test:
+  stage: test
+  tags:
+    - node
+  before_script:
+    - yarn config set cache-folder .yarn
+    - yarn install
+  script:
+    - yarn test --coverage --no-color
+  coverage: /All files\s*\|\s*([\d\.]+)/
