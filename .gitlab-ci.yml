@@ -13,4 +13,4 @@ Test:
     - npm install
   script:
     - npm run test --coverage --no-color
-  coverage: /All files\s*\|\s*([\d\.]+)/
+  coverage: '/^All files\s+\|\s+\d+\.*\d*\s+\|\s*(\d+\.*\d*)/'
