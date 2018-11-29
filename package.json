@@ -1,6 +1,7 @@
 {
   "name": "@enitoni/gears",
-  "version": "2.0.3",
+  "description": "A simplistic library for creating command interfaces easily",
+  "version": "2.0.4",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "repository": "https://gitlab.com/enitoni/gears.git",
