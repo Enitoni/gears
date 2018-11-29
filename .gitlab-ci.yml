@@ -3,6 +3,10 @@ image: node:10.13.0
 cache:
   paths:
     - node_modules/
+    - .yarn
+
+before_script:
+  - apt-get update -qq && apt-get install
 
 stages:
   - test
@@ -10,7 +14,8 @@ stages:
 Test:
   stage: test
   before_script:
-    - npm install
+    - yarn config set cache-folder .yarn
+    - yarn install
   script:
-    - jest --coverage --no-color
+    - yarn test --coverage --no-color
   coverage: '/^All files\s+\|\s+\d+\.*\d*\s+\|\s*(\d+\.*\d*)/'
