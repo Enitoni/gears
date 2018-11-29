@@ -33,6 +33,7 @@ test("Bot", async () => {
     commands: [command, errorCommand]
   })
 
+  const handleCommandError = jest.fn()
   const handleError = jest.fn()
 
   const handleMatch = jest.fn((match: MatchResult<MockContext>) => {
@@ -72,6 +73,15 @@ test("Bot", async () => {
   /**
    * Process a message that will trigger the error command
    */
+  await expect(
+    bot.processMessage({
+      content: "ABCD",
+      user: "Jane Smith"
+    })
+  ).rejects.toThrow()
+
+  bot.on("commandError", handleCommandError)
+
   await bot.processMessage({
     content: "ABCD",
     user: "Jane Smith"
@@ -86,5 +96,5 @@ test("Bot", async () => {
   })
 
   expect(errorAction).toBeCalled()
-  expect(handleError).toBeCalledTimes(1)
+  expect(handleCommandError).toBeCalledTimes(1)
 })
