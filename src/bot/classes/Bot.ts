@@ -1,5 +1,6 @@
 import { bind } from "decko"
 import { CommandGroup } from "../../command/classes"
+import { CommandError } from "../../command/classes/CommandError"
 import { Context, MatchResult } from "../../command/types"
 import { Emitter } from "../../core/classes"
 import { emitOrThrow } from "../../core/helpers"
@@ -67,7 +68,8 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
     try {
       const response = await command.run(context)
       this.emit("response", response)
-    } catch (error) {
+    } catch (e) {
+      const error = Object.setPrototypeOf(e, CommandError.prototype)
       this.handleError(error)
     }
   }
