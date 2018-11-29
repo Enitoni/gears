@@ -1,7 +1,7 @@
 import { CommandMatcher } from "../types"
 
 export const matchNone = (
-  matchers: CommandMatcher[]
+  ...matchers: CommandMatcher[]
 ): CommandMatcher => async context => {
   for (const matcher of matchers) {
     const newContext = await matcher(context)

@@ -8,7 +8,7 @@ export const getMockContext = (message: MockClientMessage): MockContext => {
   const manager = getMockServiceManager(bot)
 
   return {
-    content: message.content,
+    content: message,
     manager,
     message,
     bot

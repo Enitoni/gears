@@ -25,7 +25,7 @@ test("Bot", async () => {
   })
 
   const group = new MockCommandGroup({
-    matcher: matchPrefixes(["AB"]),
+    matcher: matchPrefixes("AB"),
     commands: [command, errorCommand]
   })
 
