@@ -1,6 +1,6 @@
 {
   "name": "@enitoni/gears",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "repository": "https://gitlab.com/enitoni/gears.git",
