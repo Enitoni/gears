@@ -9,6 +9,7 @@ import { ClientAdapter } from "./ClientAdapter"
 
 export interface BotEvents<M> {
   match: MatchResult<BotContext<M>>
+  commandError: CommandError<M>
   response: any
   error: any
 }
@@ -69,7 +70,7 @@ export class Bot<M> extends Emitter<BotEvents<M>> {
       const response = await command.run(context)
       this.emit("response", response)
     } catch (e) {
-      const error = Object.setPrototypeOf(e, CommandError.prototype)
+      const error = new CommandError(result, e)
       this.handleError(error)
     }
   }
