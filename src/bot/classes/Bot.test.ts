@@ -1,3 +1,4 @@
+import { matchPrefixes } from "../../command/matchers"
 import { MockCommand, MockCommandGroup, MockContext } from "../../command/mocks"
 import { MatchResult } from "../../command/types"
 import { getMockBot, MockClient } from "../mocks"
@@ -24,12 +25,7 @@ test("Bot", async () => {
   })
 
   const group = new MockCommandGroup({
-    matcher: context => {
-      if (context.content.startsWith("AB")) {
-        context.content = context.content.replace("AB", "")
-        return context
-      }
-    },
+    matcher: matchPrefixes(["AB"]),
     commands: [command, errorCommand]
   })
 
@@ -61,10 +57,7 @@ test("Bot", async () => {
   /**
    * Process a message that will match
    */
-  await bot.processMessage({
-    content: "ABC",
-    user: "John Smith"
-  })
+  await bot.processMessage("ABC")
 
   expect(action).toBeCalledTimes(1)
   expect(handleMatch).toBeCalled()
@@ -73,27 +66,16 @@ test("Bot", async () => {
   /**
    * Process a message that will trigger the error command
    */
-  await expect(
-    bot.processMessage({
-      content: "ABCD",
-      user: "Jane Smith"
-    })
-  ).rejects.toThrow()
+  await expect(bot.processMessage("ABCD")).rejects.toThrow()
 
   bot.on("commandError", handleCommandError)
 
-  await bot.processMessage({
-    content: "ABCD",
-    user: "Jane Smith"
-  })
+  await bot.processMessage("ABCD")
 
   /**
    * Process a message that will not match
    */
-  await bot.processMessage({
-    content: "CDE",
-    user: "Nobody"
-  })
+  await bot.processMessage("CDE")
 
   expect(errorAction).toBeCalled()
   expect(handleCommandError).toBeCalledTimes(1)

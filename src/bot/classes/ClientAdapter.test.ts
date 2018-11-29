@@ -8,8 +8,7 @@ test("ClientAdapter", done => {
   const handleError = jest.fn()
 
   const handleMessage = (message: MockClientMessage) => {
-    expect(message.content).toBe("Hello")
-
+    expect(message).toBe("Hello")
     expect(handleConnect).toBeCalled()
     expect(handleDisconnect).toBeCalled()
     expect(handleError).toBeCalled()

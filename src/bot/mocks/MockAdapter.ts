@@ -2,7 +2,7 @@ import { AdapterHooks, ClientAdapter } from "../classes"
 import { MockClient, MockClientMessage } from "./MockClient"
 
 export class MockAdapter extends ClientAdapter<MockClient, undefined, MockClientMessage> {
-  protected register(options: undefined, hooks: AdapterHooks<MockClientMessage>) {
+  protected register(_: undefined, hooks: AdapterHooks<MockClientMessage>) {
     const client = new MockClient()
 
     client.on("message", hooks.message)
@@ -14,7 +14,7 @@ export class MockAdapter extends ClientAdapter<MockClient, undefined, MockClient
       client,
       methods: {
         start: () => client.start(),
-        getMessageContent: (message: MockClientMessage) => message.content
+        getMessageContent: (message: MockClientMessage) => message
       }
     }
   }
