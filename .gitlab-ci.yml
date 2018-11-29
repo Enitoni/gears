@@ -9,8 +9,6 @@ stages:
 
 Test:
   stage: test
-  tags:
-    - node
   before_script:
     - npm install
   script:
