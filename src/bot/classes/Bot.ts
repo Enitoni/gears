@@ -23,8 +23,8 @@ export type BotContext<M> = Context<unknown, M>
 export class Bot<M> extends Emitter<BotEvents<M>> {
   private adapter: ClientAdapter<unknown, unknown, M>
 
-  private group: CommandGroup<BotContext<M>>
-  private manager: ServiceManager<M>
+  public readonly group: CommandGroup<BotContext<M>>
+  public readonly manager: ServiceManager<M>
 
   constructor(options: BotOptions<M, BotContext<M>>) {
     super()
