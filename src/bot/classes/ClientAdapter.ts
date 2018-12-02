@@ -22,7 +22,7 @@ export interface AdapterResult<C, M> {
   }
 }
 
-export abstract class ClientAdapter<C = unknown, CO = unknown, M = unknown>
+export abstract class ClientAdapter<C, M = unknown, CO = unknown>
   extends Emitter<AdapterEvents<M>>
   implements AdapterResult<C, M> {
   public client: C

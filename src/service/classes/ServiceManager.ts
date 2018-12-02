@@ -2,13 +2,17 @@ import { bind } from "decko"
 import { Bot } from "../../bot/classes"
 import { Service, ServiceClass } from "./Service"
 
-export class ServiceManager<M> {
-  private bot: Bot<M>
-  private services: Service<M>[]
+export class ServiceManager<M, C> {
+  private services: Service<M, C>[]
 
-  constructor(bot: Bot<M>, services: ServiceClass<M>[]) {
-    this.bot = bot
-    this.services = services.map(S => new S(bot, this))
+  constructor(bot: Bot<M, C>, services: ServiceClass<M, C>[]) {
+    this.services = services.map(
+      S =>
+        new S({
+          bot,
+          manager: this
+        })
+    )
   }
 
   @bind
@@ -33,7 +37,7 @@ export class ServiceManager<M> {
   }
 
   @bind
-  public getService<T extends Service<M>>(serviceClass: ServiceClass<M>) {
+  public getService<T extends Service<M, C>>(serviceClass: ServiceClass<M, C>) {
     const service = this.services.find(s => s instanceof serviceClass)
     if (!service) throw new Error(`Service "${serviceClass.name}" not found in manager`)
 
@@ -41,7 +45,7 @@ export class ServiceManager<M> {
   }
 
   @bind
-  public hasService(serviceClass: ServiceClass<M>) {
+  public hasService(serviceClass: ServiceClass<M, C>) {
     return !!this.services.find(s => s instanceof serviceClass)
   }
 }

@@ -14,28 +14,28 @@ export interface BotEvents<M> {
   error: any
 }
 
-export interface BotOptions<M, C extends Context> {
-  adapter: ClientAdapter<unknown, unknown, M>
+export interface BotOptions<M, C extends Context, CL> {
+  adapter: ClientAdapter<CL, M>
   group: CommandGroup<C>
-  services?: ServiceClass<M>[]
+  services?: ServiceClass<M, CL>[]
 }
 
 export type BotContext<M> = Context<unknown, M>
 
-export class Bot<M> extends Emitter<BotEvents<M>> {
-  private adapter: ClientAdapter<unknown, unknown, M>
+export class Bot<M, C> extends Emitter<BotEvents<M>> {
+  private adapter: ClientAdapter<C, M>
 
   public readonly group: CommandGroup<BotContext<M>>
-  public readonly manager: ServiceManager<M>
+  public readonly manager: ServiceManager<M, C>
 
-  constructor(options: BotOptions<M, BotContext<M>>) {
+  constructor(options: BotOptions<M, BotContext<M>, C>) {
     super()
 
     const { adapter, group, services = [] } = options
 
     this.adapter = adapter
     this.group = group
-    this.manager = new ServiceManager(this, services)
+    this.manager = new ServiceManager<M, C>(this, services)
 
     this.adapter.on("message", this.processMessage)
     this.adapter.on("error", this.handleError)

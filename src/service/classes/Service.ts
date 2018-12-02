@@ -1,13 +1,20 @@
 import { Bot } from "../../bot/classes"
 import { ServiceManager } from "./ServiceManager"
 
-export class Service<M> {
+export interface ServiceOptions<M, C> {
+  bot: Bot<M, C>
+  manager: ServiceManager<M, C>
+}
+
+export class Service<M, C> {
   private didStart = false
 
-  protected bot: Bot<M>
-  protected manager: ServiceManager<M>
+  protected bot: Bot<M, C>
+  protected manager: ServiceManager<M, C>
 
-  constructor(bot: Bot<M>, manager: ServiceManager<M>) {
+  constructor(options: ServiceOptions<M, C>) {
+    const { bot, manager } = options
+
     this.bot = bot
     this.manager = manager
   }
@@ -42,4 +49,4 @@ export class Service<M> {
   protected async serviceDidStop() {}
 }
 
-export type ServiceClass<M> = new (bot: Bot<M>, manager: ServiceManager<M>) => Service<M>
+export type ServiceClass<M, C> = new (options: ServiceOptions<M, C>) => Service<M, C>

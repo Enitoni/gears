@@ -1,4 +1,4 @@
-import { getMockBot, MockClientMessage } from "../../bot/mocks"
+import { getMockBot, MockClient, MockClientMessage } from "../../bot/mocks"
 import { getMockServiceManager } from "../mocks"
 import { Service } from "./Service"
 
@@ -8,7 +8,7 @@ test("Service", async () => {
   const didStop = jest.fn()
   const didRestart = jest.fn()
 
-  class TestService extends Service<MockClientMessage> {
+  class TestService extends Service<MockClientMessage, MockClient> {
     protected async serviceDidInitialize() {
       didInitialize()
     }
