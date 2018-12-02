@@ -1,6 +1,10 @@
 import { bind } from "decko"
 import { Bot } from "../../bot/classes"
-import { Service, ServiceClass } from "./Service"
+import { Service, ServiceClass, ServiceOptions } from "./Service"
+
+export type ServiceType<M, C, T = Service<M, C>> = new (
+  options: ServiceOptions<M, C>
+) => T
 
 export class ServiceManager<M, C> {
   private services: Service<M, C>[]
@@ -37,7 +41,7 @@ export class ServiceManager<M, C> {
   }
 
   @bind
-  public getService<T extends Service<M, C>>(serviceClass: ServiceClass<M, C>) {
+  public getService<T extends Service<M, C>>(serviceClass: ServiceType<M, C, T>): T {
     const service = this.services.find(s => s instanceof serviceClass)
     if (!service) throw new Error(`Service "${serviceClass.name}" not found in manager`)
 
