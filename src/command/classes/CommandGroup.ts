@@ -1,24 +1,25 @@
 import { CommandLike, CommandMatcher, Context } from "../types"
 
-export interface CommandGroupOptions<C extends Context, D = unknown> {
-  matcher: CommandMatcher<C>
-  commands: CommandLike<C>[]
+export interface CommandGroupOptions<M, C, D> {
+  matcher: CommandMatcher<unknown, M, C>
+  commands: CommandLike<M, C>[]
   data?: D
 }
 
-export class CommandGroup<C extends Context, D extends object = {}>
-  implements CommandLike<C> {
-  private matcher: CommandMatcher<C>
-  private privateCommands: CommandLike<C>[]
+export type CommandGroupContext<M, C> = Context<unknown, M, C>
 
-  constructor(options: CommandGroupOptions<C, D>) {
+export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
+  private matcher: CommandMatcher<unknown, M, C>
+  private privateCommands: CommandLike<M, C>[]
+
+  constructor(options: CommandGroupOptions<M, C, D>) {
     const { matcher, commands } = options
 
     this.matcher = matcher
     this.privateCommands = commands
   }
 
-  public async getMatch(testingContext: C) {
+  public async getMatch(testingContext: CommandGroupContext<M, C>) {
     const context = await this.matcher(testingContext)
     if (!context) return
 
@@ -33,6 +34,6 @@ export class CommandGroup<C extends Context, D extends object = {}>
   }
 }
 
-export type CommandGroupClass<C extends Context, D extends object = {}> = new (
-  options: CommandGroupOptions<C, D>
-) => CommandGroup<C, D>
+export type CommandGroupClass<M, C, D = unknown> = new (
+  options: CommandGroupOptions<M, C, D>
+) => CommandGroup<M, C, D>

@@ -1,11 +1,11 @@
 import { Command } from "../classes"
 import { Context } from "./Context"
 
-export interface MatchResult<C extends Context> {
-  command: Command<C>
-  context: C
+export interface MatchResult<M, C = unknown> {
+  command: Command<M, C, any>
+  context: Context<unknown, M, C>
 }
 
-export interface CommandLike<C extends Context> {
-  getMatch: (context: C) => Promise<MatchResult<C> | void>
+export interface CommandLike<M, C> {
+  getMatch: (context: Context<unknown, M, C>) => Promise<MatchResult<M, C> | void>
 }

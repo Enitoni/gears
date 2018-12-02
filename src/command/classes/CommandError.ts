@@ -1,10 +1,10 @@
-import { Context, MatchResult } from "../types"
+import { MatchResult } from "../types"
 
-export class CommandError<M> extends Error {
+export class CommandError<M, C> extends Error {
   name = "CommandError"
-  public match: MatchResult<Context<unknown, M>>
+  public match: MatchResult<M, C>
 
-  constructor(match: MatchResult<Context<unknown, M>>, error: any) {
+  constructor(match: MatchResult<M, C>, error: any) {
     super(error.message || error)
     this.match = match
   }

@@ -1,4 +1,4 @@
+import { MockClient, MockClientMessage } from "../../bot/mocks"
 import { Command, CommandClass } from "../classes"
-import { MockContext } from "./getMockContext"
 
-export const MockCommand: CommandClass<MockContext> = Command
+export const MockCommand: CommandClass<MockClientMessage, MockClient> = Command

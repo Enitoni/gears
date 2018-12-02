@@ -6,24 +6,30 @@ import {
   MatchResult
 } from "../types"
 
-export interface CommandOptions<C extends Context, D = unknown> {
-  matcher: CommandMatcher<C>
-  action: CommandAction<C>
+export interface CommandOptions<M, C, D> {
+  matcher: CommandMatcher<unknown, M, C>
+  action: CommandAction<Context<unknown, M, C>>
   data?: D
 }
 
-export class Command<C extends Context, D extends object = {}> implements CommandLike<C> {
-  private matcher: CommandMatcher<C>
-  private action: CommandAction<C>
+export type CommandContext<M, C> = Context<unknown, M, C>
 
-  constructor(options: CommandOptions<C, D>) {
-    const { matcher, action } = options
+export class Command<M, C, D = unknown> implements CommandLike<M, C> {
+  public data?: D
+  private matcher: CommandMatcher<unknown, M, C>
+  private action: CommandAction<CommandContext<M, C>>
+
+  constructor(options: CommandOptions<M, C, D>) {
+    const { matcher, action, data } = options
 
     this.matcher = matcher
     this.action = action
+    this.data = data
   }
 
-  public async getMatch(testingContext: C): Promise<MatchResult<C> | undefined> {
+  public async getMatch(
+    testingContext: CommandContext<M, C>
+  ): Promise<MatchResult<M, C> | undefined> {
     const context = await this.matcher(testingContext)
     if (!context) return
 
@@ -33,11 +39,11 @@ export class Command<C extends Context, D extends object = {}> implements Comman
     }
   }
 
-  public async run(context: C) {
+  public async run(context: CommandContext<M, C>) {
     return this.action(context)
   }
 }
 
-export type CommandClass<C extends Context, D extends object = {}> = new (
-  options: CommandOptions<C, D>
-) => Command<C, D>
+export type CommandClass<M, C, D = unknown> = new (
+  options: CommandOptions<M, C, D>
+) => Command<M, C, D>

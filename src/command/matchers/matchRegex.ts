@@ -1,11 +1,14 @@
-import { CommandMatcher, Context } from "../types"
+import { CommandMatcher } from "../types"
 
 export type RegExpResolvable = RegExp | (() => RegExp)
-export type RegexContext = Context<{ match: RegExpExecArray }>
+
+export interface RegexData {
+  match: RegExpExecArray
+}
 
 export const matchRegex = (
   regex: RegExpResolvable
-): CommandMatcher<RegexContext> => async context => {
+): CommandMatcher<RegexData> => async context => {
   const match = (typeof regex === "function" ? regex() : regex).exec(context.content)
   if (!match) return
 

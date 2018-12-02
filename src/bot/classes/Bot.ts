@@ -7,28 +7,28 @@ import { emitOrThrow } from "../../core/helpers"
 import { ServiceClass, ServiceManager } from "../../service/classes"
 import { ClientAdapter } from "./ClientAdapter"
 
-export interface BotEvents<M> {
-  match: MatchResult<BotContext<M>>
-  commandError: CommandError<M>
+export interface BotEvents<M, C> {
+  match: MatchResult<M, C>
+  commandError: CommandError<M, C>
   response: any
   error: any
 }
 
-export interface BotOptions<M, C extends Context, CL> {
-  adapter: ClientAdapter<CL, M>
-  group: CommandGroup<C>
-  services?: ServiceClass<M, CL>[]
+export interface BotOptions<M, C> {
+  adapter: ClientAdapter<C, M>
+  group: CommandGroup<M, C>
+  services?: ServiceClass<M, C>[]
 }
 
-export type BotContext<M> = Context<unknown, M>
+export type BotContext<M, C> = Context<unknown, M, C>
 
-export class Bot<M, C> extends Emitter<BotEvents<M>> {
+export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
   private adapter: ClientAdapter<C, M>
 
-  public readonly group: CommandGroup<BotContext<M>>
+  public readonly group: CommandGroup<M, C>
   public readonly manager: ServiceManager<M, C>
 
-  constructor(options: BotOptions<M, BotContext<M>, C>) {
+  constructor(options: BotOptions<M, C>) {
     super()
 
     const { adapter, group, services = [] } = options
@@ -51,7 +51,7 @@ export class Bot<M, C> extends Emitter<BotEvents<M>> {
   @bind
   public async processMessage(message: M) {
     const content = this.adapter.methods.getMessageContent(message)
-    const context: BotContext<M> = {
+    const context: BotContext<M, C> = {
       bot: this,
       manager: this.manager,
       message,
@@ -62,7 +62,7 @@ export class Bot<M, C> extends Emitter<BotEvents<M>> {
     if (result) await this.useResult(result)
   }
 
-  private async useResult(result: MatchResult<Context>) {
+  private async useResult(result: MatchResult<M, C>) {
     const { command, context } = result
     this.emit("match", result)
 
@@ -90,7 +90,7 @@ export class Bot<M, C> extends Emitter<BotEvents<M>> {
   }
 
   @bind
-  private handleCommandError(error: any, result: MatchResult<Context>) {
+  private handleCommandError(error: any, result: MatchResult<M, C>) {
     error = new CommandError(result, error)
     emitOrThrow(this, "commandError", error)
   }

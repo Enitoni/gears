@@ -7,7 +7,7 @@ import { CommandError } from "./CommandError"
 test("CommandError", () => {
   const context = getMockContext("Blah")
   const command = new Command({ matcher: matchAlways(), action: () => {} })
-  const result: MatchResult<typeof context> = { context, command }
+  const result: MatchResult<any, any> = { context, command }
 
   const error = new CommandError(result, "I'm gay!")
 
