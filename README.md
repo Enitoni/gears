@@ -31,14 +31,14 @@ import { Adapter, Command, CommandGroup } from "bindings-library"
 const adapter = new Adapter(...)
 
 const command = new Command({
-  matcher: matchPrefixes(["test"]),
+  matcher: matchPrefixes("test"),
   action: (context) => {
-    context.message.reply("Test received!")
+    console.log("Test received!")
   }
 })
 
 const group = new CommandGroup({
-  matcher: matchPrefixes(["!"]),
+  matcher: matchPrefixes("!"),
   commands: [ command ]
 })
 
