@@ -1,6 +1,6 @@
-import { MockCommandGroup, MockCommandGroupInstance } from "../../command/mocks"
-import { Bot } from "../classes"
-import { MockAdapter } from "./MockAdapter"
+import { MockCommandGroup, MockCommandGroupInstance } from "../../command/mocks";
+import { Bot } from "../classes";
+import { MockAdapter } from "./MockAdapter";
 
 export interface MockBotOptions {
   group: MockCommandGroupInstance

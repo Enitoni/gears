@@ -1,7 +1,7 @@
 import { AdapterHooks, ClientAdapter } from "../classes"
 import { MockClient, MockClientMessage } from "./MockClient"
 
-export class MockAdapter extends ClientAdapter<MockClient, undefined, MockClientMessage> {
+export class MockAdapter extends ClientAdapter<MockClient, MockClientMessage, undefined> {
   protected register(_: undefined, hooks: AdapterHooks<MockClientMessage>) {
     const client = new MockClient()
 
