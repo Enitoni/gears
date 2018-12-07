@@ -1,6 +1,11 @@
+import { MockClient, MockClientMessage } from "../../bot/mocks"
+import { composeMiddleware } from "../helpers"
 import { matchPrefixes } from "../matchers"
 import { getMockContext } from "../mocks"
+import { Middleware as CoreMiddleware } from "../types"
 import { Command } from "./Command"
+
+export interface Middleware<D> extends CoreMiddleware<D, MockClientMessage, MockClient> {}
 
 test("Command matches", async () => {
   const command = new Command({
@@ -24,4 +29,22 @@ test("Command does not match", async () => {
   const result = await command.getChain(context)
 
   expect(result).toBeUndefined()
+})
+
+test("Command has middleware", async () => {
+  const middlewareA: Middleware<{ a: number }> = context => {
+    context.a = 5
+  }
+
+  const middlewareB: Middleware<{ b: number }> = context => {
+    context.b = 5
+  }
+
+  const command = new Command<MockClientMessage, MockClient>({
+    matcher: matchPrefixes("fuuuuuck"),
+    middleware: [middlewareA, middlewareB, context => {}]
+  })
+
+  const run = composeMiddleware(command.middleware)
+  run(getMockContext("g"))
 })
