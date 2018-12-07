@@ -1,6 +1,5 @@
 import { ArrayResolvable } from "../../core"
 import { resolveToArray } from "../../core/helpers"
-import { composeMiddleware } from "../helpers"
 import {
   BaseContext,
   Chain,
@@ -9,7 +8,6 @@ import {
   Context,
   Middleware
 } from "../types"
-import { Command } from "./Command"
 
 export interface CommandGroupOptions<M, C, D> {
   matcher: CommandMatcher<unknown, M, C>
@@ -48,26 +46,6 @@ export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
           context: chain.context
         }
     }
-  }
-
-  public async run(
-    context: Context<unknown, M, C>,
-    command: Command<M, C> | CommandGroup<M, C>
-  ) {
-    context.issuer = this
-
-    const middleware: Middleware[] = [
-      ...this.middleware,
-      context => {
-        if (command instanceof Command) {
-          return command.run(context)
-        } else {
-          return command.run(context, command)
-        }
-      }
-    ]
-
-    return composeMiddleware(middleware)(context)
   }
 }
 

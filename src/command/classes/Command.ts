@@ -1,6 +1,5 @@
 import { ArrayResolvable } from "../../core"
 import { assert, resolveToArray } from "../../core/helpers"
-import { composeMiddleware } from "../helpers"
 import { Chain, CommandLike, CommandMatcher, Context, Middleware } from "../types"
 
 export interface CommandOptions<M, C, D> {
@@ -41,11 +40,6 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
         context
       }
     }
-  }
-
-  public run(context: Context<unknown, M, C>): Promise<any> {
-    context.issuer = this
-    return composeMiddleware(this.middleware)(context)
   }
 }
 
