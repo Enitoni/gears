@@ -1,6 +1,5 @@
 import { matchPrefixes } from "../../command/matchers"
-import { MockCommand, MockCommandGroup, MockContext } from "../../command/mocks"
-import { MatchResult } from "../../command/types"
+import { MockCommand, MockCommandGroup } from "../../command/mocks"
 import { getMockBot, MockClient } from "../mocks"
 
 test("Bot", async () => {
@@ -29,20 +28,13 @@ test("Bot", async () => {
     commands: [command, errorCommand]
   })
 
-  const handleCommandError = jest.fn()
   const handleError = jest.fn()
-
-  const handleMatch = jest.fn((match: MatchResult<MockContext>) => {
-    expect(match.command).toBeInstanceOf(MockCommand)
-  })
-
   const handleResponse = jest.fn(response => {
     expect(response).toBe("Response!")
   })
 
   const bot = getMockBot({ group })
 
-  bot.on("match", handleMatch)
   bot.on("response", handleResponse)
 
   expect(bot.client).toBeInstanceOf(MockClient)
@@ -60,16 +52,11 @@ test("Bot", async () => {
   await bot.processMessage("ABC")
 
   expect(action).toBeCalledTimes(1)
-  expect(handleMatch).toBeCalled()
   expect(handleResponse).toBeCalled()
 
   /**
    * Process a message that will trigger the error command
    */
-  await expect(bot.processMessage("ABCD")).rejects.toThrow()
-
-  bot.on("commandError", handleCommandError)
-
   await bot.processMessage("ABCD")
 
   /**
@@ -78,5 +65,4 @@ test("Bot", async () => {
   await bot.processMessage("CDE")
 
   expect(errorAction).toBeCalled()
-  expect(handleCommandError).toBeCalledTimes(1)
 })

@@ -5,24 +5,23 @@ import { Command } from "./Command"
 test("Command matches", async () => {
   const command = new Command({
     matcher: matchPrefixes("Hi"),
-    action: () => {}
+    middleware: () => {}
   })
 
   const context = getMockContext("Hi")
-  const result = await command.getMatch(context)
+  const chain = await command.getChain(context)
 
-  expect(result).toBeDefined()
-  await result!.command.run(result!.context)
+  expect(chain).toBeDefined()
 })
 
 test("Command does not match", async () => {
   const command = new Command({
     matcher: matchPrefixes("Hi"),
-    action: () => {}
+    middleware: () => {}
   })
 
   const context = getMockContext("Bye")
-  const result = await command.getMatch(context)
+  const result = await command.getChain(context)
 
   expect(result).toBeUndefined()
 })

@@ -1,7 +1,7 @@
-import { BotContext } from "../../bot/classes"
 import { getMockBot } from "../../bot/mocks/getMockBot"
 import { MockClient, MockClientMessage } from "../../bot/mocks/MockClient"
 import { getMockServiceManager } from "../../service/mocks"
+import { Context } from "../types"
 
 export const getMockContext = (message: MockClientMessage): MockContext => {
   const bot = getMockBot()
@@ -12,7 +12,7 @@ export const getMockContext = (message: MockClientMessage): MockContext => {
     manager,
     message,
     bot
-  }
+  } as MockContext
 }
 
-export type MockContext = BotContext<MockClientMessage, MockClient>
+export type MockContext = Context<unknown, MockClientMessage, MockClient>

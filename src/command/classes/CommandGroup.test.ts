@@ -19,16 +19,12 @@ test("CommandGroup", async () => {
 
   expect(group.commands.length).toBe(1)
 
-  const workingContext = getMockContext("ab")
+  const context = getMockContext("ab")
   const failingContext = getMockContext("ac")
 
-  const workingResult = await group.getMatch(workingContext)
-  expect(workingResult).toBeDefined()
+  const chain = await group.getChain(context)
+  expect(chain).toBeDefined()
 
-  if (workingResult) {
-    expect(workingResult.command).toBe(command)
-  }
-
-  const failingResult = await group.getMatch(failingContext)
-  expect(failingResult).toBeUndefined()
+  const failingChain = await group.getChain(failingContext)
+  expect(failingChain).toBeUndefined()
 })

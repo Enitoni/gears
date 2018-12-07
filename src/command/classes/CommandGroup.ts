@@ -1,36 +1,73 @@
-import { CommandLike, CommandMatcher, Context } from "../types"
+import { ArrayResolvable } from "../../core"
+import { resolveToArray } from "../../core/helpers"
+import { composeMiddleware } from "../helpers"
+import {
+  BaseContext,
+  Chain,
+  CommandLike,
+  CommandMatcher,
+  Context,
+  Middleware
+} from "../types"
+import { Command } from "./Command"
 
 export interface CommandGroupOptions<M, C, D> {
   matcher: CommandMatcher<unknown, M, C>
   commands: CommandLike<M, C>[]
+  middleware?: ArrayResolvable<Middleware<unknown, M, C>>
   data?: D
 }
 
-export type CommandGroupContext<M, C> = Context<unknown, M, C>
-
 export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
+  public data?: D
+  public middleware: Middleware<unknown, M, C>[]
+  public commands: CommandLike<M, C>[]
   private matcher: CommandMatcher<unknown, M, C>
-  private privateCommands: CommandLike<M, C>[]
 
   constructor(options: CommandGroupOptions<M, C, D>) {
-    const { matcher, commands } = options
+    const { data, matcher, commands, middleware = [] } = options
 
+    this.data = data
     this.matcher = matcher
-    this.privateCommands = commands
+    this.commands = commands
+    this.middleware = resolveToArray(middleware)
   }
 
-  public async getMatch(testingContext: CommandGroupContext<M, C>) {
-    const context = await this.matcher(testingContext)
-    if (!context) return
+  public async getChain(context: BaseContext<M, C>): Promise<Chain<M, C> | void> {
+    const newContext: Context<unknown, M, C> = { ...context, issuer: this }
+    const resultContext = await this.matcher(newContext)
 
-    for (const command of this.privateCommands) {
-      const result = await command.getMatch(context)
-      if (result) return result
+    if (!resultContext) return
+
+    for (const command of this.commands) {
+      const chain = await command.getChain(resultContext)
+
+      if (chain)
+        return {
+          commands: [this, ...chain.commands],
+          context: chain.context
+        }
     }
   }
 
-  get commands() {
-    return [...this.privateCommands]
+  public async run(
+    context: Context<unknown, M, C>,
+    command: Command<M, C> | CommandGroup<M, C>
+  ) {
+    context.issuer = this
+
+    const middleware: Middleware[] = [
+      ...this.middleware,
+      context => {
+        if (command instanceof Command) {
+          return command.run(context)
+        } else {
+          return command.run(context, command)
+        }
+      }
+    ]
+
+    return composeMiddleware(middleware)(context)
   }
 }
 

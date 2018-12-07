@@ -1,46 +1,51 @@
-import {
-  CommandAction,
-  CommandLike,
-  CommandMatcher,
-  Context,
-  MatchResult
-} from "../types"
+import { ArrayResolvable } from "../../core"
+import { assert, resolveToArray } from "../../core/helpers"
+import { composeMiddleware } from "../helpers"
+import { Chain, CommandLike, CommandMatcher, Context, Middleware } from "../types"
 
 export interface CommandOptions<M, C, D> {
   matcher: CommandMatcher<unknown, M, C>
-  action: CommandAction<Context<unknown, M, C>>
+  middleware?: ArrayResolvable<Middleware<unknown, M, C>>
+  action?: Middleware<unknown, M, C>
   data?: D
 }
 
-export type CommandContext<M, C> = Context<unknown, M, C>
-
 export class Command<M, C, D = unknown> implements CommandLike<M, C> {
   public data?: D
+  public middleware: Middleware<unknown, M, C>[]
   private matcher: CommandMatcher<unknown, M, C>
-  private action: CommandAction<CommandContext<M, C>>
 
   constructor(options: CommandOptions<M, C, D>) {
-    const { matcher, action, data } = options
+    const { matcher, middleware, action, data } = options
+
+    assert(
+      !!middleware || (!!action && !(!!middleware && !!middleware)),
+      "Pass either an action or middleware to a Command"
+    )
+
+    const safeMiddleware = resolveToArray(middleware! || action!)
 
     this.matcher = matcher
-    this.action = action
+    this.middleware = safeMiddleware
     this.data = data
   }
 
-  public async getMatch(
-    testingContext: CommandContext<M, C>
-  ): Promise<MatchResult<M, C> | undefined> {
-    const context = await this.matcher(testingContext)
-    if (!context) return
+  public async getChain(context: Context<unknown, M, C>): Promise<Chain<M, C> | void> {
+    context.issuer = this
 
-    return {
-      command: this,
-      context
+    const resultContext = await this.matcher(context)
+
+    if (resultContext) {
+      return {
+        commands: [this],
+        context
+      }
     }
   }
 
-  public async run(context: CommandContext<M, C>) {
-    return this.action(context)
+  public run(context: Context<unknown, M, C>): Promise<any> {
+    context.issuer = this
+    return composeMiddleware(this.middleware)(context)
   }
 }
 

@@ -1,15 +1,13 @@
 import { bind } from "decko"
 import { CommandGroup } from "../../command/classes"
-import { CommandError } from "../../command/classes/CommandError"
-import { Context, MatchResult } from "../../command/types"
+import { composeMiddleware } from "../../command/helpers"
+import { BaseContext, Middleware } from "../../command/types"
 import { Emitter } from "../../core/classes"
 import { emitOrThrow } from "../../core/helpers"
 import { ServiceClass, ServiceManager } from "../../service/classes"
 import { ClientAdapter } from "./ClientAdapter"
 
-export interface BotEvents<M, C> {
-  match: MatchResult<M, C>
-  commandError: CommandError<M, C>
+export interface BotEvents {
   response: any
   error: any
 }
@@ -20,9 +18,7 @@ export interface BotOptions<M, C> {
   services?: ServiceClass<M, C>[]
 }
 
-export type BotContext<M, C> = Context<unknown, M, C>
-
-export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
+export class Bot<M, C> extends Emitter<BotEvents> {
   private adapter: ClientAdapter<C, M>
 
   public readonly group: CommandGroup<M, C>
@@ -51,26 +47,30 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
   @bind
   public async processMessage(message: M) {
     const content = this.adapter.methods.getMessageContent(message)
-    const context: BotContext<M, C> = {
+    const context: BaseContext<M, C> = {
       bot: this,
       manager: this.manager,
       message,
       content
     }
 
-    const result = await this.group.getMatch(context)
-    if (result) await this.useResult(result)
-  }
+    const chain = await this.group.getChain(context)
 
-  private async useResult(result: MatchResult<M, C>) {
-    const { command, context } = result
-    this.emit("match", result)
+    if (chain) {
+      const middleware: Middleware<unknown, M, C>[] = []
 
-    try {
-      const response = await command.run(context)
-      this.emit("response", response)
-    } catch (error) {
-      this.handleCommandError(error, result)
+      for (const command of chain.commands) {
+        middleware.push(...command.middleware)
+      }
+
+      const run = composeMiddleware(middleware)
+
+      try {
+        const response = await run(chain.context)
+        if (response) this.emit("response", response)
+      } catch (error) {
+        this.handleError(error)
+      }
     }
   }
 
@@ -87,12 +87,6 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
   @bind
   private handleError(error: any) {
     emitOrThrow(this, "error", error)
-  }
-
-  @bind
-  private handleCommandError(error: any, result: MatchResult<M, C>) {
-    error = new CommandError(result, error)
-    emitOrThrow(this, "commandError", error)
   }
 
   public get client() {
