@@ -1,3 +1,3 @@
 export const xor = (a: any, b: any) => {
-  return !!(a | b && !(a && b))
+  return (a || b) && !(a && b)
 }
