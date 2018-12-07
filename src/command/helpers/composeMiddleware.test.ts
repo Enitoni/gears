@@ -52,3 +52,12 @@ test("error", async () => {
 
   expect(response).toBe("Error!")
 })
+
+test("no response", async () => {
+  const chain: Middleware[] = []
+
+  const run = composeMiddleware(chain)
+  const response = await run(context)
+
+  expect(response).toBeUndefined()
+})
