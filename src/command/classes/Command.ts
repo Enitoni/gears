@@ -17,11 +17,7 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
   constructor(options: CommandOptions<M, C, D>) {
     const { matcher, middleware, action, data } = options
 
-    assert(
-      xor(middleware, action),
-      "Pass either an action or middleware to a Command, not both"
-    )
-
+    assert(xor(middleware, action), "Pass either an action or middleware to a Command")
     const safeMiddleware = resolveToArray(middleware! || action!)
 
     this.matcher = matcher

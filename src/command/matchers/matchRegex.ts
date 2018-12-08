@@ -12,5 +12,5 @@ export const matchRegex = (
   const match = (typeof regex === "function" ? regex() : regex).exec(context.content)
   if (!match) return
 
-  return { ...context, match }
+  return { ...context, state: { match } }
 }

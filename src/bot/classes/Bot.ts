@@ -48,8 +48,9 @@ export class Bot<M, C> extends Emitter<BotEvents> {
   public async processMessage(message: M) {
     const content = this.adapter.methods.getMessageContent(message)
     const context: BaseContext<M, C> = {
-      bot: this,
       manager: this.manager,
+      state: undefined,
+      bot: this,
       message,
       content
     }

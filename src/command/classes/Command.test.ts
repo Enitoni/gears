@@ -33,14 +33,14 @@ test("Command does not match", async () => {
 
 test("Command has middleware", async () => {
   const middlewareA: Middleware<{ a: number }> = context => {
-    context.a = 5
+    context.state.a = 3
   }
 
   const middlewareB: Middleware<{ b: number }> = context => {
-    context.b = 5
+    context.state.b = 5
   }
 
-  const command = new Command<MockClientMessage, MockClient>({
+  const command = new Command({
     matcher: matchPrefixes("fuuuuuck"),
     middleware: [middlewareA, middlewareB, context => {}]
   })
