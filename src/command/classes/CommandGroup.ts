@@ -10,7 +10,7 @@ import {
 } from "../types"
 
 export interface CommandGroupOptions<M, C, D> {
-  matcher: CommandMatcher<{}, M, C>
+  matcher: CommandMatcher<any, M, C>
   commands: CommandLike<M, C>[]
   middleware?: ArrayResolvable<Middleware<any, M, C>>
   data?: D
@@ -18,9 +18,9 @@ export interface CommandGroupOptions<M, C, D> {
 
 export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
   public data?: D
-  public middleware: Middleware<{}, M, C>[]
+  public middleware: Middleware<any, M, C>[]
   public commands: CommandLike<M, C>[]
-  private matcher: CommandMatcher<{}, M, C>
+  private matcher: CommandMatcher<any, M, C>
 
   constructor(options: CommandGroupOptions<M, C, D>) {
     const { data, matcher, commands, middleware = [] } = options
