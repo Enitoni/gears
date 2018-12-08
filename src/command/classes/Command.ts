@@ -9,7 +9,7 @@ export interface CommandOptions<M, C, D> {
   data?: D
 }
 
-export class Command<M, C, D = {}> implements CommandLike<M, C> {
+export class Command<M, C, D = unknown> implements CommandLike<M, C> {
   public data?: D
   public middleware: Middleware<{}, M, C>[]
   private matcher: CommandMatcher<{}, M, C>

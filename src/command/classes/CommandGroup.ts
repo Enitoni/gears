@@ -16,7 +16,7 @@ export interface CommandGroupOptions<M, C, D> {
   data?: D
 }
 
-export class CommandGroup<M, C, D = {}> implements CommandLike<M, C> {
+export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
   public data?: D
   public middleware: Middleware<{}, M, C>[]
   public commands: CommandLike<M, C>[]
