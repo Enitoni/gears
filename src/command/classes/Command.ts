@@ -3,16 +3,16 @@ import { assert, resolveToArray, xor } from "../../core/helpers"
 import { Chain, CommandLike, CommandMatcher, Context, Middleware } from "../types"
 
 export interface CommandOptions<M, C, D> {
-  matcher: CommandMatcher<unknown, M, C>
-  middleware?: ArrayResolvable<Middleware<any, M, C>>
-  action?: Middleware<any, M, C>
+  matcher: CommandMatcher<{}, M, C>
+  middleware?: ArrayResolvable<Middleware<{}, M, C>>
+  action?: Middleware<{}, M, C>
   data?: D
 }
 
-export class Command<M, C, D = unknown> implements CommandLike<M, C> {
+export class Command<M, C, D = {}> implements CommandLike<M, C> {
   public data?: D
-  public middleware: Middleware<unknown, M, C>[]
-  private matcher: CommandMatcher<unknown, M, C>
+  public middleware: Middleware<{}, M, C>[]
+  private matcher: CommandMatcher<{}, M, C>
 
   constructor(options: CommandOptions<M, C, D>) {
     const { matcher, middleware, action, data } = options
@@ -25,7 +25,7 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
     this.data = data
   }
 
-  public async getChain(context: Context<unknown, M, C>): Promise<Chain<M, C> | void> {
+  public async getChain(context: Context<{}, M, C>): Promise<Chain<M, C> | void> {
     context.issuer = this
 
     const resultContext = await this.matcher(context)

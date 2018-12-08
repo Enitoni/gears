@@ -10,17 +10,17 @@ import {
 } from "../types"
 
 export interface CommandGroupOptions<M, C, D> {
-  matcher: CommandMatcher<unknown, M, C>
+  matcher: CommandMatcher<{}, M, C>
   commands: CommandLike<M, C>[]
-  middleware?: ArrayResolvable<Middleware<unknown, M, C>>
+  middleware?: ArrayResolvable<Middleware<{}, M, C>>
   data?: D
 }
 
-export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
+export class CommandGroup<M, C, D = {}> implements CommandLike<M, C> {
   public data?: D
-  public middleware: Middleware<unknown, M, C>[]
+  public middleware: Middleware<{}, M, C>[]
   public commands: CommandLike<M, C>[]
-  private matcher: CommandMatcher<unknown, M, C>
+  private matcher: CommandMatcher<{}, M, C>
 
   constructor(options: CommandGroupOptions<M, C, D>) {
     const { data, matcher, commands, middleware = [] } = options
@@ -32,7 +32,7 @@ export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
   }
 
   public async getChain(context: BaseContext<M, C>): Promise<Chain<M, C> | void> {
-    const newContext: Context<unknown, M, C> = { ...context, issuer: this }
+    const newContext: Context<{}, M, C> = { ...context, issuer: this }
     const resultContext = await this.matcher(newContext)
 
     if (!resultContext) return
