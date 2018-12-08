@@ -15,4 +15,4 @@ export const getMockContext = (message: MockClientMessage): MockContext => {
   } as MockContext
 }
 
-export type MockContext = Context<unknown, MockClientMessage, MockClient>
+export type MockContext = Context<{}, MockClientMessage, MockClient>

@@ -49,7 +49,7 @@ export class Bot<M, C> extends Emitter<BotEvents> {
     const content = this.adapter.methods.getMessageContent(message)
     const context: BaseContext<M, C> = {
       manager: this.manager,
-      state: undefined,
+      state: {},
       bot: this,
       message,
       content
@@ -58,7 +58,7 @@ export class Bot<M, C> extends Emitter<BotEvents> {
     const chain = await this.group.getChain(context)
 
     if (chain) {
-      const middleware: Middleware<unknown, M, C>[] = []
+      const middleware: Middleware<{}, M, C>[] = []
 
       for (const command of chain.commands) {
         middleware.push(...command.middleware)
