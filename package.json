@@ -14,7 +14,7 @@
   "scripts": {
     "build": "run-s test clean tsc",
     "clean": "rimraf build",
-    "tsc": "tsc",
+    "tsc": "tsc --project tsconfig.build.json",
     "test": "jest"
   },
   "devDependencies": {
