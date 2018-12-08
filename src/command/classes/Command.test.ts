@@ -40,7 +40,7 @@ test("Command has middleware", async () => {
     context.state.b = 5
   }
 
-  const command = new Command({
+  const command = new Command<MockClientMessage, MockClient>({
     matcher: matchPrefixes("fuuuuuck"),
     middleware: [middlewareA, middlewareB, context => {}]
   })
