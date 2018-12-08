@@ -12,7 +12,7 @@ import {
 export interface CommandGroupOptions<M, C, D> {
   matcher: CommandMatcher<{}, M, C>
   commands: CommandLike<M, C>[]
-  middleware?: ArrayResolvable<Middleware<{}, M, C>>
+  middleware?: ArrayResolvable<Middleware<any, M, C>>
   data?: D
 }
 

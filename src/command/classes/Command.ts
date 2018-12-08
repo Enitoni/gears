@@ -4,8 +4,8 @@ import { Chain, CommandLike, CommandMatcher, Context, Middleware } from "../type
 
 export interface CommandOptions<M, C, D> {
   matcher: CommandMatcher<{}, M, C>
-  middleware?: ArrayResolvable<Middleware<{}, M, C>>
-  action?: Middleware<{}, M, C>
+  middleware?: ArrayResolvable<Middleware<any, M, C>>
+  action?: Middleware<any, M, C>
   data?: D
 }
 
