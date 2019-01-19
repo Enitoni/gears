@@ -1,6 +1,7 @@
 import { getMockBot, MockClient, MockClientMessage } from "../../bot/mocks"
 import { getMockServiceManager } from "../mocks"
 import { Service } from "./Service"
+import { MANAGER_INITIALIZE, MANAGER_START, MANAGER_STOP } from "../symbols"
 
 test("Service", async () => {
   const didInitialize = jest.fn()
@@ -29,12 +30,17 @@ test("Service", async () => {
   const bot = getMockBot()
   const manager = getMockServiceManager(bot, [TestService])
 
-  manager._initialize()
-  manager._start()
-  manager._stop()
-  manager._start()
-  manager._stop()
-  manager._start()
+  manager[MANAGER_INITIALIZE]()
+  manager[MANAGER_START]()
+  manager[MANAGER_STOP]()
+  manager[MANAGER_START]()
+  manager[MANAGER_STOP]()
+  manager[MANAGER_START]()
+
+  expect(() => {
+    const invalidSymbol = Symbol()
+    new Service({ bot, manager }, invalidSymbol)
+  }).toThrow()
 
   expect(didInitialize).toBeCalled()
   expect(didStart).toBeCalledTimes(1)

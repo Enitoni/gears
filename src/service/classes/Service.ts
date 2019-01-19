@@ -1,5 +1,11 @@
 import { Bot } from "../../bot/classes"
 import { ServiceManager } from "./ServiceManager"
+import {
+  SERVICE_CONSTRUCTOR,
+  SERVICE_INITIALIZE,
+  SERVICE_START,
+  SERVICE_STOP
+} from "../symbols"
 
 export interface ServiceOptions<M, C> {
   bot: Bot<M, C>
@@ -12,18 +18,23 @@ export class Service<M, C> {
   protected bot: Bot<M, C>
   protected manager: ServiceManager<M, C>
 
-  constructor(options: ServiceOptions<M, C>) {
+  constructor(options: ServiceOptions<M, C>, s: symbol) {
+    if (s !== SERVICE_CONSTRUCTOR)
+      throw new Error(
+        "Manually instantiating a service is not allowed, add your service class to the services array on your bot."
+      )
+
     const { bot, manager } = options
 
     this.bot = bot
     this.manager = manager
   }
 
-  public async _initialize() {
+  public async [SERVICE_INITIALIZE]() {
     await this.serviceDidInitialize()
   }
 
-  public async _start() {
+  public async [SERVICE_START]() {
     if (this.didStart) {
       await this.serviceDidRestart()
     } else {
@@ -32,7 +43,7 @@ export class Service<M, C> {
     }
   }
 
-  public async _stop() {
+  public async [SERVICE_STOP]() {
     await this.serviceDidStop()
   }
 
@@ -48,5 +59,3 @@ export class Service<M, C> {
   /** Hook called when the service has stopped and the bot is offline */
   protected async serviceDidStop() {}
 }
-
-export type ServiceClass<M, C> = new (options: ServiceOptions<M, C>) => Service<M, C>

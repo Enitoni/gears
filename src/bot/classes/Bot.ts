@@ -4,8 +4,9 @@ import { composeMiddleware } from "../../command/helpers"
 import { BaseContext, Middleware } from "../../command/types"
 import { Emitter } from "../../core/classes"
 import { emitOrThrow } from "../../core/helpers"
-import { ServiceClass, ServiceManager } from "../../service/classes"
+import { ServiceManager, ServiceType } from "../../service/classes"
 import { ClientAdapter } from "./ClientAdapter"
+import { MANAGER_INITIALIZE, MANAGER_START, MANAGER_STOP } from "../../service/symbols"
 
 export interface BotEvents {
   response: any
@@ -15,7 +16,7 @@ export interface BotEvents {
 export interface BotOptions<M, C> {
   adapter: ClientAdapter<C, M>
   group: CommandGroup<M, C>
-  services?: ServiceClass<M, C>[]
+  services?: ServiceType<M, C>[]
 }
 
 export class Bot<M, C> extends Emitter<BotEvents> {
@@ -40,7 +41,7 @@ export class Bot<M, C> extends Emitter<BotEvents> {
   }
 
   public async start() {
-    await this.manager._initialize()
+    await this.manager[MANAGER_INITIALIZE]()
     await this.adapter.methods.start()
   }
 
@@ -77,12 +78,12 @@ export class Bot<M, C> extends Emitter<BotEvents> {
 
   @bind
   private async handleReady() {
-    await this.manager._start()
+    await this.manager[MANAGER_START]()
   }
 
   @bind
   private async handleUnready() {
-    await this.manager._stop()
+    await this.manager[MANAGER_STOP]()
   }
 
   @bind

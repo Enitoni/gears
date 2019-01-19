@@ -1,0 +1,7 @@
+export const SERVICE_START = Symbol()
+export const SERVICE_STOP = Symbol()
+export const SERVICE_INITIALIZE = Symbol()
+export const SERVICE_CONSTRUCTOR = Symbol()
+export const MANAGER_INITIALIZE = Symbol()
+export const MANAGER_START = Symbol()
+export const MANAGER_STOP = Symbol()
