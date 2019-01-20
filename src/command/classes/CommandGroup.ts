@@ -40,11 +40,7 @@ export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
     for (const command of this.commands) {
       const chain = await command.getChain(resultContext)
 
-      if (chain)
-        return {
-          commands: [this, ...chain.commands],
-          context: chain.context
-        }
+      if (chain) return [{ command: this, context: { ...resultContext } }, ...chain]
     }
   }
 }

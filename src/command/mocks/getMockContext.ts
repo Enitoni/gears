@@ -9,6 +9,7 @@ export const getMockContext = (message: MockClientMessage): MockContext => {
 
   return {
     content: message,
+    state: {},
     manager,
     message,
     bot

@@ -1,7 +1,7 @@
 import { bind } from "decko"
 import { CommandGroup } from "../../command/classes"
-import { composeMiddleware } from "../../command/helpers"
-import { BaseContext, Middleware } from "../../command/types"
+import { composeChain } from "../../command/helpers"
+import { BaseContext } from "../../command/types"
 import { Emitter } from "../../core/classes"
 import { emitOrThrow } from "../../core/helpers"
 import { ServiceManager, ServiceType } from "../../service/classes"
@@ -59,16 +59,10 @@ export class Bot<M, C> extends Emitter<BotEvents> {
     const chain = await this.group.getChain(context)
 
     if (chain) {
-      const middleware: Middleware<{}, M, C>[] = []
-
-      for (const command of chain.commands) {
-        middleware.push(...command.middleware)
-      }
-
-      const run = composeMiddleware(middleware)
+      const run = composeChain(chain)
 
       try {
-        const response = await run(chain.context)
+        const response = await run()
         if (response) this.emit("response", response)
       } catch (error) {
         this.handleError(error)

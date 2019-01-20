@@ -31,10 +31,7 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
     const resultContext = await this.matcher(context)
 
     if (resultContext) {
-      return {
-        commands: [this],
-        context: { ...resultContext }
-      }
+      return [{ command: this, context: { ...resultContext } }]
     }
   }
 }

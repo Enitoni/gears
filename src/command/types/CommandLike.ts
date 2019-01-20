@@ -1,10 +1,12 @@
 import { Middleware } from "./CommandMiddleware"
 import { Context } from "./Context"
 
-export interface Chain<M, C = unknown> {
-  commands: CommandLike<M, C>[]
+export interface ChainEntry<M, C = unknown> {
+  command: CommandLike<M, C>
   context: Context<{}, M, C>
 }
+
+export type Chain<M, C = unknown> = ChainEntry<M, C>[]
 
 export interface CommandLike<M, C> {
   middleware: Middleware<{}, M, C>[]
