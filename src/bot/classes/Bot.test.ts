@@ -29,13 +29,20 @@ test("Bot", async () => {
   })
 
   const handleError = jest.fn()
+
   const handleResponse = jest.fn(response => {
     expect(response).toBe("Response!")
+  })
+
+  const handleCommand = jest.fn(([command, message]) => {
+    expect(command).toBe(command)
+    expect(message).toBe("ABC")
   })
 
   const bot = getMockBot({ group })
 
   bot.on("response", handleResponse)
+  bot.once("command", handleCommand)
 
   expect(bot.client).toBeInstanceOf(MockClient)
 

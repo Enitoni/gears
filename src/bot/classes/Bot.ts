@@ -1,14 +1,15 @@
 import { bind } from "decko"
-import { CommandGroup } from "../../command/classes"
+import { CommandGroup, Command } from "../../command/classes"
 import { composeChain } from "../../command/helpers"
-import { BaseContext } from "../../command/types"
+import { BaseContext, CommandLike } from "../../command/types"
 import { Emitter } from "../../core/classes"
 import { emitOrThrow } from "../../core/helpers"
 import { ServiceManager, ServiceType } from "../../service/classes"
 import { ClientAdapter } from "./ClientAdapter"
 import { MANAGER_INITIALIZE, MANAGER_START, MANAGER_STOP } from "../../service/symbols"
 
-export interface BotEvents {
+export interface BotEvents<M, C> {
+  command: [Command<M, C>, M]
   response: any
   error: any
 }
@@ -19,7 +20,7 @@ export interface BotOptions<M, C> {
   services?: ServiceType<M, C>[]
 }
 
-export class Bot<M, C> extends Emitter<BotEvents> {
+export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
   private adapter: ClientAdapter<C, M>
 
   public readonly group: CommandGroup<M, C>
@@ -60,6 +61,9 @@ export class Bot<M, C> extends Emitter<BotEvents> {
 
     if (chain) {
       const run = composeChain(chain)
+
+      const command = chain[chain.length - 1].command as Command<M, C>
+      this.emit("command", [command, message])
 
       try {
         const response = await run()
