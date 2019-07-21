@@ -7,6 +7,10 @@ interface EventListener<T = any> {
   once: boolean
 }
 
+/**
+ * A typesafe EventEmitter
+ * @category Internal
+ */
 export class Emitter<Events extends object> {
   private listeners = new Map<keyof Events, EventListener[]>()
 

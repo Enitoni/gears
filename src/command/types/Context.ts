@@ -2,6 +2,10 @@ import { Bot } from "../../bot/classes/Bot"
 import { ServiceManager } from "../../service/classes"
 import { Command, CommandGroup } from "../classes"
 
+/**
+ * Context before passed to the tree
+ * @category Context
+ */
 export interface BaseContext<M, C, D = {}> {
   content: string
   message: M
@@ -10,8 +14,10 @@ export interface BaseContext<M, C, D = {}> {
   state: D
 }
 
-export interface CommandContext<M, C, D> extends BaseContext<M, C, D> {
+/**
+ * [[BaseContext]] with the issuing [[CommandLike]]
+ * @category Context
+ */
+export interface Context<D = any, M = any, C = any> extends BaseContext<M, C, D> {
   issuer: Command<M, C> | CommandGroup<M, C>
 }
-
-export type Context<D = {}, M = any, C = any> = CommandContext<M, C, D>

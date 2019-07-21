@@ -1,6 +1,9 @@
 import { assert } from "../../core/helpers"
 import { Context, Middleware } from "../types"
 
+/**
+ * @ignore
+ */
 export const composeMiddleware = (chain: Middleware[]) => async (
   context: Context,
   next?: Middleware

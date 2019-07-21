@@ -4,8 +4,8 @@ import { matchRandomly } from "./matchRandomly"
 test("matchRandomly", async () => {
   const context = getMockContext("")
 
-  const first = await matchRandomly(1)(context)
-  const second = await matchRandomly(0)(context)
+  const first = matchRandomly(1)(context)
+  const second = matchRandomly(0)(context)
   await matchRandomly()(context)
 
   expect(first).toBeDefined()

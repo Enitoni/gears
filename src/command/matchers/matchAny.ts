@@ -1,5 +1,9 @@
 import { CommandMatcher } from "../types"
 
+/**
+ * Match the first matching matcher
+ * @category Matching
+ */
 export const matchAny = (
   ...matchers: CommandMatcher[]
 ): CommandMatcher => async context => {

@@ -1,5 +1,8 @@
 import { Emitter } from "../classes"
 
+/**
+ * @ignore
+ */
 export const emitOrThrow = <T extends object>(
   emitter: Emitter<T>,
   type: keyof T,

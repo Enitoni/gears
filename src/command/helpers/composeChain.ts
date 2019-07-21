@@ -1,8 +1,11 @@
 import { Chain, Middleware, NextFunction } from "../types"
 import { composeMiddleware } from "./composeMiddleware"
 
-/** This composes a chain and manages context to make sure
- * each context is correct based on the level in the chain */
+/**
+ * This composes a chain and manages context to make sure
+ * each context is correct based on the level in the chain
+ * @ignore
+ */
 export const composeChain = (chain: Chain<any, any>) => {
   let globalContext = chain[0].context
 

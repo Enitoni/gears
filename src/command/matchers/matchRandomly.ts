@@ -1,6 +1,10 @@
 import { CommandMatcher } from "../types"
 
-export const matchRandomly = (chance = 0.5): CommandMatcher => async context => {
-  const doesMatch = Math.random() < chance
-  if (doesMatch) return context
+/**
+ * Matches at random
+ * @param chance Chance of matching, between 0 and 1
+ * @category Matching
+ */
+export const matchRandomly = (chance = 0.5): CommandMatcher => context => {
+  if (Math.random() < chance) return context
 }

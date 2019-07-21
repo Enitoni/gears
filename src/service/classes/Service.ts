@@ -8,11 +8,19 @@ import {
 } from "../symbols"
 import { assert } from "../../core/helpers"
 
+/**
+ * Options passed to the [[Service]] constructor
+ * @category Service
+ */
 export interface ServiceOptions<M, C> {
   bot: Bot<M, C>
   manager: ServiceManager<M, C>
 }
 
+/**
+ * Stateful business logic living outside of commands
+ * @category Service
+ */
 export class Service<M, C> {
   private didStart = false
 

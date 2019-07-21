@@ -1,11 +1,22 @@
 import { CommandMatcher } from "../types"
 
+/**
+ * Either a regex or a function that returns a regex
+ * @category Misc
+ */
 export type RegExpResolvable = RegExp | (() => RegExp)
 
+/**
+ * @ignore
+ */
 export interface RegexData {
   match: RegExpExecArray
 }
 
+/**
+ * Match when the provided regular expression matches, adds match array to context state.
+ * @category Matching
+ */
 export const matchRegex = (
   regex: RegExpResolvable
 ): CommandMatcher<RegexData> => async context => {

@@ -9,23 +9,32 @@ import {
   Middleware
 } from "../types"
 
+/**
+ * Options passed to the [[CommandGroup]] constructor
+ * @category Command
+ */
 export interface CommandGroupOptions<M, C, D> {
   matcher: CommandMatcher<any, M, C>
   commands: CommandLike<M, C>[]
   middleware?: ArrayResolvable<Middleware<any, M, C>>
-  data?: D
+  /** Custom metadata */
+  metadata?: D
 }
 
+/**
+ * A group of [[Command]]s, which will only match if the [[CommandMatcher]] and a command in the [[CommandGroup]] matches
+ * @category Command
+ */
 export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
-  public data?: D
+  public readonly metadata?: D
   public middleware: Middleware<any, M, C>[]
   public commands: CommandLike<M, C>[]
   private matcher: CommandMatcher<any, M, C>
 
   constructor(options: CommandGroupOptions<M, C, D>) {
-    const { data, matcher, commands, middleware = [] } = options
+    const { metadata, matcher, commands, middleware = [] } = options
 
-    this.data = data
+    this.metadata = metadata
     this.matcher = matcher
     this.commands = commands
     this.middleware = resolveToArray(middleware)

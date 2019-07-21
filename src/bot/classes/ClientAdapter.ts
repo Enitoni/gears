@@ -1,5 +1,9 @@
 import { Emitter } from "../../core/classes"
 
+/**
+ * Events fired by a [[ClientAdapter]]
+ * @category Bot
+ */
 export interface AdapterEvents<M> {
   message: M
   ready: void
@@ -7,6 +11,10 @@ export interface AdapterEvents<M> {
   error: any
 }
 
+/**
+ * Methods for interacting with the adapter
+ * @category Bot
+ */
 export interface AdapterHooks<M> {
   message: (message: M) => void
   ready: () => void
@@ -14,6 +22,10 @@ export interface AdapterHooks<M> {
   error: (error: any) => void
 }
 
+/**
+ * The resulting interface after registering an adapter
+ * @category Bot
+ */
 export interface AdapterResult<C, M> {
   client: C
   methods: {
@@ -22,6 +34,9 @@ export interface AdapterResult<C, M> {
   }
 }
 
+/**
+ * Adapts any messaging interface to work with Gears.
+ */
 export abstract class ClientAdapter<C, M = unknown, CO = unknown>
   extends Emitter<AdapterEvents<M>>
   implements AdapterResult<C, M> {

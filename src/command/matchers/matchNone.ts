@@ -1,5 +1,9 @@
 import { CommandMatcher } from "../types"
 
+/**
+ * Match if no matchers provided match
+ * @category Matching
+ */
 export const matchNone = (
   ...matchers: CommandMatcher[]
 ): CommandMatcher => async context => {
