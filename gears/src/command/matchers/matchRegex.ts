@@ -1,4 +1,4 @@
-import { CommandMatcher } from "../types"
+import { Matcher } from "../types"
 
 /**
  * Either a regex or a function that returns a regex
@@ -19,7 +19,7 @@ export interface RegexData {
  */
 export const matchRegex = (
   regex: RegExpResolvable
-): CommandMatcher<RegexData> => async context => {
+): Matcher<RegexData> => async context => {
   const match = (typeof regex === "function" ? regex() : regex).exec(context.content)
   if (!match) return
 

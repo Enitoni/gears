@@ -1,12 +1,10 @@
-import { CommandMatcher, Context } from "../types"
+import { Matcher, Context } from "../types"
 
 /**
  * Match all matchers
  * @category Matching
  */
-export const matchAll = (
-  ...matchers: CommandMatcher[]
-): CommandMatcher => async context => {
+export const matchAll = (...matchers: Matcher[]): Matcher => async context => {
   let resultingContext: Context | void = context
 
   for (const matcher of matchers) {

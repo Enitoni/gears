@@ -1,4 +1,4 @@
-import { CommandMatcher, Middleware } from "../types"
+import { Matcher, Middleware } from "../types"
 import { assert } from "../../core/helpers"
 import { Command } from "./Command"
 
@@ -9,13 +9,13 @@ import { Command } from "./Command"
 export class CommandBuilder<M, C, D = any, S extends object = {}> {
   private metadata!: D
 
-  private matcher!: CommandMatcher<S, M, C>
+  private matcher!: Matcher<S, M, C>
   private middleware: Middleware<S, M, C>[] = []
 
   /**
-   * Set [[CommandMatcher]]
+   * Set [[Matcher]]
    */
-  public match<T extends object>(matcher: CommandMatcher<T & S, M, C>) {
+  public match<T extends object>(matcher: Matcher<T & S, M, C>) {
     assert(!this.matcher, "Cannot use match() more than once")
     this.matcher = matcher
 

@@ -1,7 +1,7 @@
-import { CommandMatcher } from "../types"
+import { Matcher } from "../types"
 
 /**
  * Match any message
  * @category Matching
  */
-export const matchAlways = (): CommandMatcher => context => context
+export const matchAlways = (): Matcher => context => context

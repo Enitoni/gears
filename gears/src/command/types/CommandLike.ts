@@ -1,4 +1,4 @@
-import { Middleware } from "./CommandMiddleware"
+import { Middleware } from "./Middleware"
 import { Context } from "./Context"
 
 /**

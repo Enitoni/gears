@@ -1,13 +1,13 @@
 import { ArrayResolvable } from "../../core"
 import { assert, resolveToArray, xor } from "../../core/helpers"
-import { Chain, CommandLike, CommandMatcher, Context, Middleware } from "../types"
+import { Chain, CommandLike, Matcher, Context, Middleware } from "../types"
 
 /**
  * Options passed to the [[Command]] constructor
  * @category Command
  */
 export interface CommandOptions<M, C, D> {
-  matcher: CommandMatcher<any, M, C>
+  matcher: Matcher<any, M, C>
   middleware?: ArrayResolvable<Middleware<any, M, C>>
   action?: Middleware<any, M, C>
   metadata?: D
@@ -20,7 +20,7 @@ export interface CommandOptions<M, C, D> {
 export class Command<M, C, D = unknown> implements CommandLike<M, C> {
   public readonly metadata?: D
   public middleware: Middleware<any, M, C>[]
-  private matcher: CommandMatcher<any, M, C>
+  private matcher: Matcher<any, M, C>
 
   constructor(options: CommandOptions<M, C, D>) {
     const { matcher, middleware, action, metadata } = options

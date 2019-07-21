@@ -1,4 +1,4 @@
-import { CommandLike, CommandMatcher, Middleware } from "../types"
+import { CommandLike, Matcher, Middleware } from "../types"
 import { CommandGroup } from "./CommandGroup"
 import { assert } from "../../core/helpers"
 
@@ -10,13 +10,13 @@ export class CommandGroupBuilder<M, C, D = any, S extends object = {}> {
   private commands: CommandLike<M, C>[] = []
   private metadata!: D
 
-  private matcher!: CommandMatcher<S, M, C>
+  private matcher!: Matcher<S, M, C>
   private middleware: Middleware<S, M, C>[] = []
 
   /**
-   * Set [[CommandMatcher]]
+   * Set [[Matcher]]
    */
-  public match<T extends object>(matcher: CommandMatcher<T & S, M, C>) {
+  public match<T extends object>(matcher: Matcher<T & S, M, C>) {
     assert(!this.matcher, "Cannot use match() more than once")
     this.matcher = matcher
 

@@ -1,20 +1,13 @@
 import { ArrayResolvable } from "../../core"
 import { resolveToArray } from "../../core/helpers"
-import {
-  BaseContext,
-  Chain,
-  CommandLike,
-  CommandMatcher,
-  Context,
-  Middleware
-} from "../types"
+import { BaseContext, Chain, CommandLike, Matcher, Context, Middleware } from "../types"
 
 /**
  * Options passed to the [[CommandGroup]] constructor
  * @category Command
  */
 export interface CommandGroupOptions<M, C, D> {
-  matcher: CommandMatcher<any, M, C>
+  matcher: Matcher<any, M, C>
   commands: CommandLike<M, C>[]
   middleware?: ArrayResolvable<Middleware<any, M, C>>
   /** Custom metadata */
@@ -22,14 +15,14 @@ export interface CommandGroupOptions<M, C, D> {
 }
 
 /**
- * A group of [[Command]]s, which will only match if the [[CommandMatcher]] and a command in the [[CommandGroup]] matches
+ * A group of [[Command]]s, which will only match if the [[Matcher]] and a command in the [[CommandGroup]] matches
  * @category Command
  */
 export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
   public readonly metadata?: D
   public middleware: Middleware<any, M, C>[]
   public commands: CommandLike<M, C>[]
-  private matcher: CommandMatcher<any, M, C>
+  private matcher: Matcher<any, M, C>
 
   constructor(options: CommandGroupOptions<M, C, D>) {
     const { metadata, matcher, commands, middleware = [] } = options
