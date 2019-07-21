@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "strict": true,
+    "jsx": "react",
+    "outDir": "build"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
