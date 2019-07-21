@@ -1,0 +1,6 @@
+{
+  "mode": "modules",
+  "json": "../docs/gears.json",
+  "tsconfig": "tsconfig.build.json",
+  "ignoreCompilerErrors": true
+}
