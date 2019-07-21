@@ -4,6 +4,7 @@ import { promisify } from "util"
 
 const read = promisify(fs.readFile)
 const write = promisify(fs.writeFile)
+const unlink = promisify(fs.unlink)
 
 const args = process.argv.slice(2)
 const path = String(args[0])
@@ -82,7 +83,9 @@ async function main() {
   const flattened = flatten(docsObject)
 
   const newPath = path.replace(".json", `_${version.replace(/\./g, "-")}.json`)
+
   await write(newPath, JSON.stringify({ version, modules: flattened }, undefined, 2))
+  await unlink(path)
 }
 
 main()

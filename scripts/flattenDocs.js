@@ -26,6 +26,7 @@ const fs_1 = __importDefault(require("fs"));
 const util_1 = require("util");
 const read = util_1.promisify(fs_1.default.readFile);
 const write = util_1.promisify(fs_1.default.writeFile);
+const unlink = util_1.promisify(fs_1.default.unlink);
 const args = process.argv.slice(2);
 const path = String(args[0]);
 function getTag(comment, type) {
@@ -80,6 +81,7 @@ function main() {
         const flattened = flatten(docsObject);
         const newPath = path.replace(".json", `_${version.replace(/\./g, "-")}.json`);
         yield write(newPath, JSON.stringify({ version, modules: flattened }, undefined, 2));
+        yield unlink(path);
     });
 }
 main();
