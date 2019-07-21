@@ -7,6 +7,7 @@ import { emitOrThrow } from "../../core/helpers"
 import { ServiceManager, ServiceType } from "../../service/classes"
 import { ClientAdapter } from "./ClientAdapter"
 import { MANAGER_INITIALIZE, MANAGER_START, MANAGER_STOP } from "../../service/symbols"
+import { matchAlways } from "../../command"
 
 /**
  * Events fired by a [[Bot]] instance
@@ -24,7 +25,7 @@ export interface BotEvents<M, C> {
  */
 export interface BotOptions<M, C> {
   adapter: ClientAdapter<C, M>
-  group: CommandGroup<M, C>
+  commands: CommandLike<M, C>[]
   services?: ServiceType<M, C>[]
 }
 
@@ -41,10 +42,10 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
   constructor(options: BotOptions<M, C>) {
     super()
 
-    const { adapter, group, services = [] } = options
-
+    const { adapter, commands, services = [] } = options
     this.adapter = adapter
-    this.group = group
+
+    this.group = new CommandGroup({ matcher: matchAlways(), commands })
     this.manager = new ServiceManager<M, C>(this, services)
 
     this.adapter.on("message", this.processMessage)

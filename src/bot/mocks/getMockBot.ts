@@ -1,21 +1,19 @@
-import { MockCommandGroup, MockCommandGroupInstance } from "../../command/mocks";
-import { Bot } from "../classes";
-import { MockAdapter } from "./MockAdapter";
+import { Bot } from "../classes"
+import { MockAdapter } from "./MockAdapter"
+import { CommandLike } from "../../command"
+import { MockClient } from "./MockClient"
 
 export interface MockBotOptions {
-  group: MockCommandGroupInstance
+  commands: CommandLike<string, MockClient>[]
 }
 
 const defaultOptions = {
-  group: new MockCommandGroup({
-    matcher: () => {},
-    commands: []
-  })
+  commands: []
 }
 
 export const getMockBot = (options?: MockBotOptions) => {
   const adapter = new MockAdapter(undefined)
-  const { group } = options || defaultOptions
+  const { commands } = options || defaultOptions
 
-  return new Bot({ adapter, group })
+  return new Bot({ adapter, commands })
 }

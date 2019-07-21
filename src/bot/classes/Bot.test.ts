@@ -39,7 +39,7 @@ test("Bot", async () => {
     expect(message).toBe("ABC")
   })
 
-  const bot = getMockBot({ group })
+  const bot = getMockBot({ commands: [group] })
 
   bot.on("response", handleResponse)
   bot.once("command", handleCommand)
