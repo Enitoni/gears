@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "lib": ["esnext"],
+    "strict": true
+  },
+  "include": ["scripts"]
+}
