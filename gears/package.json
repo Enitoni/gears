@@ -9,7 +9,7 @@
   "license": "MIT",
   "files": [
     "build/*",
-    "README.md"
+    "../README.md"
   ],
   "scripts": {
     "build": "run-s test clean tsc",
