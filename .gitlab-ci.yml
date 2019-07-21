@@ -15,6 +15,7 @@ Test:
   stage: test
   before_script:
     - yarn config set cache-folder .yarn
+    - cd gears
     - yarn install
   script:
     - yarn test --coverage --no-color
