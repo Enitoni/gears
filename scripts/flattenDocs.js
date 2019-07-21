@@ -78,7 +78,8 @@ function main() {
         const { version } = JSON.parse(packageString);
         const docsObject = JSON.parse(docString);
         const flattened = flatten(docsObject);
-        yield write(path, JSON.stringify({ version, modules: flattened }, undefined, 2));
+        const newPath = path.replace(".json", `_${version.replace(/\./g, "-")}.json`);
+        yield write(newPath, JSON.stringify({ version, modules: flattened }, undefined, 2));
     });
 }
 main();

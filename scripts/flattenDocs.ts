@@ -1,4 +1,5 @@
 import fs from "fs"
+import { basename } from "path"
 import { promisify } from "util"
 
 const read = promisify(fs.readFile)
@@ -80,7 +81,8 @@ async function main() {
 
   const flattened = flatten(docsObject)
 
-  await write(path, JSON.stringify({ version, modules: flattened }, undefined, 2))
+  const newPath = path.replace(".json", `_${version.replace(/\./g, "-")}.json`)
+  await write(newPath, JSON.stringify({ version, modules: flattened }, undefined, 2))
 }
 
 main()
