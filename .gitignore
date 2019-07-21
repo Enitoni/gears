@@ -1,4 +1,4 @@
 node_modules/
-gears/build/
-gears/coverage/
+build/
+coverage/
 docs/
