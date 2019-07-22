@@ -9,6 +9,6 @@ export class StoreManager<T extends Record<string, InitializableStore>> {
   }
 
   public reset() {
-    Object.values(this.stores).map(x => x.reset)
+    Object.values(this.stores).map(x => x.reset && x.reset())
   }
 }
