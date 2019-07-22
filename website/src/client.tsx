@@ -3,11 +3,13 @@ import React from "react"
 
 import { App } from "./modules/core/App"
 import { Head } from "./modules/core/Head"
-
-const dev = !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+import { DEVELOPMENT } from "./modules/core/constants"
+import { manager } from "./common/state/manager"
 
 async function main() {
-  if (dev) {
+  await manager.init()
+
+  if (DEVELOPMENT) {
     ReactDOM.render(<Head />, document.head)
     ReactDOM.render(<App />, document.querySelector(".app"))
   } else {
