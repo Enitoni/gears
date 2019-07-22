@@ -15,7 +15,8 @@
     "build": "run-s test clean tsc",
     "clean": "rimraf build",
     "tsc": "tsc --project tsconfig.build.json",
-    "doc": "typedoc --options typedoc.json --tsconfig tsconfig.build.json && node ../scripts/flattenDocs ../docs/gears.json",
+    "doc": "typedoc --options typedoc.json --tsconfig tsconfig.build.json && yarn process-docs",
+    "process-docs": "node ../scripts/flattenDocs ../doc-repo/gears.json && cd ../ && node ./scripts/compileDocList",
     "test": "jest"
   },
   "devDependencies": {
