@@ -83,7 +83,7 @@ async function main() {
 
   const newPath = path.replace(".json", `_${version.replace(/\./g, "-")}.json`)
 
-  await write(newPath, JSON.stringify({ version, modules: flattened }, undefined, 2))
+  await write(newPath, JSON.stringify({ version, modules: flattened }))
   await unlink(path)
 }
 

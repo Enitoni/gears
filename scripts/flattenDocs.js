@@ -80,7 +80,7 @@ function main() {
         const docsObject = JSON.parse(docString);
         const flattened = flatten(docsObject);
         const newPath = path.replace(".json", `_${version.replace(/\./g, "-")}.json`);
-        yield write(newPath, JSON.stringify({ version, modules: flattened }, undefined, 2));
+        yield write(newPath, JSON.stringify({ version, modules: flattened }));
         yield unlink(path);
     });
 }
