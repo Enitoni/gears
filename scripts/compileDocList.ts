@@ -15,13 +15,13 @@ async function main() {
   } catch {}
 
   const files = await scan(REPO_PATH)
-  const result: string[] = []
+  const result: Record<string, string> = {}
 
   for (const file of files) {
     const fileString = await read(`${REPO_PATH}/${file}`, "utf8")
     const data = JSON.parse(fileString)
 
-    result.push(data.version)
+    result[data.version] = file
   }
 
   await write(INDEX_PATH, JSON.stringify(result))

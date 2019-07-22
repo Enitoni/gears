@@ -26,11 +26,11 @@ function main() {
         }
         catch (_a) { }
         const files = yield scan(REPO_PATH);
-        const result = [];
+        const result = {};
         for (const file of files) {
             const fileString = yield read(`${REPO_PATH}/${file}`, "utf8");
             const data = JSON.parse(fileString);
-            result.push(data.version);
+            result[data.version] = file;
         }
         yield write(INDEX_PATH, JSON.stringify(result));
     });
