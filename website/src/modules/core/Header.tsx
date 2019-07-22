@@ -1,7 +1,7 @@
 import React from "react"
 import { styled } from "../theming/themes"
 import { getColor, getTransparency } from "../theming/helpers"
-import { MAX_BODY_WIDTH } from "./constants"
+import { MAX_BODY_WIDTH, BODY_PADDING } from "./constants"
 
 export const HEADER_HEIGHT = "56px"
 
@@ -22,6 +22,7 @@ const Container = styled.header`
 const Content = styled.div`
   width: 100%;
   max-width: ${MAX_BODY_WIDTH};
+  padding: 0px ${BODY_PADDING};
 
   display: flex;
   align-items: center;
