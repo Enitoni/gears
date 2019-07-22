@@ -8,7 +8,7 @@ import serve from "koa-static"
 import { BUILD_PUBLIC_FOLDER } from "./modules/core/constants"
 import { readFileSync } from "fs"
 import { Head } from "./modules/core/Head"
-import { Body } from "./modules/core/Body"
+import { App } from "./modules/core/App"
 
 const app = new Koa()
 const router = new Router()
@@ -25,7 +25,7 @@ router.use(
 
 router.get("*", async context => {
   const renderedHead = ReactDOMServer.renderToString(<Head />)
-  const renderedBody = ReactDOMServer.renderToString(<Body />)
+  const renderedBody = ReactDOMServer.renderToString(<App />)
 
   let finalHTML = HTML
 
