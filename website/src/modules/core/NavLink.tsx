@@ -40,7 +40,7 @@ const Container = styled.a<{ active: boolean }>`
     return props.active ? active : inactive
   }}
 
-  & + a {
+  & ~ a {
     margin-left: 32px;
   }
 `

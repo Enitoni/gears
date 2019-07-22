@@ -2,9 +2,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack",
+    "client:build": "cross-env NODE_ENV=production webpack",
     "server:build": "tsc -p tsconfig.server.json",
-    "production": "node ./build/server/server.js"
+    "build": "yarn client:build && yarn server:build",
+    "production": "cross-env NODE_ENV=production __SERVER__=true node ./build/server/server.js"
   },
   "devDependencies": {
     "@types/history": "^4.7.2",

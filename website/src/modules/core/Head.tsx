@@ -1,9 +1,11 @@
 import React from "react"
+import { IS_SERVER } from "./constants"
+import ReactDOM from "react-dom"
 
 const IMPORTED_CHARACTERS = "ABCDEFGHIKLMNOPQRSTUVXYZabcdefghiklmnopqrstuvxyz"
 
 export function Head() {
-  return (
+  const content = (
     <>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1" />
@@ -18,4 +20,18 @@ export function Head() {
       />
     </>
   )
+
+  if (IS_SERVER) {
+    return (
+      <>
+        {React.Children.map(content, element =>
+          React.cloneElement(element, {
+            "data-server-head": true
+          })
+        )}
+      </>
+    )
+  }
+
+  return ReactDOM.createPortal(content, document.head)
 }

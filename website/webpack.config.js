@@ -1,6 +1,7 @@
 // @ts-check
 const path = require("path")
 const webpackMerge = require("webpack-merge")
+const webpack = require("webpack")
 
 const CopyPlugin = require("copy-webpack-plugin")
 
@@ -8,6 +9,11 @@ const CopyPlugin = require("copy-webpack-plugin")
 const baseConfig = {
   mode: "none",
   entry: "./src/client.tsx",
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.__SERVER__": JSON.stringify(false)
+    })
+  ],
   module: {
     rules: [
       {

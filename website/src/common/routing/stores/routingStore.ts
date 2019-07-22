@@ -1,9 +1,9 @@
 import { InitializableStore } from "../../state/types/InitializableStore"
-import { createBrowserHistory } from "history"
+import { getIsomorphicHistory } from "../helpers/getIsomorphicHistory"
 import { observable } from "mobx"
 
 class RoutingStore implements InitializableStore {
-  private history = createBrowserHistory()
+  private history = getIsomorphicHistory()
   @observable public location = this.history.location
 
   public init() {
