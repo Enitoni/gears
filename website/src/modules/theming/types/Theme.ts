@@ -6,4 +6,8 @@ export interface Theme {
   fontColors: {
     normal: string
   }
+  transparencies: {
+    positive: string
+    negative: string
+  }
 }
