@@ -2,6 +2,8 @@
 const path = require("path")
 const webpackMerge = require("webpack-merge")
 
+const CopyPlugin = require("copy-webpack-plugin")
+
 /** @type {import("webpack").Configuration} */
 const baseConfig = {
   mode: "none",
@@ -38,6 +40,13 @@ const devConfig = {
 /** @type {import("webpack").Configuration} */
 const prodConfig = {
   mode: "production",
+  plugins: [
+    new CopyPlugin([
+      {
+        from: "./public"
+      }
+    ])
+  ],
   optimization: {
     minimize: true,
     nodeEnv: "production"
