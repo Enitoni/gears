@@ -6,7 +6,7 @@ import { Route, useRouter } from "../../common/routing/hooks/useRouter"
 import { DocsPage } from "../docs/components/DocsPage"
 
 const Container = styled.main`
-  margin-top: ${parseInt(HEADER_HEIGHT) + 16}px;
+  margin-top: ${parseInt(HEADER_HEIGHT) + 32}px;
 
   width: 100%;
   display: flex;
