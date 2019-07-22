@@ -1,5 +1,4 @@
 import fs from "fs"
-import { basename } from "path"
 import { promisify } from "util"
 
 const read = promisify(fs.readFile)
