@@ -3,6 +3,8 @@
   "scripts": {
     "gears:build": "cd gears && yarn build",
     "gears:test": "cd gears && yarn test",
-    "gears:docs": "cd gears && yarn doc"
+    "gears:docs": "cd gears && yarn doc",
+    "website:build": "cd website && yarn build",
+    "website:production": "cd website && yarn production"
   }
 }
