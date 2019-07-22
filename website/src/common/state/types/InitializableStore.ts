@@ -1,3 +1,4 @@
 export interface InitializableStore {
-  init(): Promise<void> | void
+  init: () => Promise<void> | void
+  reset?: () => void
 }

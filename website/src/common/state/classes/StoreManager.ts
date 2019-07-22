@@ -7,4 +7,8 @@ export class StoreManager<T extends Record<string, InitializableStore>> {
     console.info("Initializing stores")
     await Promise.all(Object.values(this.stores).map(x => x.init()))
   }
+
+  public reset() {
+    Object.values(this.stores).map(x => x.reset)
+  }
 }
