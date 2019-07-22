@@ -2,6 +2,7 @@ import React from "react"
 import { styled } from "../theming/themes"
 import { getColor, getTransparency } from "../theming/helpers"
 import { MAX_BODY_WIDTH, BODY_PADDING } from "./constants"
+import { NavLink } from "./NavLink"
 
 export const HEADER_HEIGHT = "56px"
 
@@ -38,7 +39,12 @@ const Logo = styled.h1`
 `
 
 const Nav = styled.nav`
+  height: ${HEADER_HEIGHT};
   flex: 1;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 `
 
 export function Header() {
@@ -46,7 +52,10 @@ export function Header() {
     <Container>
       <Content>
         <Logo>Gears</Logo>
-        <Nav />
+        <Nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/docs">Docs</NavLink>
+        </Nav>
       </Content>
     </Container>
   )
