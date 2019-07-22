@@ -1,7 +1,6 @@
 import React from "react"
 import { css, Global } from "@emotion/core"
 import { Theme } from "../types/Theme"
-import { getColor } from "../helpers"
 
 const style = (theme: Theme) => css`
   html,
@@ -10,6 +9,8 @@ const style = (theme: Theme) => css`
     padding: 0;
 
     font-family: Barlow;
+
+    color: ${theme.fontColors.normal};
     background: ${theme.colors.primary};
   }
 
