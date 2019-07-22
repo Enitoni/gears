@@ -4,6 +4,7 @@ import { GlobalStyles } from "../theming/components/GlobalStyles"
 import { Header } from "./Header"
 import { IS_SERVER } from "./constants"
 import { Head } from "./Head"
+import { Body } from "./Body"
 
 export function App() {
   const renderHead = () => {
@@ -16,6 +17,7 @@ export function App() {
       {renderHead()}
       <GlobalStyles />
       <Header />
+      <Body />
     </Theme>
   )
 }
