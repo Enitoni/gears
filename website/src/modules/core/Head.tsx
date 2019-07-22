@@ -24,11 +24,7 @@ export function Head() {
         href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
         rel="stylesheet"
       />
-    ].map((element, i) =>
-      React.cloneElement(element, {
-        key: i
-      })
-    )
+    ].map((element, i) => React.cloneElement(element, { key: i }))
 
     useEffect(() => {
       if (IS_SERVER) return

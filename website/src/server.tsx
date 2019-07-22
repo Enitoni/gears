@@ -34,8 +34,8 @@ router.get("*", async context => {
     hash: ""
   }
 
-  const renderedHead = ReactDOMServer.renderToString(<Head />)
   const renderedBody = ReactDOMServer.renderToString(<App />)
+  const renderedHead = ReactDOMServer.renderToString(<Head />)
 
   let finalHTML = HTML
 
@@ -43,6 +43,7 @@ router.get("*", async context => {
   finalHTML = finalHTML.replace(CONTAINER_STRING, `${CONTAINER_STRING}${renderedBody}`)
 
   context.body = finalHTML
+  manager.reset()
 })
 
 app.use(router.middleware())
