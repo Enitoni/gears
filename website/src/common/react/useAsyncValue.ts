@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import { useIsomorphicEffect } from "./useIsomorphicEffect"
+import { useStores } from "../state/hooks/useStores"
 
 export interface AsyncValueResult<T> {
   value?: T
@@ -8,6 +9,7 @@ export interface AsyncValueResult<T> {
 }
 
 export const useAsyncValue = <T>(getPromise: () => Promise<T>, deps: any[] = []) => {
+  const { ssrStore } = useStores()
   const unmountedRef = useRef(false)
   const [result, setResult] = useState<AsyncValueResult<T>>({ done: false })
 
@@ -31,7 +33,7 @@ export const useAsyncValue = <T>(getPromise: () => Promise<T>, deps: any[] = [])
       }
     }
 
-    performAwait()
+    ssrStore.register(performAwait())
 
     return () => {
       unmountedRef.current = true
