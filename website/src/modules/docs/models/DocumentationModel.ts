@@ -32,6 +32,10 @@ export class DocumentationModel {
     return result
   }
 
+  public getModule(name: string) {
+    return this.modules.find(x => x.name === name)
+  }
+
   public get version() {
     return this.data.version
   }

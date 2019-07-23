@@ -11,6 +11,7 @@ import { useIsomorphicEffect } from "../../../common/react/useIsomorphicEffect"
 import { HttpStatus } from "../../../common/routing/stores/routingStore"
 import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
 import { DescriptorRenderer } from "./DescriptorRenderer/DescriptorRenderer"
+import { DocumentationContext } from "./DocumentationContext"
 
 const Container = styled.div`
   display: flex;
@@ -35,12 +36,14 @@ function DocumentationPageContent(props: DocumentationPageContentProps) {
   const renderRoutes = useRouter(routes)
 
   return (
-    <Container>
-      <Sidebar>
-        <DocumentationCategories documentation={documentation} />
-      </Sidebar>
-      {renderRoutes()}
-    </Container>
+    <DocumentationContext.Provider value={documentation}>
+      <Container>
+        <Sidebar>
+          <DocumentationCategories documentation={documentation} />
+        </Sidebar>
+        {renderRoutes()}
+      </Container>
+    </DocumentationContext.Provider>
   )
 }
 
