@@ -24,7 +24,7 @@ class DocumentationStore implements InitializableStore {
     }
 
     if (IS_SERVER) {
-      this.selected = require(`../../../../../doc-repo/${filename}`)
+      this.selected = eval("require")(`../../../../../../../../doc-repo/${filename}`)
     } else {
       this.selected = await import(
         /* webpackChunkName: "[request]" */ `../../../../../doc-repo/${filename}`

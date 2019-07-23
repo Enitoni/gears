@@ -4,8 +4,8 @@
     "dev": "webpack-dev-server --config webpack.config.js",
     "client:build": "cross-env NODE_ENV=production webpack",
     "server:build": "tsc -p tsconfig.server.json",
-    "build": "yarn client:build && yarn server:build",
-    "production": "cross-env NODE_ENV=production __SERVER__=true node ./build/server/server.js"
+    "build": "rimraf build && yarn client:build && yarn server:build",
+    "production": "cross-env NODE_ENV=production __SERVER__=true node ./build/server/website/src/server.js"
   },
   "devDependencies": {
     "@types/history": "^4.7.2",
@@ -16,6 +16,7 @@
     "@types/react-dom": "^16.8.4",
     "copy-webpack-plugin": "^5.0.3",
     "cross-env": "^5.2.0",
+    "rimraf": "^2.6.3",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.3",
     "webpack": "^4.36.1",
