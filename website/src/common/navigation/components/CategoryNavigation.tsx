@@ -77,7 +77,7 @@ export function CategoryNavigation(props: CategoryNavigationProps) {
 
   const renderedCategories = categories.map(category => {
     const renderedChildren = category.items.map(child => (
-      <CategoryChildRenderer {...child} />
+      <CategoryChildRenderer key={child.to} {...child} />
     ))
 
     return (
