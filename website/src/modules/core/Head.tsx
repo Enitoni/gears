@@ -15,7 +15,7 @@ export function Head() {
     const content = [
       <meta charSet="utf-8" />,
       <meta name="viewport" content="initial-scale=1" />,
-      <title>{title}</title>,
+      <title>{title !== "Gears" ? `${title} | Gears` : "Gears"}</title>,
       <link
         href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:700&display=swap&text=Gears"
         rel="stylesheet"
