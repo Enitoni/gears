@@ -25,7 +25,7 @@ router.use(
 )
 
 router.get("*", async context => {
-  const { routingStore } = manager.stores
+  const { routingStore, ssrStore } = manager.stores
 
   routingStore.location = {
     state: undefined,
@@ -33,6 +33,10 @@ router.get("*", async context => {
     search: context.search,
     hash: ""
   }
+
+  // Wait for async
+  ReactDOMServer.renderToString(<App />)
+  await Promise.all(ssrStore.promises)
 
   const renderedBody = ReactDOMServer.renderToString(<App />)
   const renderedHead = ReactDOMServer.renderToString(<Head />)
