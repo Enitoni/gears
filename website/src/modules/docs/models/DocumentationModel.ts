@@ -18,7 +18,10 @@ export class DocumentationModel {
     const result: DocumentationCategory[] = Object.entries(categoryMap).map(
       ([category, descriptors]) => ({
         name: category,
-        modules: descriptors
+        modules: descriptors.sort((a, b) => {
+          if (a.kind === b.kind) return 0
+          return a.kind > b.kind ? 1 : -1
+        })
       })
     )
 
