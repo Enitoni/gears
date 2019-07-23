@@ -5,7 +5,7 @@ import { useObserver } from "mobx-react-lite"
 import { StoreSerializer } from "../../../common/state/components/StoreSerializer"
 import { useStores } from "../../../common/state/hooks/useStores"
 
-const IMPORTED_CHARACTERS = "ABCDEFGHIKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz"
+const IMPORTED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
 export function Head() {
   const { metaStore } = useStores()
@@ -13,20 +13,26 @@ export function Head() {
   return useObserver(() => {
     const { title } = metaStore.value
 
-    const content = [
-      <meta charSet="utf-8" />,
-      <meta name="viewport" content="initial-scale=1" />,
-      <title>{title !== "Gears" ? `${title} | Gears` : "Gears"}</title>,
-      <link
-        href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:700&display=swap&text=Gears"
-        rel="stylesheet"
-      />,
-      <link
-        href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
-        rel="stylesheet"
-      />,
-      <StoreSerializer />
-    ].map((element, i) => React.cloneElement(element, { key: i }))
+    const content = (
+      <>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1" />
+        <title>{title !== "Gears" ? `${title} | Gears` : "Gears"}</title>
+        <link
+          href={`https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:700&display=swap&text=${IMPORTED_CHARACTERS}`}
+          rel="stylesheet"
+        />
+        <link
+          href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
+          rel="stylesheet"
+        />
+        <StoreSerializer />
+      </>
+    )
+
+    const mappedContent = React.Children.map(content.props.children, (child, i) => {
+      return React.cloneElement<any>(child, { key: i })
+    })
 
     useEffect(() => {
       if (IS_SERVER) return
@@ -39,7 +45,7 @@ export function Head() {
     if (IS_SERVER) {
       return (
         <>
-          {content.map(element =>
+          {mappedContent.map(element =>
             React.cloneElement(element, {
               "data-server-head": true
             })
