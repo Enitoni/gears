@@ -9,6 +9,8 @@ import { Version, DocumentationStoreStatus } from "../stores/documentationStore"
 import { DocumentationModel } from "../models/DocumentationModel"
 import { useIsomorphicEffect } from "../../../common/react/useIsomorphicEffect"
 import { HttpStatus } from "../../../common/routing/stores/routingStore"
+import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
+import { DescriptorRenderer } from "./DescriptorRenderer/DescriptorRenderer"
 
 const Container = styled.div`
   display: flex;
@@ -25,12 +27,19 @@ function DocumentationPageContent(props: DocumentationPageContentProps) {
     title: `Documentation for ${documentation.data.version}`
   })
 
+  const routes: Route[] = documentation.modules.map(descriptor => ({
+    pattern: `/docs/${documentation.version}/${descriptor.name}`,
+    render: () => <DescriptorRenderer descriptor={descriptor} />
+  }))
+
+  const renderRoutes = useRouter(routes)
+
   return (
     <Container>
       <Sidebar>
         <DocumentationCategories documentation={documentation} />
       </Sidebar>
-      Some documentation goes here I guess
+      {renderRoutes()}
     </Container>
   )
 }
