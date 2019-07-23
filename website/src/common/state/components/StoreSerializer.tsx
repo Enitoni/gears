@@ -7,11 +7,7 @@ export function StoreSerializer() {
     const manager = useManager()
     const data = manager.serialize()
 
-    return (
-      <script data-store-hydration type="application/json">
-        {JSON.stringify(data)}
-      </script>
-    )
+    return <meta property="store-hydration" content={JSON.stringify(data)} />
   }
 
   return null

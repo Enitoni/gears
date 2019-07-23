@@ -42,11 +42,13 @@ router.get("*", async context => {
     return <ManagerContext.Provider value={manager}>{element}</ManagerContext.Provider>
   }
 
+  const app = wrapInContext(<App />)
+
   // Wait for async
-  ReactDOMServer.renderToString(wrapInContext(<App />))
+  ReactDOMServer.renderToString(app)
   await Promise.all(ssrStore.promises)
 
-  const renderedBody = ReactDOMServer.renderToString(wrapInContext(<App />))
+  const renderedBody = ReactDOMServer.renderToString(app)
   const renderedHead = ReactDOMServer.renderToString(wrapInContext(<Head />))
 
   let finalHTML = HTML

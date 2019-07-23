@@ -14,6 +14,8 @@ const Container = styled.main`
 `
 
 const Content = styled.div`
+  position: relative;
+
   max-width: ${MAX_BODY_WIDTH};
   padding: 0px ${BODY_PADDING};
 
