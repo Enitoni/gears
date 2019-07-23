@@ -5,17 +5,10 @@ import {
   CategorySection
 } from "../../../common/navigation/components/CategoryNavigation"
 import { DocumentationModel } from "../models/DocumentationModel"
-import { ModuleKind } from "../types/ModuleDescriptor"
-import { IconType } from "../../../common/icon/types/IconType"
+import { kindToIconMap } from "../constants"
 
 export interface DocumentationCategoriesProps {
   documentation: DocumentationModel
-}
-
-const kindToIconMap: Record<ModuleKind, IconType> = {
-  Class: "encapsulated",
-  Function: "doubleParens",
-  Interface: "placeholder"
 }
 
 export function DocumentationCategories(props: DocumentationCategoriesProps) {
