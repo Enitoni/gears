@@ -11,7 +11,7 @@ const Container = styled.a`
   transition-property: color;
 
   &:hover {
-    ${getColor("accent")};
+    color: ${getColor("accent")};
   }
 `
 
