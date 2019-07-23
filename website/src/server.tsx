@@ -7,8 +7,8 @@ import ReactDOMServer from "react-dom/server"
 import serve from "koa-static"
 import { BUILD_PUBLIC_FOLDER } from "./modules/core/constants"
 import { readFileSync } from "fs"
-import { Head } from "./modules/core/Head"
-import { App } from "./modules/core/App"
+import { Head } from "./modules/core/components/Head"
+import { App } from "./modules/core/components/App"
 import { manager } from "./common/state/manager"
 
 const app = new Koa()

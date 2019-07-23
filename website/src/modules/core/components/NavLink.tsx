@@ -1,7 +1,7 @@
-import { useRouteLink } from "../../common/routing/hooks/useRouteLink"
-import { styled } from "../theming/themes"
+import { useRouteLink } from "../../../common/routing/hooks/useRouteLink"
+import { styled } from "../../theming/themes"
 import React from "react"
-import { getFontColor, getColor, getTransparency, getDuration } from "../theming/helpers"
+import { getFontColor, getColor, getTransparency, getDuration } from "../../theming/helpers"
 import css from "@emotion/css"
 
 export interface NavLinkProps {

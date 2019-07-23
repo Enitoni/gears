@@ -1,7 +1,7 @@
 import React from "react"
-import { styled } from "../theming/themes"
-import { getColor, getTransparency } from "../theming/helpers"
-import { MAX_BODY_WIDTH, BODY_PADDING } from "./constants"
+import { styled } from "../../theming/themes"
+import { getColor, getTransparency } from "../../theming/helpers"
+import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
 import { NavLink } from "./NavLink"
 
 export const HEADER_HEIGHT = "56px"

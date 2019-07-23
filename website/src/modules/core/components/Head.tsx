@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
-import { IS_SERVER } from "./constants"
+import { IS_SERVER } from "../constants"
 import ReactDOM from "react-dom"
-import { manager } from "../../common/state/manager"
+import { manager } from "../../../common/state/manager"
 import { useObserver } from "mobx-react-lite"
 
 const IMPORTED_CHARACTERS = "ABCDEFGHIKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz"

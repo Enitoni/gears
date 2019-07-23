@@ -1,9 +1,9 @@
 import React from "react"
-import { styled } from "../theming/themes"
+import { styled } from "../../theming/themes"
 import { HEADER_HEIGHT } from "./Header"
-import { MAX_BODY_WIDTH, BODY_PADDING } from "./constants"
-import { Route, useRouter } from "../../common/routing/hooks/useRouter"
-import { DocsPage } from "../docs/components/DocsPage"
+import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
+import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
+import { DocsPage } from "../../docs/components/DocsPage"
 
 const Container = styled.main`
   margin-top: ${parseInt(HEADER_HEIGHT) + 32}px;

@@ -1,8 +1,8 @@
 import React from "react"
-import { Theme } from "../theming/components/Theme"
-import { GlobalStyles } from "../theming/components/GlobalStyles"
+import { Theme } from "../../theming/components/Theme"
+import { GlobalStyles } from "../../theming/components/GlobalStyles"
 import { Header } from "./Header"
-import { IS_SERVER } from "./constants"
+import { IS_SERVER } from "../constants"
 import { Head } from "./Head"
 import { Body } from "./Body"
 
