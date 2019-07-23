@@ -18,4 +18,4 @@ class RoutingStore implements InitializableStore {
   }
 }
 
-export const routingStore = new RoutingStore()
+export const routingStore = () => new RoutingStore()

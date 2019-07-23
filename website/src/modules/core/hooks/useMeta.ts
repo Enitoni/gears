@@ -1,9 +1,9 @@
 import { MetaInformation } from "../stores/metaStore"
-import { manager } from "../../../common/state/manager"
 import { useIsomorphicEffect } from "../../../common/react/useIsomorphicEffect"
+import { useStores } from "../../../common/state/hooks/useStores"
 
 export const useMeta = (newMeta: Partial<MetaInformation>) => {
-  const { metaStore } = manager.stores
+  const { metaStore } = useStores()
 
   useIsomorphicEffect(() => {
     metaStore.setValue(newMeta)

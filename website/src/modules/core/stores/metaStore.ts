@@ -23,4 +23,4 @@ class MetaStore implements InitializableStore {
   }
 }
 
-export const metaStore = new MetaStore()
+export const metaStore = () => new MetaStore()

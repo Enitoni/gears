@@ -1,9 +1,10 @@
 import { IS_SERVER } from "../../../modules/core/constants"
-import { manager } from "../manager"
+import { useManager } from "../hooks/useManager"
 import React from "react"
 
 export function StoreSerializer() {
   if (IS_SERVER) {
+    const manager = useManager()
     const data = manager.serialize()
 
     return (

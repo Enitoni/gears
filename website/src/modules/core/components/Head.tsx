@@ -1,14 +1,14 @@
 import React, { useEffect } from "react"
 import { IS_SERVER } from "../constants"
 import ReactDOM from "react-dom"
-import { manager } from "../../../common/state/manager"
 import { useObserver } from "mobx-react-lite"
 import { StoreSerializer } from "../../../common/state/components/StoreSerializer"
+import { useStores } from "../../../common/state/hooks/useStores"
 
 const IMPORTED_CHARACTERS = "ABCDEFGHIKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz"
 
 export function Head() {
-  const { metaStore } = manager.stores
+  const { metaStore } = useStores()
 
   return useObserver(() => {
     const { title } = metaStore.value

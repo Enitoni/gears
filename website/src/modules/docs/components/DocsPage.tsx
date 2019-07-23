@@ -2,11 +2,11 @@ import React from "react"
 import { useMeta } from "../../core/hooks/useMeta"
 import { styled } from "../../theming/themes"
 import { Sidebar } from "../../../common/navigation/components/Sidebar"
-import { manager } from "../../../common/state/manager"
 import { useObserver } from "mobx-react-lite"
 import { Documentation } from "../types/Documentation"
 import { DocCategories } from "./DocCategories"
 import { useIsomorphicEffect } from "../../../common/react/useIsomorphicEffect"
+import { useStores } from "../../../common/state/hooks/useStores"
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ function DocsRenderer(props: DocsRendererProps) {
 }
 
 export function DocsPage() {
-  const { documentationStore, ssrStore } = manager.stores
+  const { documentationStore, ssrStore } = useStores()
 
   return useObserver(() => {
     const { selected, selectedVersion } = documentationStore

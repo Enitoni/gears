@@ -1,6 +1,6 @@
-import { manager } from "../manager"
+import { StoreManager } from "../classes/StoreManager";
 
-export const hydrateStores = () => {
+export const hydrateStores = (manager: StoreManager<any>) => {
   const data = document.querySelector("[data-store-hydration=true]")
 
   if (data) {

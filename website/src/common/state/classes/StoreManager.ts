@@ -1,15 +1,22 @@
 import { InitializableStore } from "../types/InitializableStore"
 
 export class StoreManager<T extends Record<string, InitializableStore>> {
-  constructor(public stores: T) {}
+  public stores: T = {} as any
+
+  constructor(public instantiators: { [K in keyof T]: () => T[K] }) {
+    for (const [name, creator] of Object.entries(instantiators)) {
+      this.stores[name as keyof T] = creator()
+    }
+  }
 
   public async init() {
-    console.info("Initializing stores")
-    await Promise.all(Object.values(this.stores).map(x => x.init()))
+    await Promise.all(Object.values(this.stores).map(x => x.init(this as any)))
   }
 
   public reset() {
-    Object.values(this.stores).map(x => x.reset && x.reset())
+    for (const store of Object.values(this.stores)) {
+      if (store.reset) store.reset()
+    }
   }
 
   public hydrate(data: any) {

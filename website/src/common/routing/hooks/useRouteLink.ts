@@ -1,9 +1,9 @@
-import { manager } from "../../state/manager"
 import { useObserver } from "mobx-react-lite"
+import { useStores } from "../../state/hooks/useStores"
 import UrlPattern from "url-pattern"
 
 export const useRouteLink = (to: string, activeTo = to) => {
-  const { routingStore } = manager.stores
+  const { routingStore } = useStores()
 
   const click = (event: React.MouseEvent) => {
     event.preventDefault()

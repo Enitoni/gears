@@ -19,4 +19,4 @@ class SSRStore implements InitializableStore {
   }
 }
 
-export const ssrStore = new SSRStore()
+export const ssrStore = () => new SSRStore()

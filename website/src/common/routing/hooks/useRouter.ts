@@ -1,7 +1,7 @@
 import React from "react"
-import { manager } from "../../state/manager"
 import { useObserver } from "mobx-react-lite"
 import UrlPattern from "url-pattern"
+import { useStores } from "../../state/hooks/useStores"
 
 export interface Route {
   pattern: string
@@ -9,7 +9,7 @@ export interface Route {
 }
 
 export const useRouter = (routes: Route[]) => {
-  const { routingStore } = manager.stores
+  const { routingStore } = useStores()
 
   return useObserver(() => {
     const { pathname } = routingStore.location

@@ -50,4 +50,4 @@ class DocumentationStore implements InitializableStore<SerializedDocumentationSt
   }
 }
 
-export const documentationStore = new DocumentationStore()
+export const documentationStore = () => new DocumentationStore()

@@ -9,7 +9,8 @@ import { BUILD_PUBLIC_FOLDER } from "./modules/core/constants"
 import { readFileSync } from "fs"
 import { Head } from "./modules/core/components/Head"
 import { App } from "./modules/core/components/App"
-import { manager } from "./common/state/manager"
+import { createManager } from "./common/state/manager"
+import { ManagerContext } from "./common/state/components/ManagerContext"
 
 const app = new Koa()
 const router = new Router()
@@ -25,7 +26,10 @@ router.use(
 )
 
 router.get("*", async context => {
+  const manager = createManager()
   const { routingStore, ssrStore } = manager.stores
+
+  await manager.init()
 
   routingStore.location = {
     state: undefined,
@@ -34,12 +38,16 @@ router.get("*", async context => {
     hash: ""
   }
 
+  const wrapInContext = (element: React.ReactNode) => {
+    return <ManagerContext.Provider value={manager}>{element}</ManagerContext.Provider>
+  }
+
   // Wait for async
-  ReactDOMServer.renderToString(<App />)
+  ReactDOMServer.renderToString(wrapInContext(<App />))
   await Promise.all(ssrStore.promises)
 
-  const renderedBody = ReactDOMServer.renderToString(<App />)
-  const renderedHead = ReactDOMServer.renderToString(<Head />)
+  const renderedBody = ReactDOMServer.renderToString(wrapInContext(<App />))
+  const renderedHead = ReactDOMServer.renderToString(wrapInContext(<Head />))
 
   let finalHTML = HTML
 
@@ -56,6 +64,5 @@ const port = 9020
 const server = app.listen(port)
 
 server.on("listening", () => {
-  manager.init()
   console.log(`Listening on ${port}`)
 })
