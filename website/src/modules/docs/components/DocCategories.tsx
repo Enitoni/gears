@@ -1,33 +1,19 @@
 import React from "react"
 
-import { Documentation } from "../types/Documentation"
 import { CategoryNavigation } from "../../../common/navigation/components/CategoryNavigation"
-import { ModuleDescriptor, ModuleKind } from "../types/ModuleDescriptor"
+import { useStores } from "../../../common/state/hooks/useStores"
 
-export interface DocCategoriesProps {
-  documentation: Documentation
-}
+export function DocCategories() {
+  const { documentationStore } = useStores()
 
-export function DocCategories(props: DocCategoriesProps) {
-  const { documentation } = props
-
-  const categories: Record<string, ModuleDescriptor<ModuleKind>[]> = {}
-
-  for (const descriptor of documentation.modules) {
-    const descriptors = (categories[descriptor.category] =
-      categories[descriptor.category] || [])
-
-    descriptors.push(descriptor)
-  }
-
-  const mappedCategories = Object.entries(categories).map(([key, descriptors]) => {
-    const mappedDescriptors = descriptors.map(descriptor => ({
-      label: descriptor.name,
-      to: `/docs/${descriptor.name}`
+  const mappedCategories = documentationStore.categories.map(descriptors => {
+    const mappedDescriptors = descriptors.modules.map(category => ({
+      label: category.name,
+      to: `/docs/${category.name}`
     }))
 
     return {
-      name: key,
+      name: descriptors.name,
       items: mappedDescriptors
     }
   })

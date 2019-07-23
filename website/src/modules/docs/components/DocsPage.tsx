@@ -26,7 +26,7 @@ function DocsRenderer(props: DocsRendererProps) {
   return (
     <Container>
       <Sidebar>
-        <DocCategories documentation={documentation} />
+        <DocCategories />
       </Sidebar>
       Some documentation goes here I guess
     </Container>
