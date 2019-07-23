@@ -2,8 +2,15 @@ import { InitializableStore } from "../../state/types/InitializableStore"
 import { getIsomorphicHistory } from "../helpers/getIsomorphicHistory"
 import { observable } from "mobx"
 
+export enum HttpStatus {
+  OK = 200,
+  NotFound = 404
+}
+
 class RoutingStore implements InitializableStore {
   private history = getIsomorphicHistory()
+  public status = HttpStatus.OK
+
   @observable public location = this.history.location
 
   public init() {

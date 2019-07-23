@@ -59,6 +59,8 @@ router.get("*", async context => {
   finalHTML = finalHTML.replace(CONTAINER_STRING, `${CONTAINER_STRING}${renderedBody}`)
 
   context.body = finalHTML
+  context.status = routingStore.status
+
   manager.reset()
 })
 
