@@ -1,20 +1,27 @@
 import React from "react"
+
 import { styled } from "../../../modules/theming/themes"
 import { useRouteLink } from "../../routing/hooks/useRouteLink"
-import { getFontColor, getDuration } from "../../../modules/theming/helpers"
 
-export interface CategoryChild {
+import { getFontColor, getDuration } from "../../../modules/theming/helpers"
+import { size } from "polished"
+
+import { IconType } from "../../icon/types/IconType"
+import { Icon } from "../../icon/components/Icon"
+
+export interface CategorySection {
+  icon?: IconType
   label: string
   to: string
 }
 
-export interface CategoryItem {
+export interface Category {
   name: string
-  items: CategoryChild[]
+  items: CategorySection[]
 }
 
 export interface CategoryNavigationProps {
-  categories: CategoryItem[]
+  categories: Category[]
 }
 
 const Container = styled.div``
@@ -32,8 +39,9 @@ const Category = styled.div`
   }
 `
 
-const Child = styled.a<{ active: boolean }>`
-  display: block;
+const CategorySection = styled.a<{ active: boolean }>`
+  display: flex;
+  align-items: center;
 
   font-weight: 600;
   font-size: 18px;
@@ -42,6 +50,16 @@ const Child = styled.a<{ active: boolean }>`
   transition: ${getDuration("normal")} ease;
   transition-property: color;
 
+  > .icon {
+    ${size(16)}
+
+    fill: ${getFontColor("muted")};
+    margin-right: 16px;
+
+    transition: ${getDuration("normal")} ease;
+    transition-property: fill;
+  }
+
   a ~ & {
     margin-top: 16px;
   }
@@ -49,11 +67,19 @@ const Child = styled.a<{ active: boolean }>`
   ${props => {
     const active = `
       color: ${props.theme.colors.accent};
+
+      > .icon {
+        fill: ${props.theme.colors.accent};
+      }
     `
 
     const inactive = `
       &:hover {
         color: ${props.theme.fontColors.normal};
+      }
+
+      &:hover > .icon {
+        fill: ${props.theme.fontColors.normal};
       }
     `
 
@@ -61,14 +87,20 @@ const Child = styled.a<{ active: boolean }>`
   }}
 `
 
-export function CategoryChildRenderer(props: CategoryChild) {
-  const { label, to } = props
+export function CategorySectionItem(props: CategorySection) {
+  const { icon, label, to } = props
   const [active, click] = useRouteLink(to)
 
+  const renderIcon = () => {
+    if (!icon) return null
+    return <Icon className="icon" name={icon} />
+  }
+
   return (
-    <Child href={to} active={active} onClick={click}>
-      {label}
-    </Child>
+    <CategorySection href={to} active={active} onClick={click}>
+      {renderIcon()}
+      <div className="label">{label}</div>
+    </CategorySection>
   )
 }
 
@@ -77,7 +109,7 @@ export function CategoryNavigation(props: CategoryNavigationProps) {
 
   const renderedCategories = categories.map(category => {
     const renderedChildren = category.items.map(child => (
-      <CategoryChildRenderer key={child.to} {...child} />
+      <CategorySectionItem key={child.to} {...child} />
     ))
 
     return (
