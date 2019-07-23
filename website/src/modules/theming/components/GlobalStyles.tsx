@@ -23,6 +23,10 @@ const style = (theme: Theme) => css`
     text-decoration: none;
   }
 
+  svg {
+    fill: ${theme.fontColors.normal};
+  }
+
   * {
     box-sizing: border-box;
   }
