@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 import { manager } from "../../common/state/manager"
 import { useObserver } from "mobx-react-lite"
 
-const IMPORTED_CHARACTERS = "ABCDEFGHIKLMNOPQRSTUVXYZabcdefghiklmnopqrstuvxyz"
+const IMPORTED_CHARACTERS = "ABCDEFGHIKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz"
 
 export function Head() {
   const { metaStore } = manager.stores
