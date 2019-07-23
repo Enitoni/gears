@@ -36,6 +36,7 @@ export interface AdapterResult<C, M> {
 
 /**
  * Adapts any messaging interface to work with Gears.
+ * @category Bot
  */
 export abstract class ClientAdapter<C, M = unknown, CO = unknown>
   extends Emitter<AdapterEvents<M>>
