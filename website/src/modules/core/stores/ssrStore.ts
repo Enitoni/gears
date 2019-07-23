@@ -1,4 +1,5 @@
 import { InitializableStore } from "../../../common/state/types/InitializableStore"
+import { IS_SERVER } from "../constants"
 
 class SSRStore implements InitializableStore {
   public promises: Promise<any>[] = []
@@ -10,7 +11,10 @@ class SSRStore implements InitializableStore {
   }
 
   public register(promise: Promise<any>) {
-    this.promises.push(promise)
+    if (IS_SERVER) {
+      this.promises.push(promise)
+    }
+
     return promise
   }
 }
