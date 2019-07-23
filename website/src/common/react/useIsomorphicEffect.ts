@@ -6,7 +6,11 @@ export const useIsomorphicEffect = (
   deps?: any[]
 ) => {
   if (IS_SERVER) {
-    callback()
+    const dispose = callback()
+
+    if (dispose) {
+      dispose()
+    }
   } else {
     useEffect(callback, deps)
   }
