@@ -14,6 +14,10 @@ const style = (theme: Theme) => css`
     background: ${theme.colors.primary};
   }
 
+  body {
+    overflow-y: scroll;
+  }
+
   a {
     color: ${theme.colors.accent};
     text-decoration: none;
@@ -21,6 +25,16 @@ const style = (theme: Theme) => css`
 
   * {
     box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${theme.colors.accent};
+    border-radius: 100px;
   }
 `
 
