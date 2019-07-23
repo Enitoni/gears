@@ -3,12 +3,27 @@ import { css, Global } from "@emotion/core"
 import { Theme } from "../types/Theme"
 
 const style = (theme: Theme) => css`
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    line-height: inherit;
+    margin: 0;
+  }
+
   html,
   body {
     margin: 0;
     padding: 0;
 
-    font-family: Barlow;
+    font-family: Barlow, sans-serif;
 
     color: ${theme.fontColors.normal};
     background: ${theme.colors.primary};
