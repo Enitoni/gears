@@ -19,6 +19,7 @@ const Container = styled.div`
 `
 
 const Space = styled.div`
+  flex-shrink: 0;
   width: 284px;
   margin-right: 32px;
 `
