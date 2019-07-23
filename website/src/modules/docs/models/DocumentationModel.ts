@@ -35,4 +35,8 @@ export class DocumentationModel {
   public get version() {
     return this.data.version
   }
+
+  public get modules() {
+    return this.data.modules
+  }
 }
