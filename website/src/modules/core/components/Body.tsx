@@ -3,7 +3,8 @@ import { styled } from "../../theming/themes"
 import { HEADER_HEIGHT } from "./Header"
 import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
 import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
-import { DocsPage } from "../../docs/components/DocsPage"
+import { DocumentationPage } from "../../docs/components/DocumentationPage"
+import { Version } from "../../docs/stores/documentationStore"
 
 const Container = styled.main`
   margin-top: ${parseInt(HEADER_HEIGHT) + 32}px;
@@ -28,8 +29,10 @@ const routes: Route[] = [
     render: () => <>Home</>
   },
   {
-    pattern: "/docs(/*)",
-    render: () => <DocsPage />
+    pattern: "/docs/:version(/*)",
+    render: (params: { version: Version }) => (
+      <DocumentationPage version={params.version} />
+    )
   }
 ]
 

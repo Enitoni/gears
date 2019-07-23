@@ -3,6 +3,7 @@ import { styled } from "../../theming/themes"
 import { getColor, getTransparency } from "../../theming/helpers"
 import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
 import { NavLink } from "./NavLink"
+import { useStores } from "../../../common/state/hooks/useStores"
 
 export const HEADER_HEIGHT = "56px"
 
@@ -48,13 +49,16 @@ const Nav = styled.nav`
 `
 
 export function Header() {
+  const { documentationStore } = useStores()
+  const { latestVersion } = documentationStore
+
   return (
     <Container>
       <Content>
         <Logo>Gears</Logo>
         <Nav>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/docs" activeTo="/docs(/*)">
+          <NavLink to={`/docs/${latestVersion}`} activeTo="/docs(/*)">
             Docs
           </NavLink>
         </Nav>
