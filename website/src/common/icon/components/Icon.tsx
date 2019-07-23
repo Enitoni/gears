@@ -3,13 +3,15 @@ import * as icons from "../icons"
 import React from "react"
 
 export interface IconProps {
+  className?: string
   name: IconType
 }
 
 export function Icon(props: IconProps) {
-  const { name } = props
+  const { name, className } = props
 
   return React.cloneElement(icons[name], {
+    className,
     width: "100%",
     height: "100%"
   })
