@@ -5,7 +5,7 @@
     "client:build": "cross-env NODE_ENV=production webpack",
     "server:build": "tsc -p tsconfig.server.json",
     "build": "rimraf build && yarn client:build && yarn server:build",
-    "production": "cross-env NODE_ENV=production __SERVER__=true node ./build/server/website/src/server.js"
+    "production": "cross-env NODE_ENV=production node ./build/server/website/src/server.js"
   },
   "devDependencies": {
     "@types/history": "^4.7.2",

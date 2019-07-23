@@ -1,3 +1,5 @@
+process.env.__SERVER__ = "true"
+
 import Koa from "koa"
 import Router from "koa-router"
 
