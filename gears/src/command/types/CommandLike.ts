@@ -18,7 +18,7 @@ export type Chain<M, C = unknown> = ChainEntry<M, C>[]
 
 /**
  * Represents either a [[CommandGroup]] or a [[Command]]
- * @category Internal
+ * @category Command
  */
 export interface CommandLike<M, C> {
   middleware: Middleware<{}, M, C>[]
