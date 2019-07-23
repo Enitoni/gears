@@ -5,7 +5,7 @@ import { useStores } from "../../state/hooks/useStores"
 
 export interface Route {
   pattern: string
-  render: <T extends object>(params: T) => React.ReactElement
+  render: (params: any) => React.ReactElement
 }
 
 export const useRouter = (routes: Route[]) => {
@@ -15,7 +15,9 @@ export const useRouter = (routes: Route[]) => {
     const { pathname } = routingStore.location
 
     for (const route of routes) {
-      const match = new UrlPattern(route.pattern).match(pathname)
+      const match = new UrlPattern(route.pattern, {
+        segmentValueCharset: "a-zA-Z0-9-_~%."
+      }).match(pathname)
 
       if (match) {
         return () => route.render(match)
