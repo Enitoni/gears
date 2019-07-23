@@ -30,6 +30,8 @@ const style = (theme: Theme) => css`
   ::-webkit-scrollbar {
     width: 4px;
     height: 4px;
+
+    background: ${theme.transparencies.negative};
   }
 
   ::-webkit-scrollbar-thumb {
