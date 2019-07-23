@@ -34,13 +34,13 @@ function DocsRenderer(props: DocsRendererProps) {
 }
 
 export function DocsPage() {
-  const { documentationStore } = manager.stores
+  const { documentationStore, ssrStore } = manager.stores
 
   return useObserver(() => {
     const { selected, selectedVersion } = documentationStore
 
     useIsomorphicEffect(() => {
-      documentationStore.select(selectedVersion)
+      ssrStore.register(documentationStore.select(selectedVersion))
     }, [selected])
 
     if (selected) {
