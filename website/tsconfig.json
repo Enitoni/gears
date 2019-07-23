@@ -8,6 +8,7 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "lib": ["esnext", "dom"],
     "strict": true,
     "jsx": "react",
