@@ -44,6 +44,9 @@ const style = (theme: Theme) => css`
 
   * {
     box-sizing: border-box;
+
+    scrollbar-color: ${theme.colors.accent} ${theme.transparencies.negative};
+    scrollbar-width: thin;
   }
 
   ::-webkit-scrollbar {
