@@ -5,9 +5,10 @@ import { Sidebar } from "../../../common/navigation/components/Sidebar"
 import { useObserver } from "mobx-react-lite"
 import { DocumentationCategories } from "./DocumentationCategories"
 import { useStores } from "../../../common/state/hooks/useStores"
-import { Version } from "../stores/documentationStore"
-import { useAsyncValue } from "../../../common/react/useAsyncValue"
+import { Version, DocumentationStoreStatus } from "../stores/documentationStore"
 import { DocumentationModel } from "../models/DocumentationModel"
+import { useIsomorphicEffect } from "../../../common/react/useIsomorphicEffect"
+import { HttpStatus } from "../../../common/routing/stores/routingStore"
 
 const Container = styled.div`
   display: flex;
@@ -39,14 +40,28 @@ export interface DocumentationPageProps {
 }
 
 export function DocumentationPage(props: DocumentationPageProps) {
-  const { documentationStore } = useStores()
-  const { version } = props
+  const { documentationStore, ssrStore, routingStore } = useStores()
 
   return useObserver(() => {
-    const documentation = useAsyncValue(() => documentationStore.getVersion(version))
+    const { selected, status } = documentationStore
+    const { version } = props
 
-    if (documentation.value) {
-      return <DocumentationPageContent documentation={documentation.value} />
+    useIsomorphicEffect(() => {
+      if (!selected || selected.version !== version) {
+        ssrStore.register(documentationStore.getVersion(version))
+      }
+
+      if (status === DocumentationStoreStatus.NotFound) {
+        routingStore.status = HttpStatus.NotFound
+      }
+    }, [version])
+
+    if (selected) {
+      return <DocumentationPageContent documentation={selected} />
+    }
+
+    if (status === DocumentationStoreStatus.NotFound) {
+      return <>Not found</>
     }
 
     return <>Fetching</>

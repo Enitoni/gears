@@ -31,4 +31,8 @@ export class DocumentationModel {
 
     return result
   }
+
+  public get version() {
+    return this.data.version
+  }
 }
