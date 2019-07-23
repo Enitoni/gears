@@ -1,35 +1,52 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useMeta } from "../../core/hooks/useMeta"
 import { styled } from "../../theming/themes"
 import { Sidebar } from "../../../common/navigation/components/Sidebar"
 import { manager } from "../../../common/state/manager"
-import { useAsyncValue } from "../../../common/react/useAsyncValue"
 import { useObserver } from "mobx-react-lite"
+import { Documentation } from "../types/Documentation"
+import { DocCategories } from "./DocCategories"
+import { useIsomorphicEffect } from "../../../common/react/useIsomorphicEffect"
 
 const Container = styled.div`
   display: flex;
 `
 
+export interface DocsRendererProps {
+  documentation: Documentation
+}
+
+function DocsRenderer(props: DocsRendererProps) {
+  const { documentation } = props
+
+  useMeta({
+    title: `Documentation for ${documentation.version}`
+  })
+
+  return (
+    <Container>
+      <Sidebar>
+        <DocCategories documentation={documentation} />
+      </Sidebar>
+      Some documentation goes here I guess
+    </Container>
+  )
+}
+
 export function DocsPage() {
   const { docStore } = manager.stores
 
   return useObserver(() => {
-    const { selected } = docStore
-    const asyncModule = useAsyncValue(() => docStore.getModules(selected))
+    const { selected, selectedVersion } = docStore
 
-    useMeta({
-      title: "Documentation"
-    })
+    useIsomorphicEffect(() => {
+      docStore.select(selectedVersion)
+    }, [selected])
 
-    if (!asyncModule.value || !asyncModule.done) {
-      return <>Fetching</>
+    if (selected) {
+      return <DocsRenderer documentation={selected} />
     }
 
-    return (
-      <Container>
-        <Sidebar>Yeet</Sidebar>
-        the skeet
-      </Container>
-    )
+    return <>Fetching</>
   })
 }

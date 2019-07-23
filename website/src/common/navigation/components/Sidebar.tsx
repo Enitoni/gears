@@ -6,8 +6,12 @@ export interface SidebarProps {
 }
 
 const Container = styled.div`
+  flex-shrink: 0;
+
   width: 284px;
-  margin-right: 32px;
+  margin-right: 16px;
+
+  padding-bottom: 64px;
 `
 
 export function Sidebar(props: SidebarProps) {

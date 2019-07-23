@@ -26,7 +26,7 @@ const routes: Route[] = [
     render: () => <>Home</>
   },
   {
-    pattern: "/docs",
+    pattern: "/docs(/*)",
     render: () => <DocsPage />
   }
 ]

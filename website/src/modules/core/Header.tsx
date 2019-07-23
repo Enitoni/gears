@@ -54,7 +54,9 @@ export function Header() {
         <Logo>Gears</Logo>
         <Nav>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/docs">Docs</NavLink>
+          <NavLink to="/docs" activeTo="/docs(/*)">
+            Docs
+          </NavLink>
         </Nav>
       </Content>
     </Container>
