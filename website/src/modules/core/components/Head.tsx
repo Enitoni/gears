@@ -3,6 +3,7 @@ import { IS_SERVER } from "../constants"
 import ReactDOM from "react-dom"
 import { manager } from "../../../common/state/manager"
 import { useObserver } from "mobx-react-lite"
+import { StoreSerializer } from "../../../common/state/components/StoreSerializer"
 
 const IMPORTED_CHARACTERS = "ABCDEFGHIKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz"
 
@@ -23,7 +24,8 @@ export function Head() {
       <link
         href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
         rel="stylesheet"
-      />
+      />,
+      <StoreSerializer />
     ].map((element, i) => React.cloneElement(element, { key: i }))
 
     useEffect(() => {

@@ -8,7 +8,12 @@ import { Documentation } from "../types/Documentation"
 
 export type Version = keyof typeof versions
 
-class DocumentationStore implements InitializableStore {
+export interface SerializedDocumentationStore {
+  selected?: Documentation
+  selectedVersion: Version
+}
+
+class DocumentationStore implements InitializableStore<SerializedDocumentationStore> {
   public versions = versions
 
   @observable public selected?: Documentation
@@ -30,6 +35,18 @@ class DocumentationStore implements InitializableStore {
         /* webpackChunkName: "[request]" */ `../../../../../doc-repo/${filename}`
       )
     }
+  }
+
+  public serialize() {
+    const { selected, selectedVersion } = this
+    return { selected, selectedVersion }
+  }
+
+  public hydrate(data: SerializedDocumentationStore) {
+    const { selected, selectedVersion } = data
+
+    this.selected = selected
+    this.selectedVersion = selectedVersion
   }
 }
 

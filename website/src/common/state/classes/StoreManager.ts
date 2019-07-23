@@ -11,4 +11,22 @@ export class StoreManager<T extends Record<string, InitializableStore>> {
   public reset() {
     Object.values(this.stores).map(x => x.reset && x.reset())
   }
+
+  public hydrate(data: any) {
+    for (const [name, store] of Object.entries(this.stores)) {
+      if (store.hydrate) store.hydrate(data[name])
+    }
+  }
+
+  public serialize() {
+    const result: Record<string, any> = {}
+
+    for (const [name, store] of Object.entries(this.stores)) {
+      if (store.serialize) {
+        result[name] = store.serialize()
+      }
+    }
+
+    return result
+  }
 }
