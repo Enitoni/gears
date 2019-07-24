@@ -20,11 +20,7 @@ export class DocumentationModel {
       })
     )
 
-    const i = result.findIndex(category => category.name === "Internal")
-    const [internal] = result.splice(i, 1)
-    result.push(internal)
-
-    return result
+    return result.filter(c => c.name !== "Internal")
   }
 
   public getModule(name: string) {
