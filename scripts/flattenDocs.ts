@@ -63,7 +63,7 @@ function flattenChild(child: any): any {
   } = child
 
   const category = getTag(comment, "category")
-  const usage = getTag(comment, "example")
+  const example = getTag(comment, "example")
   const description = comment && comment.shortText
 
   const signatures = flattenChildren(rest.signatures)
@@ -89,7 +89,7 @@ function flattenChild(child: any): any {
     children,
     getSignature,
     declaration,
-    usage,
+    example,
     ...flags
   }
 }

@@ -55,7 +55,7 @@ function flattenGenerics(generics, comment) {
 function flattenChild(child) {
     const { kind: _, groups: ___, kindString: kind, typeParameter, comment, flags, sources } = child, rest = __rest(child, ["kind", "groups", "kindString", "typeParameter", "comment", "flags", "sources"]);
     const category = getTag(comment, "category");
-    const usage = getTag(comment, "example");
+    const example = getTag(comment, "example");
     const description = comment && comment.shortText;
     const signatures = flattenChildren(rest.signatures);
     const parameters = flattenChildren(rest.parameters);
@@ -76,7 +76,7 @@ function flattenChild(child) {
         children,
         getSignature,
         declaration,
-        usage }, flags);
+        example }, flags);
 }
 const flattenChildren = (arr) => arr && arr.map(x => flattenChild(x));
 function flatten(docs) {
