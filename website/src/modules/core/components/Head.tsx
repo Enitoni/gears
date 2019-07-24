@@ -5,7 +5,7 @@ import { useObserver } from "mobx-react-lite"
 import { StoreSerializer } from "../../../common/state/components/StoreSerializer"
 import { useStores } from "../../../common/state/hooks/useStores"
 
-const IMPORTED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+const IMPORTED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<>,."
 
 export function Head() {
   const { metaStore } = useStores()
@@ -24,6 +24,10 @@ export function Head() {
         />
         <link
           href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
+          rel="stylesheet"
+        />
+        <link
+          href={`https://fonts.googleapis.com/css?family=Fira+Mono:500&display=swap&text=${IMPORTED_CHARACTERS}`}
           rel="stylesheet"
         />
         <StoreSerializer />
