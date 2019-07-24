@@ -19,6 +19,8 @@ const Container = styled.header`
   display: flex;
   justify-content: center;
   height: ${HEADER_HEIGHT};
+
+  z-index: 1;
 `
 
 const Content = styled.div`
