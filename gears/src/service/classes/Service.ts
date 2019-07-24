@@ -19,6 +19,36 @@ export interface ServiceOptions<M, C> {
 
 /**
  * Stateful business logic living outside of commands
+ * @example
+ * class IncrementService extends Service {
+ *   counter = 0
+ *   increment = () => this.counter++
+ * }
+ *
+ * const command = new CommandBuilder()
+ *   .match(matchPrefixes("increment"))
+ *   .use((context) => {
+ *     const { manager } = context
+ *
+ *     const service = manager.getService(IncrementService)
+ *     service.increment()
+ *
+ *     console.log("The counter is now", service.counter)
+ *   })
+ *   .done()
+ *
+ * const bot = new Bot({
+ *   services: [IncrementService],
+ *   commands: [command],
+ * })
+ *
+ * // Input: "increment"
+ * // Output: "The counter is now 1"
+ *
+ * // Input: "increment"
+ * // Output: "The counter is now 2"
+ * @template M Message
+ * @template C Client
  * @category Service
  */
 export class Service<M, C> {

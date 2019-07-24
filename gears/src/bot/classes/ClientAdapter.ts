@@ -12,7 +12,7 @@ export interface AdapterEvents<M> {
 }
 
 /**
- * Methods for interacting with the adapter
+ * Methods for interacting with a [[ClientAdapter]] in register()
  * @category Bot
  */
 export interface AdapterHooks<M> {
@@ -23,7 +23,7 @@ export interface AdapterHooks<M> {
 }
 
 /**
- * The resulting interface after registering an adapter
+ * The resulting interface after registering a [[ClientAdapter]]
  * @category Bot
  */
 export interface AdapterResult<C, M> {
@@ -35,7 +35,33 @@ export interface AdapterResult<C, M> {
 }
 
 /**
- * Adapts any messaging interface to work with Gears.
+ * Adapts a messaging interface so a [[Bot]] can understand it
+ * @example
+ * class Adapter extends ClientAdapter {
+ *   protected register(options, hooks) {
+ *     // Client refers to anything that exposes a messaging interface
+ *     const client = new Client(options)
+ *
+ *     client.on("message", hooks.message)
+ *     client.on("ready", hooks.ready)
+ *     client.on("resume", hooks.ready)
+ *     client.on("disconnect", hooks.unready)
+ *     client.on("error", hooks.error)
+ *
+ *     return {
+ *       client,
+ *       methods: {
+ *         start: async () => client.start(),
+ *         getMessageContent: (message) => message
+ *       }
+ *     }
+ *   }
+ * }
+ *
+ * const adapter = new Adapter(options)
+ * const bot = new Bot({ adapter, ... })
+ * @template C Client
+ * @template M Message
  * @category Bot
  */
 export abstract class ClientAdapter<C, M = unknown, CO = unknown>

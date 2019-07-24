@@ -15,7 +15,21 @@ export interface CommandGroupOptions<M, C, D> {
 }
 
 /**
- * A group of [[Command]]s, which will only match if the [[Matcher]] and a command in the [[CommandGroup]] matches
+ * A group of [[Command]], which will only match if the [[Matcher]] and a command in the group matches
+ * @example
+ * const group = new CommandGroup({
+ *   matcher: matchPrefixes("!"),
+ *   commands: [sumCommand]
+ * })
+ *
+ * // Input: "!sum 2 2"
+ * // Output: "The sum is: 4"
+ *
+ * // Input: "!something"
+ * // Output: nothing
+ * @template M Message
+ * @template C Client
+ * @template D Metadata
  * @category Command
  */
 export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {

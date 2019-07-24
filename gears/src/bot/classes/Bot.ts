@@ -30,6 +30,10 @@ export interface BotOptions<M, C> {
 
 /**
  * Starting point for your bot. Contains the [[ServiceManager]] and the root [[CommandGroup]].
+ * @example
+ * const bot = new Bot({ adapter, commands: [sum, multiply] })
+ * @template M Message
+ * @template C Client
  * @category Bot
  */
 export class Bot<M, C> extends Emitter<BotEvents<M, C>> {

@@ -3,7 +3,6 @@ import { Context } from "./Context"
 
 /**
  * A [[Context]] and the [[Context]] at the point it was matched in a [[Chain]]
- * @category Internal
  */
 export interface ChainEntry<M, C = unknown> {
   command: CommandLike<M, C>
@@ -12,7 +11,6 @@ export interface ChainEntry<M, C = unknown> {
 
 /**
  * A chain of [[ChainEntry]] generated from a tree of [[CommandLike]]
- * @category Internal
  */
 export type Chain<M, C = unknown> = ChainEntry<M, C>[]
 

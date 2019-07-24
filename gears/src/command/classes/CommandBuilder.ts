@@ -3,7 +3,22 @@ import { assert } from "../../core/helpers"
 import { Command } from "./Command"
 
 /**
- * A way to build a [[Command]] with the builder pattern
+ * A way to build a [[Command]] with the builder pattern.
+ * If you are using TypeScript, this is more typesafe to use
+ * @example
+ * const command = new CommandBuilder()
+ *   .match(matchAlways())
+ *   .use((context) => {
+ *     console.log("You said ", context.content)
+ *   })
+ *   .done()
+ *
+ * // Input: "Hi"
+ * // Output: "You said Hi"
+ * @template M Message
+ * @template C Client
+ * @template D Metadata
+ * @template S State
  * @category Command
  */
 export class CommandBuilder<M, C, D = any, S extends object = {}> {

@@ -3,7 +3,24 @@ import { CommandGroup } from "./CommandGroup"
 import { assert } from "../../core/helpers"
 
 /**
- * A way to build a [[CommandGroup]] with the builder pattern
+ * A way to build a [[CommandGroup]] with the builder pattern.
+ * If you are using TypeScript, this is more typesafe to use
+ * @example
+ * const group = new CommandGroupBuilder()
+ *   .match(matchAlways())
+ *   .setCommands(sum, multiply)
+ *   .use(() => {
+ *     console.log("I am a piece of middleware")
+ *   })
+ *   .done()
+ *
+ * // Input: "sum 1 2 3 4"
+ * // Output: "I am a piece of middleware"
+ * // Output: "The sum is: 10"
+ * @template M Message
+ * @template C Client
+ * @template D Metadata
+ * @template S State
  * @category Command
  */
 export class CommandGroupBuilder<M, C, D = any, S extends object = {}> {

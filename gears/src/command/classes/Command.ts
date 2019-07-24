@@ -9,12 +9,31 @@ import { Chain, CommandLike, Matcher, Context, Middleware } from "../types"
 export interface CommandOptions<M, C, D> {
   matcher: Matcher<any, M, C>
   middleware?: ArrayResolvable<Middleware<any, M, C>>
+  /** @deprecated Use middleware instead */
   action?: Middleware<any, M, C>
   metadata?: D
 }
 
 /**
- * An executable command which only executes if its matcher matches
+ * An executable command which only executes if its [[Matcher]] is satisfied
+ * @example
+ * const command = new Command({
+ *   matcher: matchPrefixes("sum"),
+ *   middleware: (context) => {
+ *     const { content } = context
+ *
+ *     const numbers = content.split(" ").map(n => Number(n))
+ *     const result = numbers.reduce((a, b) => a + b)
+ *
+ *     console.log("The sum is:", result)
+ *   }
+ * })
+ *
+ * // Input: "sum 4 4"
+ * // Output: "The sum is: 8"
+ * @template M Message
+ * @template C Client
+ * @template D Metadata
  * @category Command
  */
 export class Command<M, C, D = unknown> implements CommandLike<M, C> {
