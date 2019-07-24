@@ -1,4 +1,4 @@
-import { ModuleDescriptor } from "./ModuleDescriptor"
+import { BaseModuleDescriptor } from "./ModuleDescriptor"
 import { Descriptor } from "./Descriptor"
 import { TypeDescriptor } from "./TypeDescriptor"
 import { ParameterDescriptor } from "./ParameterDescriptor"
@@ -8,6 +8,6 @@ export interface ConstructorSignature extends Descriptor<"Constructor signature"
   parameters: ParameterDescriptor[]
 }
 
-export interface ClassDescriptor extends ModuleDescriptor<"Class"> {
+export interface ClassDescriptor extends BaseModuleDescriptor<"Class"> {
   signatures: ConstructorSignature[]
 }

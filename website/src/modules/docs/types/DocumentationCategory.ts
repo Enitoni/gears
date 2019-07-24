@@ -1,6 +1,6 @@
-import { ModuleDescriptor, ModuleKind } from "./ModuleDescriptor"
+import { ModuleDescriptor } from "./ModuleDescriptor"
 
 export interface DocumentationCategory {
   name: string
-  modules: ModuleDescriptor<ModuleKind>[]
+  modules: ModuleDescriptor[]
 }

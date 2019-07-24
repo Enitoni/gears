@@ -5,7 +5,7 @@ import { styled } from "../../../theming/themes"
 import { Description } from "./Description"
 
 export interface DescriptorRendererProps {
-  descriptor: ModuleDescriptor<ModuleKind>
+  descriptor: ModuleDescriptor
 }
 
 const Container = styled.div`

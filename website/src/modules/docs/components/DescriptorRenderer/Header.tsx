@@ -1,13 +1,13 @@
-import { ModuleDescriptor, ModuleKind } from "../../types/ModuleDescriptor"
+import React from "react"
+import { ModuleDescriptor } from "../../types/ModuleDescriptor"
 import { styled } from "../../../theming/themes"
 import { Icon } from "../../../../common/icon/components/Icon"
 import { kindToIconMap } from "../../constants"
-import React from "react"
 import { size } from "polished"
 import { getColor } from "../../../theming/helpers"
 
 export interface HeaderProps {
-  descriptor: ModuleDescriptor<ModuleKind>
+  descriptor: ModuleDescriptor
 }
 
 export const ICON_SPACE = 32 * 2 + "px"

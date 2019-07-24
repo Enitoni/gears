@@ -1,12 +1,12 @@
 import { Documentation } from "../types/Documentation"
-import { ModuleDescriptor, ModuleKind } from "../types/ModuleDescriptor"
+import { ModuleDescriptor } from "../types/ModuleDescriptor"
 import { DocumentationCategory } from "../types/DocumentationCategory"
 
 export class DocumentationModel {
   constructor(public data: Documentation) {}
 
   public get categories() {
-    const categoryMap: Record<string, ModuleDescriptor<ModuleKind>[]> = {}
+    const categoryMap: Record<string, ModuleDescriptor[]> = {}
 
     for (const descriptor of this.data.modules) {
       if (!categoryMap[descriptor.category]) categoryMap[descriptor.category] = []

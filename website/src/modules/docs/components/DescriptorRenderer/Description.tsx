@@ -1,11 +1,10 @@
-import { ModuleDescriptor, ModuleKind } from "../../types/ModuleDescriptor"
-import { styled } from "../../../theming/themes"
 import React from "react"
-import { Link } from "../../../../common/navigation/components/Link"
+import { ModuleDescriptor } from "../../types/ModuleDescriptor"
+import { styled } from "../../../theming/themes"
 import { ModuleLink } from "../ModuleLink"
 
 export interface DescriptionProps {
-  descriptor: ModuleDescriptor<ModuleKind>
+  descriptor: ModuleDescriptor
 }
 
 const Container = styled.div`
