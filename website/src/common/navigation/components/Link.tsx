@@ -5,13 +5,13 @@ import { getFontColor, getColor, getDuration } from "../../../modules/theming/he
 import { useRouteLink } from "../../routing/hooks/useRouteLink"
 
 const Container = styled.a`
-  color: ${getFontColor("muted")};
+  color: ${getColor("accent")};
 
   transition: ${getDuration("normal")} ease;
   transition-property: color;
 
   &:hover {
-    color: ${getColor("accent")};
+    color: ${getFontColor("normal")};
   }
 `
 
