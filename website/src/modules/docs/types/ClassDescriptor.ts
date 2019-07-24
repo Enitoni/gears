@@ -8,6 +8,12 @@ export interface ConstructorSignature extends Descriptor<"Constructor signature"
   parameters: ParameterDescriptor[]
 }
 
+export interface MethodDescriptor extends Descriptor<"Method"> {
+  inheritedFrom?: unknown
+  isPublic: boolean
+}
+
 export interface ClassDescriptor extends BaseModuleDescriptor<"Class"> {
-  signatures: ConstructorSignature[]
+  children: (ConstructorSignature | PropertyDescriptor | MethodDescriptor)[]
+  extendedTypes?: TypeDescriptor[]
 }

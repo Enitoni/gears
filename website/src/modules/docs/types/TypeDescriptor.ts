@@ -17,7 +17,11 @@ export interface ArrayTypeDescriptor extends BaseTypeDescriptor<"array"> {
 }
 
 export interface UnionTypeDescriptor extends BaseTypeDescriptor<"union"> {
-  types: TypeDescriptor
+  types: TypeDescriptor[]
+}
+
+export interface TupleTypeDescriptor extends BaseTypeDescriptor<"tuple"> {
+  elements: TypeDescriptor[]
 }
 
 export type TypeDescriptor =
@@ -25,3 +29,4 @@ export type TypeDescriptor =
   | ReferenceTypeDescriptor
   | ArrayTypeDescriptor
   | UnionTypeDescriptor
+  | TupleTypeDescriptor
