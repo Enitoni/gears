@@ -1,6 +1,20 @@
 import fs from "fs"
 import { promisify } from "util"
 
+interface Tag {
+  tag: string
+  text: string
+}
+
+interface Comment {
+  shortText?: string
+  tags?: Tag[]
+}
+
+/**
+ * This file flattens and normalizes the output from TypeDoc to be easier to work with
+ */
+
 const read = promisify(fs.readFile)
 const write = promisify(fs.writeFile)
 const unlink = promisify(fs.unlink)
@@ -8,22 +22,40 @@ const unlink = promisify(fs.unlink)
 const args = process.argv.slice(2)
 const path = String(args[0])
 
-function getTag(comment: any, type: string) {
-  if (!comment) return
-  if (!comment.tags) return
+/** Get a single tag by type */
+function getTag(comment: Comment, type: string) {
+  const tag = getTags(comment, type)[0]
+  return tag
+}
 
-  const tag = comment.tags.find((x: any) => x.tag === type) || {}
-  if (!tag) return
+/** Get a list of tags by type, comment.tags */
+function getTags(comment: Comment, type: string): string[] {
+  if (!comment) return []
+  if (!comment.tags) return []
 
-  return tag.text.trim()
+  return comment.tags.filter(x => x.tag === type).map(x => x.text.trim())
+}
+
+function flattenGenerics(generics: any[], comment: Comment) {
+  const flattened = flattenChildren(generics)
+  if (!flattened) return
+
+  const genericComments = Object.fromEntries(
+    getTags(comment, "template").map((x: string) => x.split(" "))
+  )
+
+  return flattened.map((generic: any) => ({
+    ...generic,
+    description: genericComments[generic.name]
+  }))
 }
 
 function flattenChild(child: any): any {
   const {
     kind: _,
-    typeParameter: __,
     groups: ___,
     kindString: kind,
+    typeParameter,
     comment,
     flags,
     sources,
@@ -31,12 +63,13 @@ function flattenChild(child: any): any {
   } = child
 
   const category = getTag(comment, "category")
+  const usage = getTag(comment, "example")
   const description = comment && comment.shortText
 
   const signatures = flattenChildren(rest.signatures)
   const parameters = flattenChildren(rest.parameters)
   const children = flattenChildren(rest.children)
-  const generics = flattenChildren(rest.typeParameter)
+  const generics = flattenGenerics(typeParameter, comment)
   const getSignature = flattenChildren(rest.getSignature)
   const types = flattenChildren(rest.types)
 
@@ -56,11 +89,13 @@ function flattenChild(child: any): any {
     children,
     getSignature,
     declaration,
+    usage,
     ...flags
   }
 }
 
-const flattenChildren = (arr?: any[]): any => arr && arr.map(x => flattenChild(x))
+const flattenChildren = <T>(arr?: T[]): T[] | undefined =>
+  arr && arr.map(x => flattenChild(x))
 
 function flatten(docs: any) {
   const modules = docs.children

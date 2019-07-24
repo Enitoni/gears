@@ -24,29 +24,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const util_1 = require("util");
+/**
+ * This file flattens and normalizes the output from TypeDoc to be easier to work with
+ */
 const read = util_1.promisify(fs_1.default.readFile);
 const write = util_1.promisify(fs_1.default.writeFile);
 const unlink = util_1.promisify(fs_1.default.unlink);
 const args = process.argv.slice(2);
 const path = String(args[0]);
+/** Get a single tag by type */
 function getTag(comment, type) {
+    const tag = getTags(comment, type)[0];
+    return tag;
+}
+/** Get a list of tags by type, comment.tags */
+function getTags(comment, type) {
     if (!comment)
-        return;
+        return [];
     if (!comment.tags)
+        return [];
+    return comment.tags.filter(x => x.tag === type).map(x => x.text.trim());
+}
+function flattenGenerics(generics, comment) {
+    const flattened = flattenChildren(generics);
+    if (!flattened)
         return;
-    const tag = comment.tags.find((x) => x.tag === type) || {};
-    if (!tag)
-        return;
-    return tag.text.trim();
+    const genericComments = Object.fromEntries(getTags(comment, "template").map((x) => x.split(" ")));
+    return flattened.map((generic) => (Object.assign({}, generic, { description: genericComments[generic.name] })));
 }
 function flattenChild(child) {
-    const { kind: _, typeParameter: __, groups: ___, kindString: kind, comment, flags, sources } = child, rest = __rest(child, ["kind", "typeParameter", "groups", "kindString", "comment", "flags", "sources"]);
+    const { kind: _, groups: ___, kindString: kind, typeParameter, comment, flags, sources } = child, rest = __rest(child, ["kind", "groups", "kindString", "typeParameter", "comment", "flags", "sources"]);
     const category = getTag(comment, "category");
+    const usage = getTag(comment, "example");
     const description = comment && comment.shortText;
     const signatures = flattenChildren(rest.signatures);
     const parameters = flattenChildren(rest.parameters);
     const children = flattenChildren(rest.children);
-    const generics = flattenChildren(rest.typeParameter);
+    const generics = flattenGenerics(typeParameter, comment);
     const getSignature = flattenChildren(rest.getSignature);
     const types = flattenChildren(rest.types);
     const type = typeof rest.type === "object" ? flattenChild(rest.type) : rest.type;
@@ -61,7 +75,8 @@ function flattenChild(child) {
         parameters,
         children,
         getSignature,
-        declaration }, flags);
+        declaration,
+        usage }, flags);
 }
 const flattenChildren = (arr) => arr && arr.map(x => flattenChild(x));
 function flatten(docs) {
