@@ -5,10 +5,12 @@ import { metaStore } from "../../modules/core/stores/metaStore"
 import { documentationStore } from "../../modules/docs/stores/documentationStore"
 import { ssrStore } from "../../modules/core/stores/ssrStore"
 import { StoreMapReturn } from "./types/StoreMapReturn"
+import { sidebarStore } from "../navigation/stores/sidebarStore"
 
 const stores = {
   documentationStore,
   routingStore,
+  sidebarStore,
   metaStore,
   ssrStore
 }
