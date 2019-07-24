@@ -1,4 +1,3 @@
-import { bind } from "decko"
 import { CommandGroup, Command } from "../../command/classes"
 import { composeChain } from "../../command/helpers"
 import { BaseContext, CommandLike } from "../../command/types"
@@ -92,18 +91,15 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
     }
   }
 
-  @bind
-  private async handleReady() {
+  private handleReady = async () => {
     await this.manager[MANAGER_START]()
   }
 
-  @bind
-  private async handleUnready() {
+  private handleUnready = async () => {
     await this.manager[MANAGER_STOP]()
   }
 
-  @bind
-  private handleError(error: any) {
+  private handleError = (error: any) => {
     emitOrThrow(this, "error", error)
   }
 

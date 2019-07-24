@@ -1,4 +1,3 @@
-import { bind } from "decko"
 import { Bot } from "../../bot/classes"
 import { Service, ServiceOptions } from "./Service"
 import {
@@ -33,22 +32,19 @@ export class ServiceManager<M, C> {
     })
   }
 
-  @bind
-  public async [MANAGER_INITIALIZE]() {
+  public [MANAGER_INITIALIZE] = async () => {
     for (const service of this.services) {
       await service[SERVICE_INITIALIZE]()
     }
   }
 
-  @bind
-  public async [MANAGER_START]() {
+  public [MANAGER_START] = async () => {
     for (const service of this.services) {
       await service[SERVICE_START]()
     }
   }
 
-  @bind
-  public async [MANAGER_STOP]() {
+  public [MANAGER_STOP] = async () => {
     for (const service of this.services) {
       await service[SERVICE_STOP]()
     }
@@ -58,8 +54,9 @@ export class ServiceManager<M, C> {
    * Get a service from the manager
    * @returns A [[Service]] instance
    */
-  @bind
-  public getService<T extends Service<M, C>>(serviceClass: ServiceType<M, C, T>): T {
+  public getService = <T extends Service<M, C>>(
+    serviceClass: ServiceType<M, C, T>
+  ): T => {
     const service = this.services.find(s => s instanceof serviceClass)
     if (!service) throw new Error(`Service "${serviceClass.name}" not found in manager`)
 
@@ -70,8 +67,7 @@ export class ServiceManager<M, C> {
    * Check if a [[Service]] exists in the manager
    * @returns True if the service exists, false if not
    */
-  @bind
-  public hasService(serviceClass: ServiceType<M, C>) {
+  public hasService = (serviceClass: ServiceType<M, C>) => {
     return !!this.services.find(s => s instanceof serviceClass)
   }
 }

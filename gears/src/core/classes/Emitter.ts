@@ -1,5 +1,3 @@
-import { bind } from "decko"
-
 type EventHandler<T> = (value: T) => void
 
 interface EventListener<T = any> {
@@ -22,8 +20,7 @@ export class Emitter<Events extends object> {
     this.listeners.set(type, [...listeners, listener])
   }
 
-  @bind
-  public emit<E extends keyof Events>(type: E, data: Events[E]) {
+  public emit = <E extends keyof Events>(type: E, data: Events[E]) => {
     const listeners = this.listeners.get(type)
     if (!listeners) return
 
@@ -37,18 +34,15 @@ export class Emitter<Events extends object> {
     this.listeners.set(type, newHandlers)
   }
 
-  @bind
-  public on<E extends keyof Events>(type: E, handler: EventHandler<Events[E]>) {
+  public on = <E extends keyof Events>(type: E, handler: EventHandler<Events[E]>) => {
     this.addListener(type, { handler, once: false })
   }
 
-  @bind
-  public once<E extends keyof Events>(type: E, handler: EventHandler<Events[E]>) {
+  public once = <E extends keyof Events>(type: E, handler: EventHandler<Events[E]>) => {
     this.addListener(type, { handler, once: true })
   }
 
-  @bind
-  public off<E extends keyof Events>(type: E, handler: EventHandler<Events[E]>) {
+  public off = <E extends keyof Events>(type: E, handler: EventHandler<Events[E]>) => {
     const listeners = (this.listeners.get(type) || []).filter(
       listener => listener.handler !== handler
     )
@@ -56,18 +50,18 @@ export class Emitter<Events extends object> {
     this.listeners.set(type, listeners)
   }
 
-  @bind
-  public getListenerCount<E extends keyof Events>(type: E) {
+  public getListenerCount = <E extends keyof Events>(type: E) => {
     return (this.listeners.get(type) || []).length
   }
 
-  @bind
-  public hasListeners<E extends keyof Events>(type: E) {
+  public hasListeners = <E extends keyof Events>(type: E) => {
     return this.getListenerCount(type) > 0
   }
 
-  @bind
-  public pipe<E extends keyof Events, T extends Emitter<Events>>(type: E, emitter: T) {
+  public pipe = <E extends keyof Events, T extends Emitter<Events>>(
+    type: E,
+    emitter: T
+  ) => {
     this.on(type, (value: Events[E]) => emitter.emit(type, value))
   }
 }
