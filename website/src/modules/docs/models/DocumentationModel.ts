@@ -1,21 +1,16 @@
 import { Documentation } from "../types/Documentation"
 import { ModuleDescriptor } from "../types/ModuleDescriptor"
 import { DocumentationCategory } from "../types/DocumentationCategory"
+import { categorize } from "../../../common/lang/array/categorize"
 
 export class DocumentationModel {
   constructor(public data: Documentation) {}
 
   public get categories() {
-    const categoryMap: Record<string, ModuleDescriptor[]> = {}
+    const { modules } = this
+    const categorized = categorize(modules, m => m.category)
 
-    for (const descriptor of this.data.modules) {
-      if (!categoryMap[descriptor.category]) categoryMap[descriptor.category] = []
-
-      const descriptors = categoryMap[descriptor.category]
-      descriptors.push(descriptor)
-    }
-
-    const result: DocumentationCategory[] = Object.entries(categoryMap).map(
+    const result: DocumentationCategory[] = Object.entries(categorized).map(
       ([category, descriptors]) => ({
         name: category,
         modules: descriptors.sort((a, b) => {
