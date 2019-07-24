@@ -23,11 +23,17 @@ const baseConfig = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
+  },
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   },
   output: {
     filename: "index.js",
+    chunkFilename: "[name].js",
     path: path.resolve(__dirname, "build/public")
   }
 }
