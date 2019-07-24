@@ -4,7 +4,9 @@ import { styled } from "../../../theming/themes"
 import { Icon } from "../../../../common/icon/components/Icon"
 import { kindToIconMap } from "../../constants"
 import { size } from "polished"
-import { getColor } from "../../../theming/helpers"
+import { getColor, getFontColor } from "../../../theming/helpers"
+import { InheritingRenderer } from "./InheritingRenderer"
+import { Inheriting } from "../../types/Inheriting"
 
 export interface HeaderProps {
   descriptor: ModuleDescriptor
@@ -22,14 +24,17 @@ const Container = styled.div`
     margin-right: 32px;
   }
 
-  > .title {
-    color: ${getColor("accent")};
+`
 
-    font-family: Barlow Semi Condensed;
-    font-weight: bold;
-    font-size: 48px;
-    line-height: 27px;
-  }
+const Title = styled.h2`
+  color: ${getColor("accent")};
+
+  font-family: Barlow Semi Condensed;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 27px;
+
+  margin-right: 8px;
 `
 
 export function Header(props: HeaderProps) {
@@ -38,7 +43,7 @@ export function Header(props: HeaderProps) {
   return (
     <Container>
       <Icon className="icon" name={kindToIconMap[descriptor.kind]} />
-      <h2 className="title">{descriptor.name}</h2>
+      <Title>{descriptor.name}</Title>
     </Container>
   )
 }

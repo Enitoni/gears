@@ -2,6 +2,7 @@ import { BaseModuleDescriptor } from "./ModuleDescriptor"
 import { Descriptor } from "./Descriptor"
 import { TypeDescriptor } from "./TypeDescriptor"
 import { ParameterDescriptor } from "./ParameterDescriptor"
+import { Inheriting } from "./Inheriting"
 
 export interface ConstructorSignature extends Descriptor<"Constructor signature"> {
   type: TypeDescriptor
@@ -13,7 +14,6 @@ export interface MethodDescriptor extends Descriptor<"Method"> {
   isPublic: boolean
 }
 
-export interface ClassDescriptor extends BaseModuleDescriptor<"Class"> {
+export interface ClassDescriptor extends BaseModuleDescriptor<"Class">, Inheriting {
   children: (ConstructorSignature | PropertyDescriptor | MethodDescriptor)[]
-  extendedTypes?: TypeDescriptor[]
 }

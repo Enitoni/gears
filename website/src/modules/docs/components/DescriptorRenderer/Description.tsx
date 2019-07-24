@@ -2,6 +2,7 @@ import React from "react"
 import { ModuleDescriptor } from "../../types/ModuleDescriptor"
 import { styled } from "../../../theming/themes"
 import { ModuleLink } from "../ModuleLink"
+import { Section } from "../../../../common/navigation/components/Section"
 
 export interface DescriptionProps {
   descriptor: ModuleDescriptor
@@ -15,12 +16,18 @@ export function Description(props: DescriptionProps) {
   const { descriptor } = props
   const { description } = descriptor
 
+  const renderSection = (desc: React.ReactNode) => (
+    <Section title="Description">
+      <Container>{desc}</Container>
+    </Section>
+  )
+
   if (!description) return null
 
   const parts = description.split(/\[\[\w+]]/g)
   const matches = description.match(/\[\[\w+]]/g)
 
-  if (!matches) return <Container>{description}</Container>
+  if (!matches) return renderSection(description)
 
   let finalDescription = []
 
@@ -35,5 +42,5 @@ export function Description(props: DescriptionProps) {
     finalDescription.push(<ModuleLink key={`${moduleName}-${i}`} name={moduleName} />)
   }
 
-  return <Container>{finalDescription}</Container>
+  return renderSection(finalDescription)
 }

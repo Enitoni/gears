@@ -1,5 +1,3 @@
-import { TypeArgumentDescriptor } from "./TypeArgumentDescriptor"
-
 export interface BaseTypeDescriptor<T extends string> {
   type: T
   name: string
@@ -9,7 +7,7 @@ export type IntrinsicTypeDescriptor = BaseTypeDescriptor<"intrinsic">
 
 export interface ReferenceTypeDescriptor extends BaseTypeDescriptor<"reference"> {
   id: number
-  typeArguments?: TypeArgumentDescriptor[]
+  typeArguments?: TypeDescriptor[]
 }
 
 export interface ArrayTypeDescriptor extends BaseTypeDescriptor<"array"> {
@@ -24,9 +22,12 @@ export interface TupleTypeDescriptor extends BaseTypeDescriptor<"tuple"> {
   elements: TypeDescriptor[]
 }
 
+export interface TypeParameterDescriptor extends BaseTypeDescriptor<"typeParameter"> {}
+
 export type TypeDescriptor =
   | IntrinsicTypeDescriptor
   | ReferenceTypeDescriptor
   | ArrayTypeDescriptor
   | UnionTypeDescriptor
   | TupleTypeDescriptor
+  | TypeParameterDescriptor

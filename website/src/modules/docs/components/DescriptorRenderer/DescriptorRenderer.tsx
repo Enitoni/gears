@@ -1,8 +1,10 @@
-import { ModuleDescriptor, ModuleKind } from "../../types/ModuleDescriptor"
 import React from "react"
+import { ModuleDescriptor } from "../../types/ModuleDescriptor"
 import { Header, ICON_SPACE } from "./Header"
 import { styled } from "../../../theming/themes"
 import { Description } from "./Description"
+import { InheritingRenderer } from "./InheritingRenderer"
+import { Inheriting } from "../../types/Inheriting"
 
 export interface DescriptorRendererProps {
   descriptor: ModuleDescriptor
@@ -22,6 +24,7 @@ export function DescriptorRenderer(props: DescriptorRendererProps) {
     <Container>
       <Header descriptor={descriptor} />
       <div className="content">
+        <InheritingRenderer descriptor={descriptor as Inheriting} />
         <Description descriptor={descriptor} />
       </div>
     </Container>
