@@ -1,7 +1,8 @@
 import { Matcher } from "../types"
 
 /**
- * Either a regex or a function that returns a regex
+ * Can be RegExp or () => RegExp
+ * @category Internal
  */
 export type RegExpResolvable = RegExp | (() => RegExp)
 
