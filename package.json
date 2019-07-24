@@ -6,5 +6,8 @@
     "gears:docs": "cd gears && yarn doc",
     "website:build": "cd website && yarn build",
     "website:production": "cd website && yarn production"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8"
   }
 }
