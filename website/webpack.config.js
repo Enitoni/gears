@@ -4,38 +4,59 @@ const webpackMerge = require("webpack-merge")
 const webpack = require("webpack")
 
 const CopyPlugin = require("copy-webpack-plugin")
+const HtmlPlugin = require("html-webpack-plugin")
+const PreloadPlugin = require("preload-webpack-plugin")
+const CompressPlugin = require("compression-webpack-plugin")
 
 /** @type {import("webpack").Configuration} */
 const baseConfig = {
   mode: "none",
-  entry: "./src/client.tsx",
+  entry: ["core-js/stable", "regenerator-runtime/runtime", "./src/client.tsx"],
   plugins: [
     new webpack.DefinePlugin({
       "process.env.__SERVER__": JSON.stringify(false)
+    }),
+    new HtmlPlugin({
+      template: path.resolve(__dirname, "public/index.html"),
+      filename: path.resolve(__dirname, "build/public/index.html")
+    }),
+    new PreloadPlugin({
+      include: ["main", "vendors~main", "app", "vendors~app"]
     })
   ],
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/
+        test: /\.[jt]sx?$/,
+        use: "babel-loader"
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        use: "source-map-loader"
       }
     ]
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
+  },
   output: {
-    filename: "index.js",
-    chunkFilename: "[name].js",
-    path: path.resolve(__dirname, "build/public")
+    filename: "[name].js?q=[chunkhash]",
+    chunkFilename: "[name].js?q=[chunkhash]",
+    path: path.resolve(__dirname, "build/public"),
+    publicPath: "/"
   }
 }
 
 /** @type {import("webpack").Configuration} */
 const devConfig = {
   mode: "development",
+  devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "public"),
     historyApiFallback: true,
@@ -50,9 +71,26 @@ const prodConfig = {
   plugins: [
     new CopyPlugin([
       {
-        from: "./public"
+        from: "./public",
+        ignore: ["./public/index.html"]
       }
-    ])
+    ]),
+    new CompressPlugin({
+      algorithm: "gzip",
+      compressionOptions: {
+        level: 9
+      },
+      filename: "[path].gz[query]",
+      test: /\.js?.*/
+    }),
+    new CompressPlugin({
+      algorithm: "brotliCompress",
+      compressionOptions: {
+        level: 11
+      },
+      filename: "[path].br[query]",
+      test: /\.js?.*/
+    })
   ],
   optimization: {
     minimize: true,
@@ -60,7 +98,7 @@ const prodConfig = {
   }
 }
 
-module.exports = (function() {
+module.exports = (() => {
   if (process.env.NODE_ENV === "production") {
     console.info("Running production config")
     return webpackMerge(baseConfig, prodConfig)
