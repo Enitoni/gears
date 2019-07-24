@@ -5,6 +5,7 @@
     "gears:test": "cd gears && yarn test",
     "gears:docs": "cd gears && yarn doc",
     "website:build": "cd website && yarn build",
+    "website:dev": "cd website && yarn dev",
     "website:production": "cd website && yarn production"
   },
   "devDependencies": {
