@@ -17,7 +17,7 @@ const Container = styled.pre`
   font-size: 15px;
   line-height: 21px;
 
-  background: ${getTransparency("negative")};
+  background: ${getSyntaxColor("background")};
   border-radius: 3px;
 
   padding: 24px;

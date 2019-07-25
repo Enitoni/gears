@@ -47,14 +47,14 @@ export const lightTheme: Theme = {
     danger: "#ff2b2b"
   },
   syntaxColors: {
-    background: "rgba(0, 0, 0, 0.2)",
-    keyword: "#ff1c7b",
-    primitive: "#7593e8",
-    function: "#35d1e1",
-    class: "#f1d95f",
-    operator: "#67cd96",
-    comment: "rgba(255, 255, 255, 0.6)",
-    lineNumber: "rgba(78, 75, 125, 0.5)"
+    background: "#ffffff",
+    keyword: "#e81e57",
+    primitive: "#315edf",
+    function: "#0e92c1",
+    class: "#ff7800",
+    operator: "#2ca664",
+    comment: "rgba(78, 75, 125, 0.6)",
+    lineNumber: "rgba(78, 75, 125, 0.4)"
   },
   transparencies: {
     positive: "rgba(0, 0, 0, 0.2)",
