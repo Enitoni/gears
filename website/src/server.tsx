@@ -7,6 +7,7 @@ import React from "react"
 import { renderToNodeStream } from "react-dom/server"
 
 import serve from "koa-static"
+import conditional from "koa-conditional-get"
 import { BUILD_PUBLIC_FOLDER, SERVER_SUPPORTED_ENCODINGS } from "./modules/core/constants"
 import { Head } from "./modules/core/components/Head"
 import { App } from "./modules/core/components/App"
@@ -20,6 +21,8 @@ const app = new Koa()
 const router = new Router()
 
 const html = getHTML()
+
+router.use(conditional())
 
 router.use(
   serve(BUILD_PUBLIC_FOLDER, {
