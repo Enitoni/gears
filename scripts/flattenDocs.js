@@ -56,6 +56,7 @@ function flattenChild(child) {
     const { kind: _, groups: ___, kindString: kind, typeParameter, comment, flags, sources } = child, rest = __rest(child, ["kind", "groups", "kindString", "typeParameter", "comment", "flags", "sources"]);
     const category = getTag(comment, "category");
     const example = getTag(comment, "example");
+    const warning = getTag(comment, "warning");
     const description = comment && comment.shortText;
     const signatures = flattenChildren(rest.signatures);
     const parameters = flattenChildren(rest.parameters);
@@ -76,6 +77,7 @@ function flattenChild(child) {
         children,
         getSignature,
         declaration,
+        warning,
         example }, flags);
 }
 const flattenChildren = (arr) => arr && arr.map(x => flattenChild(x));
