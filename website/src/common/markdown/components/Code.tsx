@@ -1,8 +1,7 @@
 import { styled } from "../../../modules/theming/themes"
 import { getTransparency, getFontColor } from "../../../modules/theming/helpers"
-import React from "react"
+import React, { useLayoutEffect } from "react"
 import Prism from "prismjs"
-import { useIsomorphicLayoutEffect } from "../../react/useIsomorphicLayoutEffect"
 
 const Container = styled.pre`
   & > code {
@@ -115,7 +114,7 @@ const Container = styled.pre`
 `
 
 export function Code(props: { children: string }) {
-  useIsomorphicLayoutEffect(() => {
+  useLayoutEffect(() => {
     Prism.highlightAll()
   }, [props.children])
 
