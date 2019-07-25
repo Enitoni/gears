@@ -28,7 +28,7 @@ export type NextFunction<R> = () => Promise<R>
  * @template M Message
  * @template C Client
  * @template R Response
- * @param context The [[Chain]] from the [[ChainEntry]]
+ * @param context Current context
  * @param next The next middleware
  * @category Middleware
  */
