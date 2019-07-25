@@ -37,7 +37,12 @@ export function InheritingRenderer(props: InheritingRendererProps) {
     return (
       <Part key={type}>
         <span className="type">{type}</span>
-        {infix(arr.map(x => <TypeDescriptorRenderer descriptor={x} />), comma)}
+        {infix(
+          arr.map((x, i) => (
+            <TypeDescriptorRenderer key={`${x.name}-${i}`} descriptor={x} />
+          )),
+          comma
+        )}
       </Part>
     )
   }

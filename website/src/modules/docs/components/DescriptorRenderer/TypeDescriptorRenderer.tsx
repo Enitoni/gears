@@ -21,7 +21,9 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
 
     if (typeArguments) {
       const infixedArguments = infix(
-        typeArguments.map(x => <TypeDescriptorRenderer descriptor={x} />),
+        typeArguments.map((x, i) => (
+          <TypeDescriptorRenderer key={`${x.name}-${i}`} descriptor={x} />
+        )),
         ", "
       )
 
