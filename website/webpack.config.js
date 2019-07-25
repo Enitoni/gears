@@ -34,6 +34,11 @@ const baseConfig = {
         enforce: "pre",
         test: /\.js$/,
         use: "source-map-loader"
+      },
+      {
+        enforce: "pre",
+        test: /\.[jt]sx?$/,
+        use: "eslint-loader"
       }
     ]
   },
