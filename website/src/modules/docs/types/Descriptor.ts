@@ -21,6 +21,7 @@ export interface BaseDescriptor<T extends DescriptorKind = DescriptorKind> {
   id: number
   name: string
   example?: string
+  warning?: string
   kind: T
 }
 
