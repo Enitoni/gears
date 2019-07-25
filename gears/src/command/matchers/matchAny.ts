@@ -1,7 +1,14 @@
 import { Matcher } from "../types"
 
 /**
- * Match the first matching matcher
+ * Matches the first satisfied matcher
+ * @example
+ * matchAny(matchRegex(/[Hh]ey!/), matchPrefixes("hi"))
+ *
+ * // Matching: "hey!"
+ * // Matching: "hi"
+ * // Matching: "Hey!"
+ * // Not matching: "hello"
  * @category Matching
  */
 export const matchAny = (...matchers: Matcher[]): Matcher => async context => {

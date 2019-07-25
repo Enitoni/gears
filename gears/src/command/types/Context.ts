@@ -15,7 +15,7 @@ export interface BaseContext<M, C, D = {}> {
 }
 
 /**
- * [[BaseContext]] with the issuing [[CommandLike]]
+ * An object passed to [[Middleware]] and [[Matcher]]. Contains [[Bot]], [[ServiceManager]], the message and its content, and the state.
  * @category Context
  */
 export interface Context<D = any, M = any, C = any> extends BaseContext<M, C, D> {

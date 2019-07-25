@@ -1,7 +1,12 @@
 import { Matcher, Context } from "../types"
 
 /**
- * Match all matchers
+ * Match if all matchers provided are satisfied
+ * @example
+ * matchAll(matchPrefixes("Gee,"), matchPrefixes("don't you just love prefixes"))
+ *
+ * // Matching: "Gee, don't you just love prefixes"
+ * // Not matching: "Gee,"
  * @category Matching
  */
 export const matchAll = (...matchers: Matcher[]): Matcher => async context => {

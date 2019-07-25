@@ -14,7 +14,13 @@ export interface RegexData {
 }
 
 /**
- * Match when the provided regular expression matches, adds match array to context state.
+ * Match when the provided regular expression matches, adds match array to [[Context]] state.
+ * @example
+ * matchRegex(/^[Hh]elp( me)?!?$/)
+ *
+ * // Matching: "Help!"
+ * // Matching: "help me"
+ * // Not matching: "Please help me"
  * @category Matching
  */
 export const matchRegex = (
