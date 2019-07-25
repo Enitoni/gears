@@ -13,6 +13,8 @@ import { Context } from "./Context"
  *   }
  * }
  *
+ * matchLength(3)
+ *
  * // Matching: "This is a message"
  * // Not matching: "Hi"
  * @template S State
