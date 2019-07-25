@@ -10,9 +10,10 @@ export interface InheritingRendererProps {
   descriptor: Inheriting
 }
 
-const Container = styled.span`
+const Container = styled.div`
   color: ${getFontColor("muted")};
 
+  margin-top: 16px;
   font-size: 18px;
 `
 

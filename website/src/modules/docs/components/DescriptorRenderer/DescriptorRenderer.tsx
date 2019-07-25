@@ -1,12 +1,13 @@
 import React from "react"
 import { ModuleDescriptor } from "../../types/ModuleDescriptor"
-import { Header, ICON_SPACE } from "./Header"
+import { Heading, ICON_SPACE } from "../../../../common/markdown/components/Heading"
 import { styled } from "../../../theming/themes"
 import { Description } from "./Description"
 import { InheritingRenderer } from "./InheritingRenderer"
 import { Inheriting } from "../../types/Inheriting"
 import { ExampleRenderer } from "./ExampleRenderer"
 import { Alert } from "../../../../common/markdown/components/Alert"
+import { kindToIconMap } from "../../constants"
 
 export interface DescriptorRendererProps {
   descriptor: ModuleDescriptor
@@ -16,7 +17,6 @@ const Container = styled.div`
   flex: 1;
 
   > .content {
-    margin-top: 16px;
     margin-left: ${ICON_SPACE};
   }
 `
@@ -44,8 +44,8 @@ export function DescriptorRenderer(props: DescriptorRendererProps) {
 
   return (
     <Container>
-      <Header descriptor={descriptor} />
       <div className="content">
+        <Heading icon={kindToIconMap[descriptor.kind]}>{descriptor.name}</Heading>
         <InheritingRenderer descriptor={descriptor as Inheriting} />
         {renderWarningIfInternal()}
         <Description descriptor={descriptor} />
