@@ -1,7 +1,6 @@
 import React from "react"
 import { useMeta } from "../../core/hooks/useMeta"
 import { useObserver } from "mobx-react-lite"
-import { DocumentationCategories } from "./DocumentationCategories"
 import { useStores } from "../../../common/state/hooks/useStores"
 import { Version, DocumentationStoreStatus } from "../stores/documentationStore"
 import { DocumentationModel } from "../models/DocumentationModel"
@@ -10,6 +9,8 @@ import { HttpStatus } from "../../../common/routing/stores/routingStore"
 import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
 import { DescriptorRenderer } from "./DescriptorRenderer/DescriptorRenderer"
 import { DocumentationContext } from "./DocumentationContext"
+import { useSidebar } from "../../../common/navigation/hooks/useSidebar"
+import { getDocumentationCategories } from "../helpers/getDocumentationCategories"
 
 export interface DocumentationPageContentProps {
   documentation: DocumentationModel
@@ -29,10 +30,11 @@ function DocumentationPageContent(props: DocumentationPageContentProps) {
 
   const renderRoutes = useRouter(routes)
 
+  useSidebar(getDocumentationCategories(documentation))
+
   return (
     <DocumentationContext.Provider value={documentation}>
       {renderRoutes()}
-      <DocumentationCategories documentation={documentation} />
     </DocumentationContext.Provider>
   )
 }
@@ -43,29 +45,30 @@ export interface DocumentationPageProps {
 
 export function DocumentationPage(props: DocumentationPageProps) {
   const { documentationStore, ssrStore, routingStore } = useStores()
+  const { status, selected } = useObserver(() => ({
+    status: documentationStore.status,
+    selected: documentationStore.selected
+  }))
 
-  return useObserver(() => {
-    const { selected, status } = documentationStore
-    const { version } = props
+  const { version } = props
 
-    useIsomorphicEffect(() => {
-      if (!selected || selected.version !== version) {
-        ssrStore.register(documentationStore.getVersion(version))
-      }
-
-      if (status === DocumentationStoreStatus.NotFound) {
-        routingStore.status = HttpStatus.NotFound
-      }
-    }, [version])
-
-    if (selected) {
-      return <DocumentationPageContent documentation={selected} />
+  useIsomorphicEffect(() => {
+    if (!selected || selected.version !== version) {
+      ssrStore.register(documentationStore.getVersion(version))
     }
 
     if (status === DocumentationStoreStatus.NotFound) {
-      return <>Not found</>
+      routingStore.status = HttpStatus.NotFound
     }
+  }, [version])
 
-    return <>Fetching</>
-  })
+  if (selected) {
+    return <DocumentationPageContent documentation={selected} />
+  }
+
+  if (status === DocumentationStoreStatus.NotFound) {
+    return <>Not found</>
+  }
+
+  return <>Fetching</>
 }

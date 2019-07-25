@@ -11,10 +11,13 @@ export const useRouteLink = (to: string, activeTo = to) => {
   }
 
   return useObserver(() => {
-    const { pathname } = routingStore.location
+    const { pathname, hash } = routingStore.location
+
+    const hasHash = activeTo.includes("#")
+    const safePathName = hasHash ? `${pathname}${hash}` : pathname
 
     const pattern = new UrlPattern(activeTo)
-    const active = pattern.match(pathname) !== null
+    const active = pattern.match(safePathName) !== null
 
     return [active, click] as const
   })

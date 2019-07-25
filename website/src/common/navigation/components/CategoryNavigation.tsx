@@ -1,23 +1,22 @@
 import React from "react"
-
 import { styled } from "../../../modules/theming/themes"
-import { useRouteLink } from "../../routing/hooks/useRouteLink"
-
-import { getFontColor, getDuration } from "../../../modules/theming/helpers"
-import { size } from "polished"
 
 import { IconType } from "../../icon/types/IconType"
-import { Icon } from "../../icon/components/Icon"
+import { NavLink } from "../../../modules/core/components/NavLink"
+import { useRouteLink } from "../../routing/hooks/useRouteLink"
 
-export interface CategorySection {
-  icon?: IconType
+export type CategoryChild = Omit<CategoryLink, "children">
+
+export interface CategoryLink {
+  children?: CategoryChild[]
+  icon: IconType
   label: string
   to: string
 }
 
 export interface Category {
   name: string
-  items: CategorySection[]
+  items: CategoryLink[]
 }
 
 export interface CategoryNavigationProps {
@@ -39,67 +38,33 @@ const Category = styled.div`
   }
 `
 
-const CategorySection = styled.a<{ active: boolean }>`
-  height: 48px;
-
-  display: flex;
-  align-items: center;
-
-  font-weight: 600;
-  font-size: 18px;
-  color: ${getFontColor("normal")};
-
-  transition: ${getDuration("normal")} ease;
-  transition-property: color;
-
-  > .icon {
-    ${size(24)}
-
-    fill: ${getFontColor("normal")};
-    margin-right: 16px;
-
-    transition: ${getDuration("normal")} ease;
-    transition-property: fill;
-  }
-
-
-  ${props => {
-    const active = `
-      color: ${props.theme.colors.accent};
-
-      > .icon {
-        fill: ${props.theme.colors.accent};
-      }
-    `
-
-    const inactive = `
-      &:hover {
-        color: ${props.theme.fontColors.muted};
-      }
-
-      &:hover > .icon {
-        fill: ${props.theme.fontColors.muted};
-      }
-    `
-
-    return props.active ? active : inactive
-  }}
+const Children = styled.div`
+  margin-left: 32px;
 `
 
-export function CategorySectionItem(props: CategorySection) {
-  const { icon, label, to } = props
-  const [active, click] = useRouteLink(to)
+export function CategoryLink(props: CategoryLink) {
+  const { icon, label, to, children } = props
+  const [active] = useRouteLink(to)
 
-  const renderIcon = () => {
-    if (!icon) return null
-    return <Icon className="icon" name={icon} />
+  const renderChildren = () => {
+    if (!children || !active) return null
+
+    return (
+      <Children>
+        {children.map(x => (
+          <CategoryLink key={x.to} {...x} />
+        ))}
+      </Children>
+    )
   }
 
   return (
-    <CategorySection href={to} active={active} onClick={click}>
-      {renderIcon()}
-      <div className="label">{label}</div>
-    </CategorySection>
+    <div>
+      <NavLink to={to} icon={icon}>
+        {label}
+      </NavLink>
+      {renderChildren()}
+    </div>
   )
 }
 
@@ -108,7 +73,7 @@ export function CategoryNavigation(props: CategoryNavigationProps) {
 
   const renderedCategories = categories.map(category => {
     const renderedChildren = category.items.map(child => (
-      <CategorySectionItem key={child.to} {...child} />
+      <CategoryLink key={child.to} {...child} />
     ))
 
     return (

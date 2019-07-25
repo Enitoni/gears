@@ -1,11 +1,15 @@
-import { Descriptor } from "./Descriptor"
+import { BaseDescriptor, DescriptorKind, Descriptor } from "./Descriptor"
 import { ClassDescriptor } from "./ClassDescriptor"
 
-export type ModuleKind = "Class" | "Function" | "Interface" | "Type alias"
+export type ModuleKind = Extract<
+  DescriptorKind,
+  "Class" | "Function" | "Interface" | "Type alias"
+>
 
-export interface BaseModuleDescriptor<T extends ModuleKind> extends Descriptor<T> {
+export interface BaseModuleDescriptor<T extends ModuleKind> extends BaseDescriptor<T> {
   category: string
   description: string
+  children: Descriptor[]
 }
 
 export type ModuleDescriptor =

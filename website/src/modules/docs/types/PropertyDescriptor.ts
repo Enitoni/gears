@@ -1,7 +1,7 @@
-import { Descriptor } from "./Descriptor"
+import { BaseDescriptor } from "./Descriptor"
 import { TypeDescriptor } from "./TypeDescriptor"
 
-export interface PropertyDescriptor extends Descriptor<"Property"> {
+export interface PropertyDescriptor extends BaseDescriptor<"Property"> {
   type: TypeDescriptor
   isPrivate: boolean
 }

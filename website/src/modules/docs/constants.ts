@@ -1,9 +1,15 @@
-import { ModuleKind } from "./types/ModuleDescriptor"
 import { IconType } from "../../common/icon/types/IconType"
+import { DescriptorKind } from "./types/Descriptor"
 
-export const kindToIconMap: Record<ModuleKind, IconType> = {
+export const kindToIconMap: Record<DescriptorKind, IconType> = {
   Class: "encapsulated",
-  Function: "doubleParens",
   Interface: "typeAlias",
-  "Type alias": "typeAlias"
+  Method: "doubleParens",
+  Property: "circledP",
+  Function: "doubleParens",
+  Parameter: "placeholder",
+  Constructor: "doubleParens",
+  "Type alias": "typeAlias",
+  "Type parameter": "generic",
+  "Constructor signature": "doubleParens"
 }
