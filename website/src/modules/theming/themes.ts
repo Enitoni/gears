@@ -10,6 +10,10 @@ export const darkTheme: Theme = {
     normal: "#eeeeee",
     muted: "rgba(255, 255, 255, 0.6)"
   },
+  stateColors: {
+    warning: "#ffe500",
+    danger: "#ff2b2b"
+  },
   syntaxColors: {
     background: "rgba(0, 0, 0, 0.2)",
     keyword: "#ff1c7b",
@@ -37,6 +41,10 @@ export const lightTheme: Theme = {
   fontColors: {
     normal: "#29274c",
     muted: "rgba(0, 0, 0, 0.6)"
+  },
+  stateColors: {
+    warning: "#ffe500",
+    danger: "#ff2b2b"
   },
   syntaxColors: {
     background: "rgba(0, 0, 0, 0.2)",

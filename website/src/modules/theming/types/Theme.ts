@@ -7,6 +7,10 @@ export interface Theme {
     normal: string
     muted: string
   }
+  stateColors: {
+    warning: string
+    danger: string
+  }
   syntaxColors: {
     background: string
     keyword: string
