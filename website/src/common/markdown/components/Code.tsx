@@ -1,7 +1,14 @@
 import { styled } from "../../../modules/theming/themes"
 import { getTransparency, getFontColor } from "../../../modules/theming/helpers"
-import React, { useLayoutEffect } from "react"
+import React from "react"
 import Prism from "prismjs"
+import { IS_SERVER } from "../../../modules/core/constants"
+
+if (IS_SERVER) {
+  // Don't remove trailing slash, doesn't work without for whatever reason.
+  const loadLanguages = eval("require")("prismjs/components/")
+  loadLanguages(["typescript"])
+}
 
 const Container = styled.pre`
   & > code {
@@ -114,13 +121,21 @@ const Container = styled.pre`
 `
 
 export function Code(props: { children: string }) {
-  useLayoutEffect(() => {
-    Prism.highlightAll()
-  }, [props.children])
+  const html = Prism.highlight(props.children, Prism.languages.typescript, "typescript")
+
+  const lineCount = props.children.split("\n").length
+  const lines = Array(lineCount)
+    .fill("<span></span>")
+    .join("")
+
+  const withLineNumbers = html.replace(
+    /<\/span>$/, // Matches last closing span tag
+    `</span><span aria-hidden="true" class="line-numbers-rows">${lines}</span>`
+  )
 
   return (
     <Container className="language-typescript line-numbers">
-      <code>{props.children}</code>
+      <code dangerouslySetInnerHTML={{ __html: withLineNumbers }} />
     </Container>
   )
 }
