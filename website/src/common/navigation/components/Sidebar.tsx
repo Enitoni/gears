@@ -50,8 +50,10 @@ export function Sidebar() {
       <Container open={sidebarStore.open}>
         <Fixed>
           <Navigation>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to={`/docs/${latestVersion}`} activeTo="/docs(/*)">
+            <NavLink icon="home" to="/">
+              Home
+            </NavLink>
+            <NavLink icon="book" to={`/docs/${latestVersion}`} activeTo="/docs(/*)">
               Docs
             </NavLink>
           </Navigation>

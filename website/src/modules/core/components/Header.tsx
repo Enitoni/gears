@@ -12,7 +12,7 @@ const Container = styled.header`
   right: 0px;
 
   background: ${getColor("primary")};
-  border-bottom: solid 1px ${getTransparency("positive")};
+  border-bottom: solid 1px ${getTransparency("negative")};
 
   display: flex;
   justify-content: center;

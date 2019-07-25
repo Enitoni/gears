@@ -40,7 +40,7 @@ const Category = styled.div`
 `
 
 const CategorySection = styled.a<{ active: boolean }>`
-  height: 40px;
+  height: 48px;
 
   display: flex;
   align-items: center;
@@ -62,9 +62,6 @@ const CategorySection = styled.a<{ active: boolean }>`
     transition-property: fill;
   }
 
-  a ~ & {
-    margin-top: 8px;
-  }
 
   ${props => {
     const active = `
