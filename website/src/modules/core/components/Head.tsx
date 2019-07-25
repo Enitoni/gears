@@ -9,55 +9,52 @@ const IMPORTED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy
 
 export function Head() {
   const { metaStore } = useStores()
+  const { title } = useObserver(() => metaStore.value)
 
-  return useObserver(() => {
-    const { title } = metaStore.value
+  const content = (
+    <>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="initial-scale=1" />
+      <title>{title !== "Gears" ? `${title} | Gears` : "Gears"}</title>
+      <link
+        href={`https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:700&display=swap&text=${IMPORTED_CHARACTERS}`}
+        rel="stylesheet"
+      />
+      <link
+        href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
+        rel="stylesheet"
+      />
+      <link
+        href={`https://fonts.googleapis.com/css?family=Fira+Mono:400,500&display=swap&text=${IMPORTED_CHARACTERS}`}
+        rel="stylesheet"
+      />
+      <StoreSerializer />
+    </>
+  )
 
-    const content = (
+  const mappedContent = React.Children.map(content.props.children, (child, i) => {
+    return React.cloneElement<any>(child, { key: i })
+  })
+
+  useEffect(() => {
+    if (IS_SERVER) return
+
+    document
+      .querySelectorAll("[data-server-head=true]")
+      .forEach(element => element.remove())
+  })
+
+  if (IS_SERVER) {
+    return (
       <>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1" />
-        <title>{title !== "Gears" ? `${title} | Gears` : "Gears"}</title>
-        <link
-          href={`https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:700&display=swap&text=${IMPORTED_CHARACTERS}`}
-          rel="stylesheet"
-        />
-        <link
-          href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
-          rel="stylesheet"
-        />
-        <link
-          href={`https://fonts.googleapis.com/css?family=Fira+Mono:400,500&display=swap&text=${IMPORTED_CHARACTERS}`}
-          rel="stylesheet"
-        />
-        <StoreSerializer />
+        {mappedContent.map(element =>
+          React.cloneElement(element, {
+            "data-server-head": true
+          })
+        )}
       </>
     )
+  }
 
-    const mappedContent = React.Children.map(content.props.children, (child, i) => {
-      return React.cloneElement<any>(child, { key: i })
-    })
-
-    useEffect(() => {
-      if (IS_SERVER) return
-
-      document
-        .querySelectorAll("[data-server-head=true]")
-        .forEach(element => element.remove())
-    })
-
-    if (IS_SERVER) {
-      return (
-        <>
-          {mappedContent.map(element =>
-            React.cloneElement(element, {
-              "data-server-head": true
-            })
-          )}
-        </>
-      )
-    }
-
-    return ReactDOM.createPortal(content, document.head)
-  })
+  return ReactDOM.createPortal(content, document.head)
 }
