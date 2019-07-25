@@ -6,11 +6,7 @@ export const useIsomorphicEffect = (
   deps?: any[]
 ) => {
   if (IS_SERVER) {
-    const dispose = callback()
-
-    if (dispose) {
-      dispose()
-    }
+    callback()
   } else {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(callback, deps)
