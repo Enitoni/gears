@@ -10,6 +10,8 @@ export interface IconProps {
 export function Icon(props: IconProps) {
   const { name, className } = props
 
+  if (!icons[name]) return null
+
   return React.cloneElement(icons[name], {
     className,
     width: "100%",
