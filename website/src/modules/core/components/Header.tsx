@@ -34,7 +34,7 @@ const Content = styled.div`
 `
 
 const Logo = styled.h1`
-  font-family: Barlow Semi Condensed;
+  font-family: Barlow Semi Condensed, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
