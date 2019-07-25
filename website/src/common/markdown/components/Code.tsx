@@ -11,12 +11,11 @@ if (IS_SERVER) {
 }
 
 const Container = styled.pre`
-  & > code {
-    position: relative;
-    font-family: Fira Mono, monospace;
-    font-size: 15px;
-    line-height: 21px;
-  }
+  position: relative;
+
+  font-family: Fira Mono, monospace;
+  font-size: 15px;
+  line-height: 21px;
 
   background: ${getTransparency("negative")};
   border-radius: 3px;
@@ -69,9 +68,9 @@ const Container = styled.pre`
   .line-numbers-rows {
     position: absolute;
     pointer-events: none;
-    top: 0;
-    left: -2.6em;
-    width: 2em;
+    top: 24px;
+    left: 24px;
+    width: 24px;
 
     user-select: none;
   }
@@ -103,8 +102,8 @@ export function Code(props: { children: string }) {
     html + `<span aria-hidden="true" class="line-numbers-rows">${lines}</span>`
 
   return (
-    <Container className="language-typescript line-numbers">
-      <code dangerouslySetInnerHTML={{ __html: withLineNumbers }} />
-    </Container>
+    <code>
+      <Container dangerouslySetInnerHTML={{ __html: withLineNumbers }} />
+    </code>
   )
 }
