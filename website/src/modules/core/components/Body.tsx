@@ -9,6 +9,7 @@ import { Sidebar } from "../../../common/navigation/components/Sidebar"
 
 const Container = styled.main`
   margin-top: ${parseInt(HEADER_HEIGHT) + 32}px;
+  padding-bottom: 32px;
 
   width: 100%;
   display: flex;
