@@ -8,8 +8,9 @@ import { Inheriting } from "../../types/Inheriting"
 import { ExampleRenderer } from "./ExampleRenderer"
 import { Alert } from "../../../../common/markdown/components/Alert"
 import { kindToIconMap } from "../../constants"
+import { ClassDescriptorRenderer } from "../ClassDescriptorRenderer/ClassDescriptorRenderer"
 
-export interface DescriptorRendererProps {
+export interface ModuleDescriptorRendererProps {
   descriptor: ModuleDescriptor
 }
 
@@ -25,7 +26,7 @@ const SpaceContainer = styled.div`
   margin-top: 32px;
 `
 
-export function DescriptorRenderer(props: DescriptorRendererProps) {
+export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
   const { descriptor } = props
 
   const renderWarningIfInternal = () => {
@@ -42,6 +43,13 @@ export function DescriptorRenderer(props: DescriptorRendererProps) {
     )
   }
 
+  const renderDescriptor = () => {
+    if (descriptor.kind === "Class")
+      return <ClassDescriptorRenderer descriptor={descriptor} />
+
+    return null
+  }
+
   return (
     <Container>
       <div className="content">
@@ -50,6 +58,7 @@ export function DescriptorRenderer(props: DescriptorRendererProps) {
         {renderWarningIfInternal()}
         <Description descriptor={descriptor} />
         <ExampleRenderer descriptor={descriptor} />
+        {renderDescriptor()}
       </div>
     </Container>
   )

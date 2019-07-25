@@ -7,7 +7,7 @@ import { DocumentationModel } from "../models/DocumentationModel"
 import { useIsomorphicEffect } from "../../../common/react/useIsomorphicEffect"
 import { HttpStatus } from "../../../common/routing/stores/routingStore"
 import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
-import { DescriptorRenderer } from "./DescriptorRenderer/DescriptorRenderer"
+import { ModuleDescriptorRenderer } from "./ModuleDescriptorRenderer/ModuleDescriptorRenderer"
 import { DocumentationContext } from "./DocumentationContext"
 import { useSidebar } from "../../../common/navigation/hooks/useSidebar"
 import { getDocumentationCategories } from "../helpers/getDocumentationCategories"
@@ -25,7 +25,7 @@ function DocumentationPageContent(props: DocumentationPageContentProps) {
 
   const routes: Route[] = documentation.modules.map(descriptor => ({
     pattern: `/docs/${documentation.version}/${descriptor.name}`,
-    render: () => <DescriptorRenderer descriptor={descriptor} />
+    render: () => <ModuleDescriptorRenderer descriptor={descriptor} />
   }))
 
   const renderRoutes = useRouter(routes)
