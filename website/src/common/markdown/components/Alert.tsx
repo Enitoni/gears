@@ -15,6 +15,7 @@ export interface StyleProps {
 const Container = styled.div<StyleProps>`
   font-weight: 600;
   padding: 16px;
+  letter-spacing: 0.03em;
 
   border: solid 2px white;
   border-radius: 3px;
