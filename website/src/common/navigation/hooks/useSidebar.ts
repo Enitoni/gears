@@ -6,8 +6,6 @@ export const useSidebar = (categories?: Category[]) => {
   const { sidebarStore } = useStores()
 
   useIsomorphicEffect(() => {
-    const wasOpen = sidebarStore.open
-
     if (categories) {
       sidebarStore.categories = categories
       sidebarStore.open = true
@@ -15,7 +13,6 @@ export const useSidebar = (categories?: Category[]) => {
 
     return () => {
       sidebarStore.categories = []
-      sidebarStore.open = wasOpen
     }
   }, [categories])
 }
