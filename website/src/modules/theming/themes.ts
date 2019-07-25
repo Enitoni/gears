@@ -15,13 +15,13 @@ export const darkTheme: Theme = {
     danger: "#ff2b2b"
   },
   syntaxColors: {
-    background: "rgba(0, 0, 0, 0.2)",
+    background: "rgba(0, 0, 0, 0.25)",
     keyword: "#ff1c7b",
     primitive: "#7593e8",
     function: "#35d1e1",
     class: "#f1d95f",
     operator: "#67cd96",
-    comment: "rgba(255, 255, 255, 0.6)",
+    comment: "#4e4b7d",
     lineNumber: "rgba(78, 75, 125, 0.5)"
   },
   transparencies: {
