@@ -1,5 +1,5 @@
 import { styled } from "../../../modules/theming/themes"
-import { getTransparency, getFontColor, getColor } from "../../../modules/theming/helpers"
+import { getTransparency, getSyntaxColor } from "../../../modules/theming/helpers"
 import React from "react"
 import Prism from "prismjs"
 import { IS_SERVER } from "../../../modules/core/constants"
@@ -26,38 +26,20 @@ const Container = styled.pre`
 
   .token.comment,
   .token.block-comment,
-  .token.prolog,
-  .token.doctype,
-  .token.cdata {
-    color: ${getFontColor("muted")};
-  }
-
   .token.punctuation {
-    color: ${getFontColor("muted")};
+    color: ${getSyntaxColor("comment")};
   }
 
-  .token.tag,
-  .token.attr-name,
-  .token.namespace,
-  .token.deleted {
-    color: #e2777a;
-  }
-
-  .token.function-name {
-    color: #6196cc;
-  }
-
-  .token.boolean,
-  .token.number,
+  .token.function-name,
   .token.function {
-    color: #f08d49;
+    color: ${getSyntaxColor("function")};
   }
 
   .token.property,
   .token.class-name,
   .token.constant,
   .token.symbol {
-    color: #f8c555;
+    color: ${getSyntaxColor("class")};
   }
 
   .token.selector,
@@ -65,34 +47,23 @@ const Container = styled.pre`
   .token.atrule,
   .token.keyword,
   .token.builtin {
-    color: ${getColor("accent")};
+    color: ${getSyntaxColor("keyword")};
   }
 
+  .token.boolean,
+  .token.number,
   .token.string,
   .token.char,
   .token.attr-value,
   .token.regex,
   .token.variable {
-    color: #7ec699;
+    color: ${getSyntaxColor("primitive")};
   }
 
   .token.operator,
   .token.entity,
   .token.url {
-    color: #67cdcc;
-  }
-
-  .token.important,
-  .token.bold {
-    font-weight: bold;
-  }
-
-  .token.italic {
-    font-style: italic;
-  }
-
-  .token.inserted {
-    color: green;
+    color: ${getSyntaxColor("operator")};
   }
 
   .line-numbers-rows {
@@ -111,9 +82,9 @@ const Container = styled.pre`
     counter-increment: linenumber;
   }
 
-  .line-numbers-rows > span:before {
+  .line-numbers-rows > span::before {
     content: counter(linenumber);
-    color: ${getTransparency("positive")};
+    color: ${getSyntaxColor("lineNumber")};
     display: block;
     padding-right: 0.6em;
     text-align: right;
@@ -128,10 +99,8 @@ export function Code(props: { children: string }) {
     .fill("<span></span>")
     .join("")
 
-  const withLineNumbers = html.replace(
-    /<\/span>$/, // Matches last closing span tag
-    `</span><span aria-hidden="true" class="line-numbers-rows">${lines}</span>`
-  )
+  const withLineNumbers =
+    html + `<span aria-hidden="true" class="line-numbers-rows">${lines}</span>`
 
   return (
     <Container className="language-typescript line-numbers">

@@ -10,6 +10,16 @@ export const darkTheme: Theme = {
     normal: "#eeeeee",
     muted: "rgba(255, 255, 255, 0.6)"
   },
+  syntaxColors: {
+    background: "rgba(0, 0, 0, 0.2)",
+    keyword: "#ff1c7b",
+    primitive: "#7593e8",
+    function: "#35d1e1",
+    class: "#f1d95f",
+    operator: "#67cd96",
+    comment: "rgba(255, 255, 255, 0.6)",
+    lineNumber: "rgba(78, 75, 125, 0.5)"
+  },
   transparencies: {
     positive: "rgba(78, 75, 125, 0.5)",
     negative: "rgba(0, 0, 0, 0.2)"
@@ -27,6 +37,16 @@ export const lightTheme: Theme = {
   fontColors: {
     normal: "#29274c",
     muted: "rgba(0, 0, 0, 0.6)"
+  },
+  syntaxColors: {
+    background: "rgba(0, 0, 0, 0.2)",
+    keyword: "#ff1c7b",
+    primitive: "#7593e8",
+    function: "#35d1e1",
+    class: "#f1d95f",
+    operator: "#67cd96",
+    comment: "rgba(255, 255, 255, 0.6)",
+    lineNumber: "rgba(78, 75, 125, 0.5)"
   },
   transparencies: {
     positive: "rgba(0, 0, 0, 0.2)",
