@@ -6,6 +6,7 @@ import { Description } from "./Description"
 import { InheritingRenderer } from "./InheritingRenderer"
 import { Inheriting } from "../../types/Inheriting"
 import { ExampleRenderer } from "./ExampleRenderer"
+import { Alert } from "../../../../common/markdown/components/Alert"
 
 export interface DescriptorRendererProps {
   descriptor: ModuleDescriptor
@@ -20,14 +21,33 @@ const Container = styled.div`
   }
 `
 
+const SpaceContainer = styled.div`
+  margin-top: 32px;
+`
+
 export function DescriptorRenderer(props: DescriptorRendererProps) {
   const { descriptor } = props
+
+  const renderWarningIfInternal = () => {
+    if (descriptor.category !== "Internal") return null
+
+    return (
+      <SpaceContainer>
+        <Alert type="warning">
+          {
+            "This is an internal module. Do not use this in your codebase as it may change or be removed entirely without warning in future versions of Gears."
+          }
+        </Alert>
+      </SpaceContainer>
+    )
+  }
 
   return (
     <Container>
       <Header descriptor={descriptor} />
       <div className="content">
         <InheritingRenderer descriptor={descriptor as Inheriting} />
+        {renderWarningIfInternal()}
         <Description descriptor={descriptor} />
         <ExampleRenderer descriptor={descriptor} />
       </div>
