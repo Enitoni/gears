@@ -1,7 +1,5 @@
 import React from "react"
 import { useMeta } from "../../core/hooks/useMeta"
-import { styled } from "../../theming/themes"
-import { Sidebar } from "../../../common/navigation/components/Sidebar"
 import { useObserver } from "mobx-react-lite"
 import { DocumentationCategories } from "./DocumentationCategories"
 import { useStores } from "../../../common/state/hooks/useStores"
@@ -12,10 +10,6 @@ import { HttpStatus } from "../../../common/routing/stores/routingStore"
 import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
 import { DescriptorRenderer } from "./DescriptorRenderer/DescriptorRenderer"
 import { DocumentationContext } from "./DocumentationContext"
-
-const Container = styled.div`
-  display: flex;
-`
 
 export interface DocumentationPageContentProps {
   documentation: DocumentationModel
@@ -37,12 +31,8 @@ function DocumentationPageContent(props: DocumentationPageContentProps) {
 
   return (
     <DocumentationContext.Provider value={documentation}>
-      <Container>
-        <Sidebar>
-          <DocumentationCategories documentation={documentation} />
-        </Sidebar>
-        {renderRoutes()}
-      </Container>
+      {renderRoutes()}
+      <DocumentationCategories documentation={documentation} />
     </DocumentationContext.Provider>
   )
 }

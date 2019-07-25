@@ -1,11 +1,7 @@
-import React from "react"
-
-import {
-  CategoryNavigation,
-  CategorySection
-} from "../../../common/navigation/components/CategoryNavigation"
+import { CategorySection } from "../../../common/navigation/components/CategoryNavigation"
 import { DocumentationModel } from "../models/DocumentationModel"
 import { kindToIconMap } from "../constants"
+import { useSidebar } from "../../../common/navigation/hooks/useSidebar"
 
 export interface DocumentationCategoriesProps {
   documentation: DocumentationModel
@@ -30,5 +26,6 @@ export function DocumentationCategories(props: DocumentationCategoriesProps) {
     }
   })
 
-  return <CategoryNavigation categories={mappedCategories} />
+  useSidebar(mappedCategories)
+  return null
 }

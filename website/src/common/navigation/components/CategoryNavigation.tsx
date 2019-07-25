@@ -40,20 +40,22 @@ const Category = styled.div`
 `
 
 const CategorySection = styled.a<{ active: boolean }>`
+  height: 40px;
+
   display: flex;
   align-items: center;
 
   font-weight: 600;
   font-size: 18px;
-  color: ${getFontColor("muted")};
+  color: ${getFontColor("normal")};
 
   transition: ${getDuration("normal")} ease;
   transition-property: color;
 
   > .icon {
-    ${size(16)}
+    ${size(24)}
 
-    fill: ${getFontColor("muted")};
+    fill: ${getFontColor("normal")};
     margin-right: 16px;
 
     transition: ${getDuration("normal")} ease;
@@ -61,7 +63,7 @@ const CategorySection = styled.a<{ active: boolean }>`
   }
 
   a ~ & {
-    margin-top: 16px;
+    margin-top: 8px;
   }
 
   ${props => {
@@ -75,11 +77,11 @@ const CategorySection = styled.a<{ active: boolean }>`
 
     const inactive = `
       &:hover {
-        color: ${props.theme.fontColors.normal};
+        color: ${props.theme.fontColors.muted};
       }
 
       &:hover > .icon {
-        fill: ${props.theme.fontColors.normal};
+        fill: ${props.theme.fontColors.muted};
       }
     `
 

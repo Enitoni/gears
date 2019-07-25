@@ -1,41 +1,63 @@
 import { styled } from "../../../modules/theming/themes"
 import React from "react"
 import { HEADER_HEIGHT } from "../../../modules/core/components/Header"
+import { useStores } from "../../state/hooks/useStores"
+import { CategoryNavigation } from "./CategoryNavigation"
+import { useObserver } from "mobx-react-lite"
+import { NavLink } from "../../../modules/core/components/NavLink"
+import { getTransparency } from "../../../modules/theming/helpers"
 
-export interface SidebarProps {
-  children: React.ReactNode
-}
+const SIDEBAR_WIDTH = "320px"
 
-const Container = styled.div`
+const Container = styled.div<{ open: boolean }>`
+  position: relative;
+  flex-shrink: 0;
+  width: ${SIDEBAR_WIDTH};
+  margin-left: 32px;
+
+  ${props =>
+    props.open === false &&
+    `
+    display: none;
+  `}
+`
+
+const Fixed = styled.div`
   position: fixed;
-  top: ${HEADER_HEIGHT};
-  bottom: 0px;
 
-  flex-shrink: 0;
-  width: 284px;
-  padding-top: 32px;
+  padding: 0px 32px;
+  width: ${SIDEBAR_WIDTH};
 
-  overflow-y: scroll;
+  top: ${parseInt(HEADER_HEIGHT) + 32}px;
+  bottom: 32px;
+
+  overflow-y: auto;
 `
 
-const Space = styled.div`
-  flex-shrink: 0;
-  width: 284px;
-  margin-right: 32px;
+const Navigation = styled.nav`
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+
+  border-bottom: solid 1px ${getTransparency("negative")};
 `
 
-const BottomSpace = styled.div`
-  height: 32px;
-`
+export function Sidebar() {
+  const { sidebarStore, documentationStore } = useStores()
+  const { latestVersion } = documentationStore
 
-export function Sidebar(props: SidebarProps) {
-  return (
+  return useObserver(() => (
     <>
-      <Container>
-        {props.children}
-        <BottomSpace />
+      <Container open={sidebarStore.open}>
+        <Fixed>
+          <Navigation>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to={`/docs/${latestVersion}`} activeTo="/docs(/*)">
+              Docs
+            </NavLink>
+          </Navigation>
+          <CategoryNavigation categories={sidebarStore.categories} />
+        </Fixed>
       </Container>
-      <Space />
     </>
-  )
+  ))
 }
