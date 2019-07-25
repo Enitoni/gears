@@ -1,6 +1,6 @@
 import React from "react"
 import { ModuleDescriptor } from "../../types/ModuleDescriptor"
-import { Section } from "../../../../common/navigation/components/Section"
+import { Section } from "../../../../common/markdown/components/Section"
 import { Code } from "../../../../common/markdown/components/Code"
 
 export interface ExampleRendererProps {

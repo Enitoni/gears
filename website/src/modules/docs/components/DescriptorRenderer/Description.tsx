@@ -2,7 +2,7 @@ import React from "react"
 import { ModuleDescriptor } from "../../types/ModuleDescriptor"
 import { styled } from "../../../theming/themes"
 import { ModuleLink } from "../ModuleLink"
-import { Section } from "../../../../common/navigation/components/Section"
+import { Section } from "../../../../common/markdown/components/Section"
 
 export interface DescriptionProps {
   descriptor: ModuleDescriptor
@@ -17,7 +17,7 @@ export function Description(props: DescriptionProps) {
   const { description } = descriptor
 
   const renderSection = (desc: React.ReactNode) => (
-    <Section title="Description">
+    <Section icon="paragraph" title="Description">
       <Container>{desc}</Container>
     </Section>
   )
