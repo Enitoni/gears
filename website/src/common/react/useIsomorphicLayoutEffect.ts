@@ -12,6 +12,7 @@ export const useIsomorphicLayoutEffect = (
       dispose()
     }
   } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useLayoutEffect(callback, deps)
   }
 }
