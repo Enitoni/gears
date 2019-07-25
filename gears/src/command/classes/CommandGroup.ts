@@ -27,6 +27,9 @@ export interface CommandGroupOptions<M, C, D> {
  *
  * // Input: "!something"
  * // Output: nothing
+ *
+ * // Input: "?sum 5 3"
+ * // Output: nothing
  * @template M Message
  * @template C Client
  * @template D Metadata
