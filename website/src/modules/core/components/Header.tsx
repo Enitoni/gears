@@ -2,6 +2,9 @@ import React from "react"
 import { styled } from "../../theming/themes"
 import { getColor, getTransparency } from "../../theming/helpers"
 import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
+import { IconButton } from "../../../common/button/components/IconButton"
+import { useStores } from "../../../common/state/hooks/useStores"
+import { useObserver } from "mobx-react-lite"
 
 export const HEADER_HEIGHT = "56px"
 
@@ -45,16 +48,24 @@ const Nav = styled.nav`
 
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
 `
 
 export function Header() {
-  return (
+  const { sidebarStore } = useStores()
+
+  return useObserver(() => (
     <Container>
       <Content>
         <Logo>Gears</Logo>
-        <Nav />
+        <Nav>
+          <IconButton
+            icon="menu"
+            active={sidebarStore.open}
+            onClick={() => (sidebarStore.open = !sidebarStore.open)}
+          />
+        </Nav>
       </Content>
     </Container>
-  )
+  ))
 }
