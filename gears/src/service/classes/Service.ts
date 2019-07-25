@@ -21,8 +21,10 @@ export interface ServiceOptions<M, C> {
  * Stateful business logic living outside of commands
  * @example
  * class IncrementService extends Service {
- *   counter = 0
- *   increment = () => this.counter++
+ *   serviceDidInitialize() {
+ *     this.counter = 0
+ *     this.increment = () => this.counter++
+ *   }
  * }
  *
  * const command = new CommandBuilder()
@@ -57,6 +59,9 @@ export class Service<M, C> {
   protected bot: Bot<M, C>
   protected manager: ServiceManager<M, C>
 
+  /**
+   * @warning Do not manually instantiate a service. Services are automatically instantiated by the [[ServiceManager]].
+   */
   constructor(options: ServiceOptions<M, C>, s: symbol) {
     assert(
       s === SERVICE_CONSTRUCTOR,
@@ -87,14 +92,14 @@ export class Service<M, C> {
   }
 
   /** Hook called when the service has initialized, but the bot is ready */
-  protected async serviceDidInitialize() {}
+  protected serviceDidInitialize(): Promise<void> | void {}
 
   /** Hook called when the service has started and the bot is ready */
-  protected async serviceDidStart() {}
+  protected serviceDidStart(): Promise<void> | void {}
 
   /** Hook called when the service has started after stopping */
-  protected async serviceDidRestart() {}
+  protected serviceDidRestart(): Promise<void> | void {}
 
   /** Hook called when the service has stopped and the bot is offline */
-  protected async serviceDidStop() {}
+  protected serviceDidStop(): Promise<void> | void {}
 }
