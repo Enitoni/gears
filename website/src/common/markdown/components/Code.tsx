@@ -1,5 +1,5 @@
 import { styled } from "../../../modules/theming/themes"
-import { getTransparency, getFontColor } from "../../../modules/theming/helpers"
+import { getTransparency, getFontColor, getColor } from "../../../modules/theming/helpers"
 import React from "react"
 import Prism from "prismjs"
 import { IS_SERVER } from "../../../modules/core/constants"
@@ -65,7 +65,7 @@ const Container = styled.pre`
   .token.atrule,
   .token.keyword,
   .token.builtin {
-    color: #cc99cd;
+    color: ${getColor("accent")};
   }
 
   .token.string,
