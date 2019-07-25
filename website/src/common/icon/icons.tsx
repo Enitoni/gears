@@ -60,3 +60,28 @@ export const menu = (
     <path fillRule="evenodd" clipRule="evenodd" d="M2 17H22V19H2V17Z" />
   </svg>
 )
+
+export const generic = (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M10.4142 6L4.41421 12L10.4142 18L9 19.4142L1.58578 12L9 4.58578L10.4142 6ZM15 4.58578L22.4142 12L15 19.4142L13.5858 18L19.5858 12L13.5858 6L15 4.58578Z"
+    />
+  </svg>
+)
+
+export const circledP = (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M9 7H12.5C14.433 7 16 8.567 16 10.5C16 12.433 14.433 14 12.5 14H11V17H9V7ZM11 12H12.5C13.3284 12 14 11.3284 14 10.5C14 9.67157 13.3284 9 12.5 9H11V12Z"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+    />
+  </svg>
+)
