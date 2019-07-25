@@ -1,7 +1,7 @@
 import { Matcher } from "../types"
 
 /**
- * Match if no matchers provided are satisfied¨
+ * Match if no matchers provided are satisfied
  * @example
  * matchNone(matchPrefixes("Let me in!"))
  *

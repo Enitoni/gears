@@ -9,7 +9,7 @@ import { Context } from "./Context"
 export type NextFunction<R> = () => Promise<R>
 
 /**
- * Middleware runs sequentially down the tree
+ * Middleware runs sequentially down the tree.
  * It allows you to attach state or perform actions within a [[CommandLike]]
  * @example
  * const loggerMiddleware = async (context, next) => {
