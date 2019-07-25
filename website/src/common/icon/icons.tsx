@@ -85,3 +85,12 @@ export const circledP = (
     />
   </svg>
 )
+
+export const paragraph = (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M22 5H2V7H22V5Z" />
+    <path d="M22 9H2V11H22V9Z" />
+    <path d="M2 13H22V15H2V13Z" />
+    <path d="M16 17H2V19H16V17Z" />
+  </svg>
+)
