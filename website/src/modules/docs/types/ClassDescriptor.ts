@@ -11,7 +11,7 @@ export interface ConstructorSignature extends BaseDescriptor<"Constructor signat
 }
 
 export interface ConstructorDescriptor extends BaseDescriptor<"Constructor"> {
-  signaures: ConstructorSignature[]
+  signatures: ConstructorSignature[]
 }
 
 export interface MethodDescriptor extends BaseDescriptor<"Method"> {
