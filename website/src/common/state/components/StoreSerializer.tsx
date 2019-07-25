@@ -4,6 +4,7 @@ import React from "react"
 
 export function StoreSerializer() {
   if (IS_SERVER) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const manager = useManager()
     const data = manager.serialize()
 

@@ -12,6 +12,7 @@ export const useIsomorphicEffect = (
       dispose()
     }
   } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(callback, deps)
   }
 }
