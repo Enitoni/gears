@@ -98,7 +98,7 @@ function flattenChild(child: any): any {
 }
 
 const flattenChildren = <T>(arr?: T[]): T[] | undefined =>
-  arr && arr.map(x => flattenChild(x))
+  arr && arr.map(x => flattenChild(x)).filter(x => !x.name || !x.name.startsWith("_"))
 
 function flatten(docs: any) {
   const modules = docs.children

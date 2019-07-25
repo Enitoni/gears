@@ -80,7 +80,7 @@ function flattenChild(child) {
         warning,
         example }, flags);
 }
-const flattenChildren = (arr) => arr && arr.map(x => flattenChild(x));
+const flattenChildren = (arr) => arr && arr.map(x => flattenChild(x)).filter(x => !x.name || !x.name.startsWith("_"));
 function flatten(docs) {
     const modules = docs.children
         .flatMap((x) => x.children)
