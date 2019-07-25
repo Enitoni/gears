@@ -4,7 +4,7 @@ import Koa from "koa"
 import Router from "koa-router"
 
 import React from "react"
-import { renderToString, renderToNodeStream } from "react-dom/server"
+import { renderToNodeStream } from "react-dom/server"
 
 import serve from "koa-static"
 import { BUILD_PUBLIC_FOLDER, SERVER_SUPPORTED_ENCODINGS } from "./modules/core/constants"
@@ -14,6 +14,7 @@ import { createManager } from "./common/state/manager"
 import { ManagerContext } from "./common/state/components/ManagerContext"
 import { promisifyPipe } from "./modules/core/helpers/promisifyPipe"
 import { getHTML } from "./modules/core/helpers/getHTML"
+import { createStateSettler } from "./modules/core/helpers/createStateSettler"
 
 const app = new Koa()
 const router = new Router()
@@ -55,10 +56,10 @@ router.get("*", async context => {
   }
 
   const app = wrapInContext(<App />)
+  const safeRender = createStateSettler(manager)
 
   // Wait for async
-  renderToString(app)
-  await Promise.all(ssrStore.promises)
+  await safeRender(app)
 
   stream.write(html.start)
   await promisifyPipe(renderToNodeStream(wrapInContext(<Head />)), stream)

@@ -3,6 +3,7 @@ import { IS_SERVER } from "../constants"
 
 class SSRStore implements InitializableStore {
   public promises: Promise<any>[] = []
+  public lazy = false
 
   public init() {}
 
@@ -16,6 +17,11 @@ class SSRStore implements InitializableStore {
     }
 
     return promise
+  }
+
+  public async waitFor() {
+    await Promise.all(this.promises)
+    this.promises = []
   }
 }
 
