@@ -23,11 +23,12 @@ const Container = styled.div<{ open: boolean }>`
 `
 
 const Fixed = styled.div`
-  position: fixed;
+  border-left: solid 1px ${getTransparency("negative")};
 
   padding: 0px 32px;
   width: ${SIDEBAR_WIDTH};
 
+  position: fixed;
   top: ${parseInt(HEADER_HEIGHT) + 32}px;
   bottom: 32px;
 
