@@ -9,8 +9,8 @@ export const placeholder = (
 export const doubleParens = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M9.2 1.60001L10.4 3.20001C7.58901 5.30825 6 8.44949 6 12C6 15.5505 7.58901 18.6918 10.4 20.8L9.2 22.4C5.8903 19.9177 4 16.1728 4 12C4 7.82717 5.8903 4.08229 9.2 1.60001ZM14.8 1.60001C18.1097 4.08229 20 7.82717 20 12C20 16.1728 18.1097 19.9177 14.8 22.4L13.6 20.8C16.411 18.6918 18 15.5505 18 12C18 8.44949 16.411 5.30825 13.6 3.20001L14.8 1.60001Z"
     />
   </svg>
@@ -19,8 +19,8 @@ export const doubleParens = (
 export const encapsulated = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M6.58579 2H22V17.4142L17.4142 22H2V6.58579L6.58579 2ZM7.41421 4L5.41421 6H18V18.5858L20 16.5858V4H7.41421ZM16 20V8H4V20H16Z"
     />
   </svg>
@@ -36,8 +36,8 @@ export const typeAlias = (
 export const home = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M12 0.733139L22 8.51092V22H2V8.51092L12 0.733139ZM4 9.48908V20H8V11H16V20H20V9.48909L12 3.26686L4 9.48908ZM14 20V13H10V20H14Z"
     />
   </svg>
@@ -46,9 +46,17 @@ export const home = (
 export const book = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M21 1H6.5C5.57174 1 4.6815 1.36875 4.02513 2.02513C3.36875 2.6815 3 3.57174 3 4.5V19.5C3 20.4283 3.36875 21.3185 4.02513 21.9749C4.6815 22.6313 5.57174 23 6.5 23H21V1ZM5.43934 3.43934C5.72064 3.15804 6.10218 3 6.5 3H19V16H6.5C5.97616 16 5.46443 16.1174 5 16.3377V4.5C5 4.10218 5.15804 3.72064 5.43934 3.43934ZM5 19.5C5 19.8978 5.15804 20.2794 5.43934 20.5607C5.72064 20.842 6.10218 21 6.5 21H19V18H6.5C6.10218 18 5.72064 18.158 5.43934 18.4393C5.15804 18.7206 5 19.1022 5 19.5Z"
     />
+  </svg>
+)
+
+export const menu = (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path fillRule="evenodd" clipRule="evenodd" d="M2 11H22V13H2V11Z" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M2 5H22V7H2V5Z" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M2 17H22V19H2V17Z" />
   </svg>
 )
