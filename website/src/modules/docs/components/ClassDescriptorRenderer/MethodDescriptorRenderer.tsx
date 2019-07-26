@@ -22,7 +22,7 @@ const Container = styled.div`
   padding-bottom: 24px;
 `
 
-const Title = styled.a`
+const Title = styled.h5`
   color: inherit;
 
   font-family: Fira Mono, monospace;
@@ -72,7 +72,7 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
   const { name, description } = descriptor
   const { type, parameters = [] } = descriptor.signatures[0]
 
-  const ref = useScrollAnchor()
+  const ref = useScrollAnchor(`#${name}`)
 
   const renderDescription = () => {
     if (!description) return
@@ -104,7 +104,7 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
 
   return (
     <Container ref={ref} id={name}>
-      <Title href={`#${name}`}>
+      <Title>
         {renderName()}
         <Type>
           <TypeDescriptorRenderer descriptor={type} />

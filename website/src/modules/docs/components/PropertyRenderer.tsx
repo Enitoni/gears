@@ -26,7 +26,7 @@ const Header = styled.header`
   display: flex;
 `
 
-const Title = styled.a`
+const Title = styled.h5`
   display: block;
   color: inherit;
 
@@ -42,14 +42,12 @@ const Type = styled.span`
 
 export function PropertyRenderer(props: PropertyRendererProps) {
   const { name, description, type } = props
-  const ref = useScrollAnchor()
+  const ref = useScrollAnchor(`#${name}`)
 
   return (
     <Container id={name} ref={ref}>
       <Header>
-        <Title href={`#${name}`} id={name}>
-          {name}:
-        </Title>
+        <Title>{name}:</Title>
         <Type>
           <TypeDescriptorRenderer descriptor={type} />
         </Type>
