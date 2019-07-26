@@ -50,6 +50,13 @@ function flattenGenerics(generics: any[], comment: Comment) {
   }))
 }
 
+const flattenAccessor = (accessor: any) => {
+  const { getSignature, ...rest } = flattenChild(accessor)
+  const type = flattenChild(getSignature[0].type)
+
+  return { ...rest, type, kind: "Property" }
+}
+
 function flattenChild(child: any): any {
   const {
     kind: _,
@@ -72,7 +79,6 @@ function flattenChild(child: any): any {
   const parameters = flattenChildren(rest.parameters)
   const children = flattenChildren(rest.children)
   const generics = flattenGenerics(typeParameter, comment)
-  const getSignature = flattenChildren(rest.getSignature)
   const types = flattenChildren(rest.types)
 
   const type = typeof rest.type === "object" ? flattenChild(rest.type) : rest.type
@@ -89,7 +95,6 @@ function flattenChild(child: any): any {
     signatures,
     parameters,
     children,
-    getSignature,
     declaration,
     warning,
     example,
@@ -97,8 +102,33 @@ function flattenChild(child: any): any {
   }
 }
 
-const flattenChildren = <T>(arr?: T[]): T[] | undefined =>
-  arr && arr.map(x => flattenChild(x)).filter(x => !x.name || !x.name.startsWith("_"))
+const filterChildren = (child: any) => {
+  const allowedUndescores = ["__get", "__call"]
+
+  const isAllowed =
+    child.name && child.name.startsWith("_")
+      ? allowedUndescores.includes(child.name)
+      : true
+
+  return !child.isPrivate && isAllowed
+}
+
+const flattenChildren = <T>(arr?: T[]): T[] | undefined => {
+  const flattenMap: Record<string, any> = {
+    Accessor: flattenAccessor
+  }
+
+  return (
+    arr &&
+    arr
+      .map((x: any) => {
+        const fn = flattenMap[x.kindString]
+
+        return fn ? fn(x) : flattenChild(x)
+      })
+      .filter(filterChildren)
+  )
+}
 
 function flatten(docs: any) {
   const modules = docs.children

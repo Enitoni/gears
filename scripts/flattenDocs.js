@@ -52,6 +52,11 @@ function flattenGenerics(generics, comment) {
     const genericComments = Object.fromEntries(getTags(comment, "template").map((x) => x.split(" ")));
     return flattened.map((generic) => (Object.assign({}, generic, { description: genericComments[generic.name] })));
 }
+const flattenAccessor = (accessor) => {
+    const _a = flattenChild(accessor), { getSignature } = _a, rest = __rest(_a, ["getSignature"]);
+    const type = flattenChild(getSignature[0].type);
+    return Object.assign({}, rest, { type, kind: "Property" });
+};
 function flattenChild(child) {
     const { kind: _, groups: ___, kindString: kind, typeParameter, comment, flags, sources } = child, rest = __rest(child, ["kind", "groups", "kindString", "typeParameter", "comment", "flags", "sources"]);
     const category = getTag(comment, "category");
@@ -62,7 +67,6 @@ function flattenChild(child) {
     const parameters = flattenChildren(rest.parameters);
     const children = flattenChildren(rest.children);
     const generics = flattenGenerics(typeParameter, comment);
-    const getSignature = flattenChildren(rest.getSignature);
     const types = flattenChildren(rest.types);
     const type = typeof rest.type === "object" ? flattenChild(rest.type) : rest.type;
     const declaration = rest.declaration && flattenChild(rest.declaration);
@@ -75,12 +79,29 @@ function flattenChild(child) {
         signatures,
         parameters,
         children,
-        getSignature,
         declaration,
         warning,
         example }, flags);
 }
-const flattenChildren = (arr) => arr && arr.map(x => flattenChild(x)).filter(x => !x.name || !x.name.startsWith("_"));
+const filterChildren = (child) => {
+    const allowedUndescores = ["__get", "__call"];
+    const isAllowed = child.name && child.name.startsWith("_")
+        ? allowedUndescores.includes(child.name)
+        : true;
+    return !child.isPrivate && isAllowed;
+};
+const flattenChildren = (arr) => {
+    const flattenMap = {
+        Accessor: flattenAccessor
+    };
+    return (arr &&
+        arr
+            .map((x) => {
+            const fn = flattenMap[x.kindString];
+            return fn ? fn(x) : flattenChild(x);
+        })
+            .filter(filterChildren));
+};
 function flatten(docs) {
     const modules = docs.children
         .flatMap((x) => x.children)
