@@ -10,6 +10,7 @@ import { Alert } from "../../../../common/markdown/components/Alert"
 import { kindToIconMap } from "../../constants"
 import { ClassDescriptorRenderer } from "../ClassDescriptorRenderer/ClassDescriptorRenderer"
 import { InterfaceDescriptorRenderer } from "../InterfaceDescriptorRenderer"
+import { FunctionDescriptorRenderer } from "../FunctionDescriptorRenderer"
 
 export interface ModuleDescriptorRendererProps {
   descriptor: ModuleDescriptor
@@ -50,6 +51,9 @@ export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
 
     if (descriptor.kind === "Interface")
       return <InterfaceDescriptorRenderer descriptor={descriptor} />
+
+    if (descriptor.kind === "Function")
+      return <FunctionDescriptorRenderer descriptor={descriptor} />
 
     return null
   }
