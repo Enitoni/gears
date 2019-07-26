@@ -1,6 +1,6 @@
-export const infix = <T, U>(arr: T[], divider: U) => {
+export const infix = <T, U>(arr: T[], divider: U | ((i: number) => U)): (T | U)[] => {
   return arr
-    .map(x => [x, divider])
+    .map((x, i) => [x, typeof divider === "function" ? (divider as any)(i) : divider])
     .flat()
     .slice(0, -1)
 }
