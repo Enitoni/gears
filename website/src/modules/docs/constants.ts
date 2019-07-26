@@ -11,5 +11,6 @@ export const kindToIconMap: Record<DescriptorKind, IconType> = {
   Constructor: "doubleParens",
   "Type alias": "typeAlias",
   "Type parameter": "generic",
+  "Call signature": "doubleParens",
   "Constructor signature": "doubleParens"
 }
