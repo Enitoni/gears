@@ -4,6 +4,8 @@ import { ModuleLink } from "./ModuleLink"
 import { infix } from "../../../common/lang/array/infix"
 import { styled } from "../../theming/themes"
 import { getSyntaxColor } from "../../theming/helpers"
+import { nameToURL } from "../constants"
+import { ExternalLink } from "../../../common/navigation/components/ExternalLink"
 
 export interface TypeDescriptorRendererProps {
   descriptor: TypeDescriptor
@@ -11,6 +13,10 @@ export interface TypeDescriptorRendererProps {
 
 const Container = styled.span`
   font-family: Fira Mono, monospace;
+
+  > .intrinsic {
+    color: ${getSyntaxColor("primitive")};
+  }
 `
 
 const TypeArgument = styled.span`
@@ -49,11 +55,25 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
     return element
   }
 
+  if (Object.keys(nameToURL).includes(descriptor.name)) {
+    const url = nameToURL[descriptor.name]
+
+    return attachTypeArguments(
+      <Container>
+        <ExternalLink className="intrinsic" to={url}>
+          {descriptor.name}
+        </ExternalLink>
+      </Container>
+    )
+  }
+
   if (descriptor.type === "array") {
     return (
       <Container>
         <TypeDescriptorRenderer descriptor={descriptor.elementType} />
-        []
+        <ExternalLink className="intrinsic" to={nameToURL["array"]}>
+          []
+        </ExternalLink>
       </Container>
     )
   }
