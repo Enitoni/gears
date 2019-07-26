@@ -43,7 +43,7 @@ router.get("*", async context => {
   const stream = SERVER_SUPPORTED_ENCODINGS[encoding]()
 
   const manager = createManager()
-  const { routingStore, ssrStore } = manager.stores
+  const { routingStore } = manager.stores
 
   await manager.init()
 
