@@ -79,7 +79,11 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
   }
 
   if (descriptor.type === "reference") {
-    return attachTypeArguments(<ModuleLink name={descriptor.name} />)
+    return attachTypeArguments(
+      <Container>
+        <ModuleLink name={descriptor.name} />
+      </Container>
+    )
   }
 
   if (["typeParameter", "unknown"].includes(descriptor.type)) {
@@ -103,5 +107,5 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
     return <Container>{infixSpan(renderTypeList(descriptor.types), " | ")}</Container>
   }
 
-  return null
+  return <Container>unknown type</Container>
 }
