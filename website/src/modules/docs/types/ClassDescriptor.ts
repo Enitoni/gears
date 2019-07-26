@@ -4,6 +4,7 @@ import { TypeDescriptor } from "./TypeDescriptor"
 import { ParameterDescriptor } from "./ParameterDescriptor"
 import { PropertyDescriptor } from "./PropertyDescriptor"
 import { Inheriting } from "./Inheriting"
+import { CallSignatureDescriptor } from "./CallSignatureDescriptor"
 
 export interface ConstructorSignature extends BaseDescriptor<"Constructor signature"> {
   type: TypeDescriptor
@@ -15,6 +16,7 @@ export interface ConstructorDescriptor extends BaseDescriptor<"Constructor"> {
 }
 
 export interface MethodDescriptor extends BaseDescriptor<"Method"> {
+  signatures: CallSignatureDescriptor[]
   inheritedFrom?: unknown
   isPublic: boolean
 }
