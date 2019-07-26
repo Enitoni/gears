@@ -4,6 +4,7 @@ import { styled } from "../../../modules/theming/themes"
 import { IconType } from "../../icon/types/IconType"
 import { NavLink } from "../../../modules/core/components/NavLink"
 import { useRouteLink } from "../../routing/hooks/useRouteLink"
+import { useScrollAnchor } from "../../react/useScrollAnchor"
 
 export type CategoryChild = Omit<CategoryLink, "children">
 
@@ -45,6 +46,7 @@ const Children = styled.div`
 export function CategoryLink(props: CategoryLink) {
   const { icon, label, to, children } = props
   const [active] = useRouteLink(to)
+  const ref = useScrollAnchor(to)
 
   const renderChildren = () => {
     if (!children || !active) return null
@@ -59,7 +61,7 @@ export function CategoryLink(props: CategoryLink) {
   }
 
   return (
-    <div>
+    <div ref={ref} id={label}>
       <NavLink to={to} icon={icon}>
         {label}
       </NavLink>
