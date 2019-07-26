@@ -9,10 +9,11 @@
     "website:production": "cd website && yarn production"
   },
   "devDependencies": {
-    "@types/koa-conditional-get": "^2.0.0",
-    "@types/node": "^12.6.8"
-  },
-  "dependencies": {
-    "koa-conditional-get": "^2.0.0"
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "typescript": "^3.5.3"
   }
 }
