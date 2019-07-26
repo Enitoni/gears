@@ -13,7 +13,7 @@ export function PropertyDescriptorList(props: PropertyDescriptorListProps) {
   return (
     <Section icon="circledP" title="Properties">
       {descriptors.map(({ name, type }) => (
-        <PropertyRenderer name={name} type={type} />
+        <PropertyRenderer key={name} name={name} type={type} />
       ))}
     </Section>
   )
