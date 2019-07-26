@@ -1,6 +1,9 @@
 import React from "react"
 import { styled } from "../../../theming/themes"
-import { useScrollAnchor } from "../../../../common/react/useScrollAnchor"
+import {
+  useScrollAnchor,
+  highlightedScrollAnchor
+} from "../../../../common/react/useScrollAnchor"
 import { ModuleLinkMarkup } from "../ModuleLinkMarkup"
 import { TypeDescriptorRenderer } from "../TypeDescriptorRenderer"
 import { getTransparency, getColor } from "../../../theming/helpers"
@@ -14,7 +17,6 @@ export interface MethodDescriptorRendererProps {
 const Container = styled.div`
   &:not(:last-child) {
     border-bottom: solid 1px ${getTransparency("negative")};
-
     margin-bottom: 24px;
   }
 
@@ -22,7 +24,8 @@ const Container = styled.div`
   padding-bottom: 24px;
 `
 
-const Title = styled.h5`
+const Title = styled.h5<{ highlighted: boolean }>`
+  ${props => props.highlighted && highlightedScrollAnchor(props.theme)};
   color: inherit;
 
   font-family: Fira Mono, monospace;
@@ -72,7 +75,7 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
   const { name, description } = descriptor
   const { type, parameters = [] } = descriptor.signatures[0]
 
-  const ref = useScrollAnchor(`#${name}`)
+  const [ref, active] = useScrollAnchor(`#${name}`)
 
   const renderDescription = () => {
     if (!description) return
@@ -102,9 +105,11 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
     return `${name}(${joinedParams})`
   }
 
+  console.log
+
   return (
     <Container ref={ref} id={name}>
-      <Title>
+      <Title highlighted={active}>
         {renderName()}
         <Type>
           <TypeDescriptorRenderer descriptor={type} />

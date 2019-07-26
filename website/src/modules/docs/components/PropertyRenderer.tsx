@@ -3,7 +3,10 @@ import { styled } from "../../theming/themes"
 import React from "react"
 import { TypeDescriptorRenderer } from "./TypeDescriptorRenderer"
 import { getTransparency } from "../../theming/helpers"
-import { useScrollAnchor } from "../../../common/react/useScrollAnchor"
+import {
+  useScrollAnchor,
+  highlightedScrollAnchor
+} from "../../../common/react/useScrollAnchor"
 
 export interface PropertyRendererProps {
   name: string
@@ -22,7 +25,8 @@ const Container = styled.div`
   padding-bottom: 16px;
 `
 // can i break thing?
-const Header = styled.header`
+const Header = styled.header<{ highlighted: boolean }>`
+  ${props => props.highlighted && highlightedScrollAnchor(props.theme)}
   display: flex;
 `
 
@@ -42,11 +46,11 @@ const Type = styled.span`
 
 export function PropertyRenderer(props: PropertyRendererProps) {
   const { name, description, type } = props
-  const ref = useScrollAnchor(`#${name}`)
+  const [ref, active] = useScrollAnchor(`#${name}`)
 
   return (
     <Container id={name} ref={ref}>
-      <Header>
+      <Header highlighted={active}>
         <Title>{name}:</Title>
         <Type>
           <TypeDescriptorRenderer descriptor={type} />
