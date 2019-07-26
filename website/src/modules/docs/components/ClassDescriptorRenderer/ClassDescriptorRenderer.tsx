@@ -5,6 +5,7 @@ import { categorize } from "../../../../common/lang/array/categorize"
 import { ConstructorDescriptorRenderer } from "./ConstructorDescriptorRenderer"
 import { DescriptorKind, Descriptor } from "../../types/Descriptor"
 import { categorizeDescriptorKind } from "../../helpers/categorizeDescriptorKind"
+import { PropertyDescriptorList } from "../PropertyDescriptorList"
 
 export interface ClassDescriptorRendererProps {
   descriptor: ClassDescriptor
@@ -23,5 +24,18 @@ export function ClassDescriptorRenderer(props: ClassDescriptorRendererProps) {
     return null
   }
 
-  return <>{renderConstructor()}</>
+  const renderProperties = () => {
+    if (kinds.Property && kinds.Property.length > 0) {
+      return <PropertyDescriptorList descriptors={kinds.Property} />
+    }
+
+    return null
+  }
+
+  return (
+    <>
+      {renderConstructor()}
+      {renderProperties()}
+    </>
+  )
 }
