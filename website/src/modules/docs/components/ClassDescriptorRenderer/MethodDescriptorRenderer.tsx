@@ -5,7 +5,6 @@ import { ModuleLinkMarkup } from "../ModuleLinkMarkup"
 import { TypeDescriptorRenderer } from "../TypeDescriptorRenderer"
 import { getTransparency, getColor } from "../../../theming/helpers"
 import { MethodDescriptor } from "../../types/ClassDescriptor"
-import { PropertyDescriptorList } from "../PropertyDescriptorList"
 import { PropertyRenderer } from "../PropertyRenderer"
 
 export interface MethodDescriptorRendererProps {
@@ -16,9 +15,11 @@ const Container = styled.div`
   &:not(:last-child) {
     border-bottom: solid 1px ${getTransparency("negative")};
 
-    padding-bottom: 24px;
     margin-bottom: 24px;
   }
+
+  margin-bottom: -24px;
+  padding-bottom: 24px;
 `
 
 const Title = styled.a`

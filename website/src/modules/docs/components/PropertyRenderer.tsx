@@ -12,12 +12,14 @@ export interface PropertyRendererProps {
 }
 
 const Container = styled.div`
-  & ~ & {
-    border-top: solid 1px ${getTransparency("negative")};
+  &:not(:last-child) {
+    border-bottom: solid 1px ${getTransparency("negative")};
 
-    padding-top: 16px;
-    margin-top: 16px;
+    margin-bottom: 16px;
   }
+
+  margin-bottom: -16px;
+  padding-bottom: 16px;
 `
 // can i break thing?
 const Header = styled.header`
@@ -43,9 +45,9 @@ export function PropertyRenderer(props: PropertyRendererProps) {
   const ref = useScrollAnchor()
 
   return (
-    <Container>
+    <Container id={name} ref={ref}>
       <Header>
-        <Title ref={ref} href={`#${name}`} id={name}>
+        <Title href={`#${name}`} id={name}>
           {name}:
         </Title>
         <Type>
