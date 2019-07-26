@@ -1,11 +1,10 @@
+import React from "react"
 import { ClassDescriptor } from "../../types/ClassDescriptor"
 import { Section } from "../../../../common/markdown/components/Section"
-import React from "react"
-import { categorize } from "../../../../common/lang/array/categorize"
 import { ConstructorDescriptorRenderer } from "./ConstructorDescriptorRenderer"
-import { DescriptorKind, Descriptor } from "../../types/Descriptor"
 import { categorizeDescriptorKind } from "../../helpers/categorizeDescriptorKind"
 import { PropertyDescriptorList } from "../PropertyDescriptorList"
+import { MethodDescriptorRenderer } from "./MethodDescriptorRenderer"
 
 export interface ClassDescriptorRendererProps {
   descriptor: ClassDescriptor
@@ -32,10 +31,25 @@ export function ClassDescriptorRenderer(props: ClassDescriptorRendererProps) {
     return null
   }
 
+  const renderMethods = () => {
+    if (kinds.Method && kinds.Method.length > 0) {
+      return (
+        <Section title="Methods" icon="doubleParens">
+          {kinds.Method.filter(x => !x.inheritedFrom).map(descriptor => (
+            <MethodDescriptorRenderer descriptor={descriptor} />
+          ))}
+        </Section>
+      )
+    }
+
+    return null
+  }
+
   return (
     <>
       {renderConstructor()}
       {renderProperties()}
+      {renderMethods()}
     </>
   )
 }
