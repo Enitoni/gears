@@ -4,7 +4,7 @@ import { styled } from "../../../modules/theming/themes"
 import { getFontColor, getColor, getDuration } from "../../../modules/theming/helpers"
 import { useRouteLink } from "../../routing/hooks/useRouteLink"
 
-const Container = styled.a`
+export const Container = styled.a`
   color: ${getColor("accent")};
 
   transition: ${getDuration("normal")} ease;
@@ -18,6 +18,7 @@ const Container = styled.a`
 export interface LinkProps {
   to: string
   children?: React.ReactNode
+  className?: string
 }
 
 export function Link(props: LinkProps) {
