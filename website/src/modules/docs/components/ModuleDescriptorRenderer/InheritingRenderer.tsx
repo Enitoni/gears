@@ -11,8 +11,6 @@ export interface InheritingRendererProps {
 }
 
 const Container = styled.div`
-  color: ${getFontColor("muted")};
-
   margin-top: 16px;
   font-size: 18px;
 `
