@@ -46,7 +46,7 @@ const Children = styled.div`
 export function CategoryLink(props: CategoryLink) {
   const { icon, label, to, children } = props
   const [active] = useRouteLink(to)
-  const ref = useScrollAnchor(to)
+  const [ref] = useScrollAnchor(to, "center")
 
   const renderChildren = () => {
     if (!children || !active) return null
