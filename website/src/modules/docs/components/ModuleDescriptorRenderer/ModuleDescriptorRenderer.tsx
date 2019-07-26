@@ -9,6 +9,7 @@ import { ExampleRenderer } from "./ExampleRenderer"
 import { Alert } from "../../../../common/markdown/components/Alert"
 import { kindToIconMap } from "../../constants"
 import { ClassDescriptorRenderer } from "../ClassDescriptorRenderer/ClassDescriptorRenderer"
+import { InterfaceDescriptorRenderer } from "../InterfaceDescriptorRenderer"
 
 export interface ModuleDescriptorRendererProps {
   descriptor: ModuleDescriptor
@@ -46,6 +47,9 @@ export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
   const renderDescriptor = () => {
     if (descriptor.kind === "Class")
       return <ClassDescriptorRenderer descriptor={descriptor} />
+
+    if (descriptor.kind === "Interface")
+      return <InterfaceDescriptorRenderer descriptor={descriptor} />
 
     return null
   }
