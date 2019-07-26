@@ -13,11 +13,11 @@ export interface MethodDescriptorRendererProps {
 }
 
 const Container = styled.div`
-  & ~ & {
-    border-top: solid 1px ${getTransparency("negative")};
+  &:not(:last-child) {
+    border-bottom: solid 1px ${getTransparency("negative")};
 
-    padding-top: 24px;
-    margin-top: 24px;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
   }
 `
 
@@ -90,7 +90,7 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
       <Paremeters>
         <ParametersHeading>Parameters</ParametersHeading>
         {parameters.map(({ name, type }) => (
-          <PropertyRenderer name={name} type={type} />
+          <PropertyRenderer key={name} name={name} type={type} />
         ))}
       </Paremeters>
     )
@@ -102,8 +102,8 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
   }
 
   return (
-    <Container>
-      <Title ref={ref} href={`#${name}`} id={name}>
+    <Container ref={ref} id={name}>
+      <Title href={`#${name}`}>
         {renderName()}
         <Type>
           <TypeDescriptorRenderer descriptor={type} />
