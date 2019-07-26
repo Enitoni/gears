@@ -67,7 +67,7 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
       <Container>
         {infix(
           descriptor.types.map(descriptor => (
-            <TypeDescriptorRenderer descriptor={descriptor} />
+            <TypeDescriptorRenderer key={descriptor.name} descriptor={descriptor} />
           )),
           <span> & </span>
         )}

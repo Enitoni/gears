@@ -37,7 +37,7 @@ export function ConstructorDescriptorRenderer(props: ConstructorDescriptorRender
     return (
       <Subsection title="Parameters">
         {descriptor.signatures[0].parameters.map(({ type, name }) => (
-          <PropertyRenderer type={type} name={name} />
+          <PropertyRenderer key={name} type={type} name={name} />
         ))}
       </Subsection>
     )

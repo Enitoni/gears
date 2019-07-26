@@ -36,7 +36,7 @@ export function ClassDescriptorRenderer(props: ClassDescriptorRendererProps) {
       return (
         <Section title="Methods" icon="doubleParens">
           {kinds.Method.filter(x => !x.inheritedFrom).map(descriptor => (
-            <MethodDescriptorRenderer descriptor={descriptor} />
+            <MethodDescriptorRenderer key={descriptor.name} descriptor={descriptor} />
           ))}
         </Section>
       )
