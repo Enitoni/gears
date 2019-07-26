@@ -23,7 +23,7 @@ export interface BotEvents<M, C> {
  * @category Bot
  */
 export interface BotOptions<M, C> {
-  adapter: ClientAdapter<C, M>
+  adapter: ClientAdapter<M, C>
   commands: CommandLike<M, C>[]
   services?: ServiceType<M, C>[]
 }
@@ -37,7 +37,7 @@ export interface BotOptions<M, C> {
  * @category Bot
  */
 export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
-  private adapter: ClientAdapter<C, M>
+  private adapter: ClientAdapter<M, C>
 
   public readonly group: CommandGroup<M, C>
   public readonly manager: ServiceManager<M, C>

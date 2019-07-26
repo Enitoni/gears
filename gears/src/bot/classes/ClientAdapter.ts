@@ -64,7 +64,7 @@ export interface AdapterResult<C, M> {
  * @template M Message
  * @category Bot
  */
-export abstract class ClientAdapter<C, M = unknown, CO = unknown>
+export abstract class ClientAdapter<M, C = unknown, CO = unknown>
   extends Emitter<AdapterEvents<M>>
   implements AdapterResult<C, M> {
   public client: C
