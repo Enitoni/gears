@@ -22,7 +22,6 @@ const Container = styled.div`
 // can i break thing?
 const Header = styled.header`
   display: flex;
-  justify-content: space-between;
 `
 
 const Title = styled.a`
@@ -35,7 +34,8 @@ const Title = styled.a`
 `
 
 const Type = styled.span`
-  font-size: 16px;
+  margin-left: 8px;
+  font-size: 18px;
 `
 
 export function PropertyRenderer(props: PropertyRendererProps) {
@@ -46,7 +46,7 @@ export function PropertyRenderer(props: PropertyRendererProps) {
     <Container>
       <Header>
         <Title ref={ref} href={`#${name}`} id={name}>
-          {name}
+          {name}:
         </Title>
         <Type>
           <TypeDescriptorRenderer descriptor={type} />
