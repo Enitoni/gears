@@ -3,6 +3,7 @@ import { styled } from "../../theming/themes"
 import React from "react"
 import { TypeDescriptorRenderer } from "./TypeDescriptorRenderer"
 import { getTransparency } from "../../theming/helpers"
+import { useScrollAnchor } from "../../../common/react/useScrollAnchor"
 
 export interface PropertyRendererProps {
   name: string
@@ -39,11 +40,12 @@ const Type = styled.span`
 
 export function PropertyRenderer(props: PropertyRendererProps) {
   const { name, description, type } = props
+  const ref = useScrollAnchor()
 
   return (
     <Container>
       <Header>
-        <Title href={`#${name}`} id={name}>
+        <Title ref={ref} href={`#${name}`} id={name}>
           {name}
         </Title>
         <Type>
