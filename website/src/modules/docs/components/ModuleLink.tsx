@@ -10,7 +10,7 @@ export function ModuleLink(props: ModuleLinkProps) {
   const documentation = useDocumentation()
   const descriptor = documentation.getModule(props.name)
 
-  if (!descriptor) return <>Invalid module</>
+  if (!descriptor) return <>{props.name}</>
 
   const { name } = descriptor
 
