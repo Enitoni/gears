@@ -53,13 +53,26 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
     return attachTypeArguments(<ModuleLink name={descriptor.name} />)
   }
 
-  if (descriptor.type === "typeParameter") {
+  if (["typeParameter", "unknown"].includes(descriptor.type)) {
     return <Container>{descriptor.name}</Container>
   }
 
   if (descriptor.type === "intrinsic") {
     // TODO: Make this link to MDN
-    return <>{descriptor.name}</>
+    return <Container>{descriptor.name}</Container>
+  }
+
+  if (descriptor.type === "intersection") {
+    return (
+      <Container>
+        {infix(
+          descriptor.types.map(descriptor => (
+            <TypeDescriptorRenderer descriptor={descriptor} />
+          )),
+          <span> & </span>
+        )}
+      </Container>
+    )
   }
 
   return null

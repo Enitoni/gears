@@ -24,6 +24,10 @@ export interface TupleTypeDescriptor extends BaseTypeDescriptor<"tuple"> {
 
 export interface TypeParameterDescriptor extends BaseTypeDescriptor<"typeParameter"> {}
 
+export interface IntersectionTypeDescriptor extends BaseTypeDescriptor<"intersection"> {
+  types: TypeDescriptor[]
+}
+
 export type TypeDescriptor =
   | IntrinsicTypeDescriptor
   | ReferenceTypeDescriptor
@@ -31,3 +35,4 @@ export type TypeDescriptor =
   | UnionTypeDescriptor
   | TupleTypeDescriptor
   | TypeParameterDescriptor
+  | IntersectionTypeDescriptor
