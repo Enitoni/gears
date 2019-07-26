@@ -3,6 +3,7 @@ import { TypeDescriptor } from "../types/TypeDescriptor"
 import { ModuleLink } from "./ModuleLink"
 import { infix } from "../../../common/lang/array/infix"
 import { styled } from "../../theming/themes"
+import { getSyntaxColor } from "../../theming/helpers"
 
 export interface TypeDescriptorRendererProps {
   descriptor: TypeDescriptor
@@ -12,20 +13,28 @@ const Container = styled.span`
   font-family: Fira Mono, monospace;
 `
 
+const TypeArgument = styled.span`
+  color: ${getSyntaxColor("class")};
+`
+
+const infixSpan = <T extends any>(arr: T[], text: string) =>
+  infix(arr, i => <span key={i}>{text}</span>)
+
 export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
   const { descriptor } = props
+
+  const renderTypeList = (arr: TypeDescriptor[]) => {
+    return arr.map((descriptor, i) => (
+      <TypeDescriptorRenderer key={`${descriptor.name}-${i}`} descriptor={descriptor} />
+    ))
+  }
 
   const attachTypeArguments = (element: JSX.Element) => {
     const typeArgumentable = descriptor as { typeArguments?: TypeDescriptor[] }
     const { typeArguments } = typeArgumentable
 
     if (typeArguments) {
-      const infixedArguments = infix(
-        typeArguments.map((x, i) => (
-          <TypeDescriptorRenderer key={`${x.name}-${i}`} descriptor={x} />
-        )),
-        ", "
-      )
+      const infixedArguments = infixSpan(renderTypeList(typeArguments), ", ")
 
       return (
         <Container>
@@ -54,7 +63,11 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
   }
 
   if (["typeParameter", "unknown"].includes(descriptor.type)) {
-    return <Container>{descriptor.name}</Container>
+    return (
+      <Container>
+        <TypeArgument>{descriptor.name}</TypeArgument>
+      </Container>
+    )
   }
 
   if (descriptor.type === "intrinsic") {
@@ -63,18 +76,11 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
   }
 
   if (descriptor.type === "intersection") {
-    return (
-      <Container>
-        {infix(
-          descriptor.types.map(descriptor => (
-            <TypeDescriptorRenderer key={descriptor.name} descriptor={descriptor} />
-          )),
-          i => (
-            <span key={i}> & </span>
-          )
-        )}
-      </Container>
-    )
+    return <Container>{infixSpan(renderTypeList(descriptor.types), " & ")}</Container>
+  }
+
+  if (descriptor.type === "union") {
+    return <Container>{infixSpan(renderTypeList(descriptor.types), " | ")}</Container>
   }
 
   return null
