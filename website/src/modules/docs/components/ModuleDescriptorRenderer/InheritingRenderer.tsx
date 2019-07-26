@@ -3,7 +3,7 @@ import { styled } from "../../../theming/themes"
 import { getFontColor } from "../../../theming/helpers"
 import React from "react"
 import { infix } from "../../../../common/lang/array/infix"
-import { TypeDescriptorRenderer } from "./TypeDescriptorRenderer"
+import { TypeDescriptorRenderer } from "../TypeDescriptorRenderer"
 import { Inheriting } from "../../types/Inheriting"
 
 export interface InheritingRendererProps {
