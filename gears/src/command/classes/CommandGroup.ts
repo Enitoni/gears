@@ -50,8 +50,11 @@ export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
     this.middleware = resolveToArray(middleware)
   }
 
+  /**
+   * @category Internal
+   */
   public async getChain(context: BaseContext<M, C>): Promise<Chain<M, C> | void> {
-    const newContext: Context<{}, M, C> = { ...context, issuer: this }
+    const newContext: Context<any, M, C> = { ...context, issuer: this }
     const resultContext = await this.matcher(newContext)
 
     if (!resultContext) return

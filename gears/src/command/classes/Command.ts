@@ -52,7 +52,10 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
     this.metadata = metadata
   }
 
-  public async getChain(context: Context<{}, M, C>): Promise<Chain<M, C> | void> {
+  /**
+   * @category Internal
+   */
+  public async getChain(context: Context<any, M, C>): Promise<Chain<M, C> | void> {
     context.issuer = this
 
     const resultContext = await this.matcher(context)

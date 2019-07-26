@@ -51,7 +51,7 @@ export class ServiceManager<M, C> {
   }
 
   /**
-   * Get a service from the manager
+   * Get a service from the manager. Will throw if service does not exist
    * @returns A [[Service]] instance
    */
   public getService = <T extends Service<M, C>>(

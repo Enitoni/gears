@@ -60,7 +60,7 @@ export class Service<M, C> {
   protected manager: ServiceManager<M, C>
 
   /**
-   * @warning Do not manually instantiate a service. Services are automatically instantiated by the [[ServiceManager]].
+   * @warning Do not manually instantiate a service. Services are automatically instantiated by the [[ServiceManager]]
    */
   constructor(options: ServiceOptions<M, C>, s: symbol) {
     assert(
@@ -91,15 +91,23 @@ export class Service<M, C> {
     await this.serviceDidStop()
   }
 
-  /** Hook called when the service has initialized, but the bot is ready */
+  /**
+   * Hook called when the service has initialized, but the bot is ready
+   */
   protected serviceDidInitialize(): Promise<void> | void {}
 
-  /** Hook called when the service has started and the bot is ready */
+  /**
+   * Hook called when the service has started and the bot is ready
+   */
   protected serviceDidStart(): Promise<void> | void {}
 
-  /** Hook called when the service has started after stopping */
+  /**
+   * Hook called when the service has started after stopping
+   */
   protected serviceDidRestart(): Promise<void> | void {}
 
-  /** Hook called when the service has stopped and the bot is offline */
+  /**
+   * Hook called when the service has stopped and the bot is offline
+   */
   protected serviceDidStop(): Promise<void> | void {}
 }
