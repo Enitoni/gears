@@ -72,8 +72,8 @@ const ParametersHeading = styled.h5`
 
 export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
   const { descriptor } = props
-  const { name, description } = descriptor
-  const { type, parameters = [] } = descriptor.signatures[0]
+  const { name } = descriptor
+  const { type, description, parameters = [] } = descriptor.signatures[0]
 
   const [ref, active] = useScrollAnchor(`#${name}`)
 
