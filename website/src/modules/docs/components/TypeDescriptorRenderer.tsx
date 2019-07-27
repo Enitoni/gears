@@ -19,7 +19,8 @@ const Container = styled.span`
   }
 `
 
-const TypeArgument = styled.span`
+export const GenericContainer = styled.span`
+  font-family: Fira Mono, monospace;
   color: ${getSyntaxColor("class")};
 `
 
@@ -89,7 +90,7 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
   if (["typeParameter", "unknown"].includes(descriptor.type)) {
     return (
       <Container>
-        <TypeArgument>{descriptor.name}</TypeArgument>
+        <GenericContainer>{descriptor.name}</GenericContainer>
       </Container>
     )
   }

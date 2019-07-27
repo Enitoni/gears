@@ -11,6 +11,8 @@ import { kindToIconMap } from "../../constants"
 import { ClassDescriptorRenderer } from "../ClassDescriptorRenderer/ClassDescriptorRenderer"
 import { InterfaceDescriptorRenderer } from "../InterfaceDescriptorRenderer"
 import { FunctionDescriptorRenderer } from "../FunctionDescriptorRenderer"
+import { Genericing } from "../../types/Genericing"
+import { GenericDescriptorList } from "../GenericDescriptorList"
 
 export interface ModuleDescriptorRendererProps {
   descriptor: ModuleDescriptor
@@ -45,6 +47,15 @@ export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
     )
   }
 
+  const renderGenerics = () => {
+    const genericable = descriptor as Genericing
+    const { generics } = genericable
+
+    if (generics && generics.length > 0) {
+      return <GenericDescriptorList descriptors={generics} />
+    }
+  }
+
   const renderDescriptor = () => {
     if (descriptor.kind === "Class")
       return <ClassDescriptorRenderer descriptor={descriptor} />
@@ -66,6 +77,7 @@ export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
         {renderWarningIfInternal()}
         <Description descriptor={descriptor} />
         <ExampleRenderer descriptor={descriptor} />
+        {renderGenerics()}
         {renderDescriptor()}
       </div>
     </Container>

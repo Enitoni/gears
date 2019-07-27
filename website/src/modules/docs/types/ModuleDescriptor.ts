@@ -2,6 +2,7 @@ import { BaseDescriptor, DescriptorKind, Descriptor } from "./Descriptor"
 import { ClassDescriptor } from "./ClassDescriptor"
 import { InterfaceDescriptor } from "./InterfaceDescriptor"
 import { FunctionDescriptor } from "./FunctionDescriptor"
+import { GenericDescriptor } from "./GenericDescriptor"
 
 export type ModuleKind = Extract<
   DescriptorKind,
@@ -12,6 +13,7 @@ export interface BaseModuleDescriptor<T extends ModuleKind> extends BaseDescript
   category: string
   description: string
   children: Descriptor[]
+  generics?: GenericDescriptor[]
 }
 
 export type ModuleDescriptor =

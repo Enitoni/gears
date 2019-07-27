@@ -106,8 +106,6 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
     return `${name}(${joinedParams})`
   }
 
-  console.log
-
   return (
     <Container ref={ref} id={name}>
       <Title highlighted={active}>
