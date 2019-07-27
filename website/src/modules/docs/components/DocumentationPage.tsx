@@ -11,6 +11,7 @@ import { ModuleDescriptorRenderer } from "./ModuleDescriptorRenderer/ModuleDescr
 import { DocumentationContext } from "./DocumentationContext"
 import { useSidebar } from "../../../common/navigation/hooks/useSidebar"
 import { getDocumentationCategories } from "../helpers/getDocumentationCategories"
+import { useRedirect } from "../../../common/routing/hooks/useRedirect"
 
 export interface DocumentationPageContentProps {
   documentation: DocumentationModel
@@ -19,18 +20,22 @@ export interface DocumentationPageContentProps {
 function DocumentationPageContent(props: DocumentationPageContentProps) {
   const { documentation } = props
 
+  const root = `/docs/${documentation.version}`
+  const firstDescriptor = documentation.modules[0]
+
+  useSidebar(getDocumentationCategories(documentation))
+  useRedirect(root, `${root}/${firstDescriptor.name}`)
+
   useMeta({
     title: `Documentation for ${documentation.data.version}`
   })
 
-  const routes: Route[] = documentation.modules.map(descriptor => ({
-    pattern: `/docs/${documentation.version}/${descriptor.name}`,
-    render: () => <ModuleDescriptorRenderer descriptor={descriptor} />
-  }))
-
-  const renderRoutes = useRouter(routes)
-
-  useSidebar(getDocumentationCategories(documentation))
+  const renderRoutes = useRouter(
+    documentation.modules.map(descriptor => ({
+      pattern: `${root}/${descriptor.name}`,
+      render: () => <ModuleDescriptorRenderer descriptor={descriptor} />
+    }))
+  )
 
   return (
     <DocumentationContext.Provider value={documentation}>

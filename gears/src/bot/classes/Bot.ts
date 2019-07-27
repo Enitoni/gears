@@ -13,9 +13,27 @@ import { matchAlways } from "../../command"
  * @category Bot
  */
 export interface BotEvents<M, C> {
+  /**
+   * The [[Bot]] has initialized but not started.
+   * Use this to add bot specific configurations via [[Service]]
+   */
+  init: void
+  /**
+   *  A [[Command]] was executed
+   */
   command: [Command<M, C>, M]
-  response: any
-  error: any
+  /**
+   * A response was returned from the called [[Middleware]]
+   */
+  response: {
+    response: any
+    command: Command<M, C>
+    message: M
+  }
+  /**
+   * An error occurred
+   */
+  error: void
 }
 
 /**
@@ -62,6 +80,7 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
    */
   public async start() {
     await this.manager[MANAGER_INITIALIZE]()
+    this.emit("init", undefined)
     await this.adapter.methods.start()
   }
 
@@ -88,7 +107,10 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
 
       try {
         const response = await run()
-        if (response) this.emit("response", response)
+
+        if (typeof response !== undefined) {
+          this.emit("response", { response, message, command })
+        }
       } catch (error) {
         this.handleError(error)
       }
