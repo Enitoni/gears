@@ -64,6 +64,12 @@ router.get("*", async context => {
   // Wait for async
   await safeRender(app)
 
+  const newPathname = routingStore.location.pathname
+
+  if (newPathname !== context.path) {
+    return context.redirect(newPathname)
+  }
+
   stream.write(html.start)
   await promisifyPipe(renderToNodeStream(wrapInContext(<Head />)), stream)
   stream.write(html.bundles)

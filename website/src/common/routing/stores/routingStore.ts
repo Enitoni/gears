@@ -1,6 +1,7 @@
 import { InitializableStore } from "../../state/types/InitializableStore"
 import { getIsomorphicHistory } from "../helpers/getIsomorphicHistory"
 import { observable } from "mobx"
+import { IS_SERVER } from "../../../modules/core/constants"
 
 export enum HttpStatus {
   OK = 200,
@@ -21,7 +22,12 @@ class RoutingStore implements InitializableStore {
 
   public push = (path: string) => {
     if (path === this.location.pathname) return
-    this.history.push(path)
+
+    if (IS_SERVER) {
+      this.location.pathname = path
+    } else {
+      this.history.push(path)
+    }
   }
 }
 
