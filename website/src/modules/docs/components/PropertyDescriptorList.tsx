@@ -12,8 +12,8 @@ export function PropertyDescriptorList(props: PropertyDescriptorListProps) {
 
   return (
     <Section icon="circledP" title="Properties">
-      {descriptors.map(({ name, type }) => (
-        <PropertyRenderer key={name} name={name} type={type} />
+      {descriptors.map(({ name, type, description }) => (
+        <PropertyRenderer description={description} key={name} name={name} type={type} />
       ))}
     </Section>
   )

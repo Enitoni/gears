@@ -50,6 +50,7 @@ const Description = styled.div`
 
   font-weight: 600;
   font-size: 16px;
+  letter-spacing: 0.03em;
 `
 
 const Paremeters = styled.div`

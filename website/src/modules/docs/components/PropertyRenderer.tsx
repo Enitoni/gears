@@ -7,6 +7,7 @@ import {
   useScrollAnchor,
   highlightedScrollAnchor
 } from "../../../common/react/useScrollAnchor"
+import { ModuleLinkMarkup } from "./ModuleLinkMarkup"
 
 export interface PropertyRendererProps {
   name: string
@@ -44,9 +45,26 @@ const Type = styled.span`
   font-size: 18px;
 `
 
+const Description = styled.div`
+  margin-top: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+`
+
 export function PropertyRenderer(props: PropertyRendererProps) {
   const { name, description, type } = props
   const [ref, active] = useScrollAnchor(`#${name}`)
+
+  const renderDescription = () => {
+    if (!description) return
+
+    return (
+      <Description>
+        <ModuleLinkMarkup>{description}</ModuleLinkMarkup>
+      </Description>
+    )
+  }
 
   return (
     <Container id={name} ref={ref}>
@@ -56,7 +74,7 @@ export function PropertyRenderer(props: PropertyRendererProps) {
           <TypeDescriptorRenderer descriptor={type} />
         </Type>
       </Header>
-      {description}
+      {renderDescription()}
     </Container>
   )
 }
