@@ -1,6 +1,6 @@
 # Gears
 
-![Version](https://img.shields.io/badge/dynamic/json.svg?label=version&url=https%3A%2F%2Fgitlab.com%2Fenitoni-gears%2Fgears%2Fraw%2Fmaster%2Fpackage.json&query=version&colorB=brightgreen)
+![Version](https://img.shields.io/npm/v/@enitoni/gears)
 ![Build](https://gitlab.com/enitoni-gears/gears/badges/master/build.svg)
 ![Coverage](https://gitlab.com/enitoni-gears/gears/badges/master/coverage.svg)
 
