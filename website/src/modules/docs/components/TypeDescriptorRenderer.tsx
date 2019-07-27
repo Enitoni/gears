@@ -107,5 +107,21 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
     return <Container>{infixSpan(renderTypeList(descriptor.types), " | ")}</Container>
   }
 
+  if (descriptor.type === "tuple") {
+    const renderTuplePart = (part: string) => (
+      <ExternalLink className="intrinsic" to={nameToURL["tuple"]}>
+        {part}
+      </ExternalLink>
+    )
+
+    return (
+      <Container>
+        {renderTuplePart("[")}
+        {infixSpan(renderTypeList(descriptor.elements), ", ")}
+        {renderTuplePart("]")}
+      </Container>
+    )
+  }
+
   return <Container>unknown type</Container>
 }

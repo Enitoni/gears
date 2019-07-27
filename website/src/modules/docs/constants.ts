@@ -31,5 +31,6 @@ export const nameToURL: Record<string, string> = {
   undefined: GLOBAL_OBJECTS + "/Undefined",
   null: GLOBAL_OBJECTS + "/Null",
   any: BASIC_TYPES + "#any",
-  void: BASIC_TYPES + "#void"
+  void: BASIC_TYPES + "#void",
+  tuple: BASIC_TYPES + "#tuple"
 }
