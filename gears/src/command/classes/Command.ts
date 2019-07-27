@@ -47,6 +47,12 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
     assert(xor(middleware, action), "Pass either an action or middleware to a Command")
     const safeMiddleware = resolveToArray(middleware! || action!)
 
+    if (action) {
+      console.warn(
+        `Warning: CommandOptions.action is deprecated. Use middleware instead.`
+      )
+    }
+
     this.matcher = matcher
     this.middleware = safeMiddleware
     this.metadata = metadata

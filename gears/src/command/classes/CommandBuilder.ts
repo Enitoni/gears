@@ -43,7 +43,7 @@ export class CommandBuilder<M, C, D = any, S extends object = {}> {
   }
 
   /**
-   * Use [[Middleware]]
+   * Add [[Middleware]]. The order that you call this is the order the middleware will be in
    */
   public use<T extends object>(middleware: Middleware<T & S, M, C>) {
     this.middleware.push(middleware as any)

@@ -2,7 +2,8 @@ import { PromiseResolvable } from "../../core/types"
 import { Context } from "./Context"
 
 /**
- * Determines if a [[CommandLike]] should run or not
+ * Determines if a [[CommandLike]] should run or not.
+ * When it is called, it is passed the [[Context]] which is then returned if the matcher is satisfied
  * @example
  * // Custom matcher
  * const matchLength = (length: number) => (context) => {

@@ -29,7 +29,7 @@ export interface BotOptions<M, C> {
 }
 
 /**
- * Starting point for your bot. Contains the [[ServiceManager]] and the root [[CommandGroup]].
+ * Starting point for your Gears app. Contains the [[ServiceManager]] and the root [[CommandGroup]]
  * @example
  * const bot = new Bot({ adapter, commands: [sum, multiply] })
  * @template M Message

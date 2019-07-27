@@ -2,7 +2,7 @@ import { Middleware } from "./Middleware"
 import { Context } from "./Context"
 
 /**
- * A [[Context]] and the [[Context]] at the point it was matched in a [[Chain]]
+ * A [[CommandLike]] and the [[Context]] at the point it was matched in a [[Chain]]
  * @category Internal
  */
 export interface ChainEntry<M, C = unknown> {
@@ -11,14 +11,14 @@ export interface ChainEntry<M, C = unknown> {
 }
 
 /**
- * A chain of [[ChainEntry]] generated from a tree of [[CommandLike]]
+ * A chain of [[ChainEntry]] generated from a tree of [[CommandLike]] during message processing
  * @category Internal
  */
 export type Chain<M, C = unknown> = ChainEntry<M, C>[]
 
 /**
  * Represents either a [[CommandGroup]] or a [[Command]]
- * @category Command
+ * @category Internal
  */
 export interface CommandLike<M, C> {
   middleware: Middleware<{}, M, C>[]

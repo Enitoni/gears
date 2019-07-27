@@ -12,7 +12,7 @@ import {
 
 /**
  * Service class type
- * @category Service
+ * @category Internal
  */
 export type ServiceType<M, C, T = Service<M, C>> = new (
   options: ServiceOptions<M, C>,
@@ -20,7 +20,7 @@ export type ServiceType<M, C, T = Service<M, C>> = new (
 ) => T
 
 /**
- * Manages instantiation and lifecycles of services
+ * Manages instantiation and lifecycles of [[Service]]
  * @category Service
  */
 export class ServiceManager<M, C> {

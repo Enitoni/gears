@@ -18,7 +18,7 @@ export interface ServiceOptions<M, C> {
 }
 
 /**
- * Stateful business logic living outside of commands
+ * Stateful business logic living outside of [[Middleware]]
  * @example
  * class IncrementService extends Service {
  *   serviceDidInitialize() {
