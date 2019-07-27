@@ -5,6 +5,7 @@ import { ConstructorDescriptorRenderer } from "./ConstructorDescriptorRenderer"
 import { categorizeDescriptorKind } from "../../helpers/categorizeDescriptorKind"
 import { PropertyDescriptorList } from "../PropertyDescriptorList"
 import { MethodDescriptorRenderer } from "./MethodDescriptorRenderer"
+import { filterMethod } from "../../helpers/filterMethod"
 
 export interface ClassDescriptorRendererProps {
   descriptor: ClassDescriptor
@@ -32,10 +33,12 @@ export function ClassDescriptorRenderer(props: ClassDescriptorRendererProps) {
   }
 
   const renderMethods = () => {
-    if (kinds.Method && kinds.Method.length > 0) {
+    const methods = kinds.Method && kinds.Method.filter(filterMethod)
+
+    if (methods.length > 0) {
       return (
         <Section title="Methods" icon="doubleParens">
-          {kinds.Method.map(descriptor => (
+          {methods.map(descriptor => (
             <MethodDescriptorRenderer key={descriptor.name} descriptor={descriptor} />
           ))}
         </Section>

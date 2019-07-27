@@ -7,6 +7,7 @@ import { DocumentationCategory } from "../types/DocumentationCategory"
 import { ModuleDescriptor } from "../types/ModuleDescriptor"
 import { kindToIconMap } from "../constants"
 import { Descriptor } from "../types/Descriptor"
+import { filterDescriptor } from "./filterDescriptor"
 
 export const getDocumentationCategories = (documentation: DocumentationModel) => {
   const { categories, version } = documentation
@@ -21,14 +22,6 @@ export const getDocumentationCategories = (documentation: DocumentationModel) =>
     }
   }
 
-  const filterChild = (descriptor: Descriptor) => {
-    if (descriptor.kind === "Method") {
-      return !descriptor.inheritedFrom
-    }
-
-    return !["Constructor"].includes(descriptor.kind)
-  }
-
   const sortChild = (a: Descriptor, b: Descriptor) => {
     return a.kind === b.kind ? 0 : a.kind < b.kind ? 1 : -1
   }
@@ -39,7 +32,7 @@ export const getDocumentationCategories = (documentation: DocumentationModel) =>
     const to = `/docs/${version}/${name}`
 
     const children = [...(descriptor.children || [])]
-      .filter(filterChild)
+      .filter(filterDescriptor)
       .sort(sortChild)
       .map(c => mapChild(c, to))
 

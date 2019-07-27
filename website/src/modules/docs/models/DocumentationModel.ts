@@ -8,7 +8,7 @@ export class DocumentationModel {
 
   public get categories() {
     const { modules } = this
-    const categorized = categorize(modules, m => m.category)
+    const categorized = categorize(modules, m => m.category!)
 
     const result: DocumentationCategory[] = Object.entries(categorized).map(
       ([category, descriptors]) => ({

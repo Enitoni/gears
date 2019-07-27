@@ -72,14 +72,10 @@ const ParametersHeading = styled.h5`
 
 export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
   const { descriptor } = props
-  const { name, inheritedFrom } = descriptor
-  const { type, description, parameters = [], category } = descriptor.signatures[0]
+  const { name } = descriptor
+  const { type, description, parameters = [] } = descriptor.signatures[0]
 
   const [ref, active] = useScrollAnchor(`#${name}`)
-
-  if (category === "Internal" || inheritedFrom) {
-    return null
-  }
 
   const renderDescription = () => {
     if (!description) return
