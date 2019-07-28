@@ -81,7 +81,7 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
 
   if (
     ["typeParameter", "unknown"].includes(descriptor.type) ||
-    descriptor.name.length === 1
+    (descriptor.name && descriptor.name.length === 1)
   ) {
     return (
       <Container>

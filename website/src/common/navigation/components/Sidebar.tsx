@@ -5,9 +5,12 @@ import { useStores } from "../../state/hooks/useStores"
 import { CategoryNavigation } from "./CategoryNavigation"
 import { useObserver } from "mobx-react-lite"
 import { NavLink } from "../../../modules/core/components/NavLink"
-import { getTransparency } from "../../../modules/theming/helpers"
+import { getTransparency, getColor, getDuration } from "../../../modules/theming/helpers"
+import { cover } from "polished"
 
 const SIDEBAR_WIDTH = "320px"
+
+export const SIDEBAR_BREAKPOINT = "(max-width: 1000px)"
 
 const Container = styled.div<{ open: boolean }>`
   position: relative;
@@ -20,9 +23,28 @@ const Container = styled.div<{ open: boolean }>`
     `
     display: none;
   `}
+
+  @media ${SIDEBAR_BREAKPOINT} {
+    position: fixed;
+    margin: 0px;
+
+    left: 0px;
+    right: 0px;
+    top: ${HEADER_HEIGHT};
+    bottom: 0px;
+
+    width: 100%;
+
+    ${props =>
+      props.open === false &&
+      `
+      display: block;
+    `}
+  }
 `
 
-const Fixed = styled.div`
+const Fixed = styled.div<{ open: boolean }>`
+  background: ${getColor("primary")};
   border-left: solid 1px ${getTransparency("negative")};
 
   padding: 0px 32px;
@@ -33,6 +55,52 @@ const Fixed = styled.div`
   bottom: 32px;
 
   overflow-y: auto;
+
+  transition: ${getDuration("normal")} ease;
+  transition-property: transform;
+
+  @media ${SIDEBAR_BREAKPOINT} {
+    position: absolute;
+
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+
+    padding: 32px;
+    padding-right: 0px;
+
+    transform: translateX(100%);
+
+    ${props =>
+      props.open &&
+      `
+      transform: translateX(0%);
+    `}
+  }
+`
+
+const Filter = styled.div<{ open: boolean }>`
+  display: none;
+  ${cover()}
+
+  opacity: 0;
+  background: ${getTransparency("negative")};
+
+  transition: ${getDuration("normal")} ease;
+  transition-property: opacity;
+
+  pointer-events: none;
+
+  @media ${SIDEBAR_BREAKPOINT} {
+    display: block;
+
+    ${props =>
+      props.open &&
+      `
+      opacity: 1;
+      pointer-events: all;
+    `}
+  }
 `
 
 const Navigation = styled.nav`
@@ -49,7 +117,8 @@ export function Sidebar() {
   return useObserver(() => (
     <>
       <Container open={sidebarStore.open}>
-        <Fixed>
+        <Filter open={sidebarStore.open} onClick={() => (sidebarStore.open = false)} />
+        <Fixed open={sidebarStore.open}>
           <Navigation>
             <NavLink icon="home" to="/">
               Home

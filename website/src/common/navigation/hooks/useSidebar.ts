@@ -8,7 +8,6 @@ export const useSidebar = (categories?: Category[]) => {
   useIsomorphicEffect(() => {
     if (categories) {
       sidebarStore.categories = categories
-      sidebarStore.open = true
     }
 
     return () => {
