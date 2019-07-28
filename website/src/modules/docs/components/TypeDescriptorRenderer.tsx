@@ -79,18 +79,21 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
     )
   }
 
-  if (descriptor.type === "reference") {
-    return attachTypeArguments(
+  if (
+    ["typeParameter", "unknown"].includes(descriptor.type) ||
+    descriptor.name.length === 1
+  ) {
+    return (
       <Container>
-        <ModuleLink name={descriptor.name} />
+        <GenericContainer>{descriptor.name}</GenericContainer>
       </Container>
     )
   }
 
-  if (["typeParameter", "unknown"].includes(descriptor.type)) {
-    return (
+  if (descriptor.type === "reference") {
+    return attachTypeArguments(
       <Container>
-        <GenericContainer>{descriptor.name}</GenericContainer>
+        <ModuleLink name={descriptor.name} />
       </Container>
     )
   }
