@@ -9,6 +9,7 @@ import { TypeDescriptorRenderer } from "../TypeDescriptorRenderer"
 import { getTransparency, getColor } from "../../../theming/helpers"
 import { MethodDescriptor } from "../../types/ClassDescriptor"
 import { PropertyRenderer } from "../PropertyRenderer"
+import { Paragraph } from "../../../../common/markdown/components/Paragraph"
 
 export interface MethodDescriptorRendererProps {
   descriptor: MethodDescriptor
@@ -30,15 +31,11 @@ const Title = styled.h5<{ highlighted: boolean }>`
 
   font-family: Fira Mono, monospace;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.15em;
 `
 
 const Type = styled.span`
   margin-top: 8px;
-
-  font-family: Fira Mono, monospace;
-  font-weight: 500;
-  font-size: 18px;
 
   ::before {
     content: ": ";
@@ -47,10 +44,6 @@ const Type = styled.span`
 
 const Description = styled.div`
   margin-top: 24px;
-
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.03em;
 `
 
 const Paremeters = styled.div`
@@ -83,7 +76,9 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
 
     return (
       <Description>
-        <ModuleLinkMarkup>{description}</ModuleLinkMarkup>
+        <Paragraph>
+          <ModuleLinkMarkup>{description}</ModuleLinkMarkup>
+        </Paragraph>
       </Description>
     )
   }

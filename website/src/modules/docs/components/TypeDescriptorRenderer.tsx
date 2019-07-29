@@ -13,6 +13,7 @@ export interface TypeDescriptorRendererProps {
 
 const Container = styled.span`
   font-family: Fira Mono, monospace;
+  word-break: break-word;
 
   > .intrinsic {
     color: ${getSyntaxColor("primitive")};

@@ -13,18 +13,11 @@ import { InterfaceDescriptorRenderer } from "../InterfaceDescriptorRenderer"
 import { FunctionDescriptorRenderer } from "../FunctionDescriptorRenderer"
 import { Genericing } from "../../types/Genericing"
 import { GenericDescriptorList } from "../GenericDescriptorList"
+import { Content } from "../../../../common/markdown/components/Content"
 
 export interface ModuleDescriptorRendererProps {
   descriptor: ModuleDescriptor
 }
-
-const Container = styled.div`
-  flex: 1;
-
-  > .content {
-    margin-left: ${ICON_SPACE};
-  }
-`
 
 const SpaceContainer = styled.div`
   margin-top: 32px;
@@ -70,16 +63,14 @@ export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
   }
 
   return (
-    <Container>
-      <div className="content">
-        <Heading icon={kindToIconMap[descriptor.kind]}>{descriptor.name}</Heading>
-        <InheritingRenderer descriptor={descriptor as Inheriting} />
-        {renderWarningIfInternal()}
-        <Description descriptor={descriptor} />
-        <ExampleRenderer descriptor={descriptor} />
-        {renderGenerics()}
-        {renderDescriptor()}
-      </div>
-    </Container>
+    <Content>
+      <Heading icon={kindToIconMap[descriptor.kind]}>{descriptor.name}</Heading>
+      <InheritingRenderer descriptor={descriptor as Inheriting} />
+      {renderWarningIfInternal()}
+      <Description descriptor={descriptor} />
+      <ExampleRenderer descriptor={descriptor} />
+      {renderGenerics()}
+      {renderDescriptor()}
+    </Content>
   )
 }

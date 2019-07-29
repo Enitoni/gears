@@ -5,18 +5,21 @@ import { size } from "polished"
 import { getColor } from "../../../modules/theming/helpers"
 import { SECTION_ICON_SIZE, SECTION_ICON_MARGIN } from "./Section"
 import { IconType } from "../../icon/types/IconType"
+import { CONTENT_BREAKPOINT } from "./Content"
 
 export interface HeadingProps {
   icon?: IconType
   children: React.ReactNode
 }
 
-export const ICON_SPACE =
-  parseInt(SECTION_ICON_SIZE) + parseInt(SECTION_ICON_MARGIN) + "px"
+export const NEGATIVE_ICON_SPACE = `calc(-${SECTION_ICON_SIZE} + -${SECTION_ICON_MARGIN})`
+export const POSITIVE_ICON_SPACE = `calc(${SECTION_ICON_SIZE} + ${SECTION_ICON_MARGIN})`
 
 const Container = styled.div<{ hasIcon: boolean }>`
   display: flex;
   align-items: flex-end;
+
+  word-break: break-word;
 
   > .icon {
     ${size(SECTION_ICON_SIZE)}
@@ -28,8 +31,12 @@ const Container = styled.div<{ hasIcon: boolean }>`
   ${props =>
     props.hasIcon &&
     `
-    margin-left: -${ICON_SPACE};
+    margin-left: ${NEGATIVE_ICON_SPACE};
   `}
+
+  @media ${CONTENT_BREAKPOINT} {
+    margin-left: 0px;
+  }
 `
 
 const Title = styled.h2`
@@ -37,8 +44,8 @@ const Title = styled.h2`
 
   font-family: Barlow Semi Condensed;
   font-weight: bold;
-  font-size: 36px;
-  line-height: 31px;
+  font-size: 2.1em;
+  line-height: 0.9em;
 
   margin-right: 8px;
 `

@@ -3,6 +3,7 @@ import { getTransparency, getSyntaxColor } from "../../../modules/theming/helper
 import React from "react"
 import Prism from "prismjs"
 import { IS_SERVER } from "../../../modules/core/constants"
+import { CONTENT_BREAKPOINT } from "./Content"
 
 if (IS_SERVER) {
   // Don't remove trailing slash, doesn't work without for whatever reason.
@@ -13,6 +14,7 @@ if (IS_SERVER) {
 const Container = styled.pre`
   position: relative;
 
+  white-space: pre-wrap;
   font-family: Fira Mono, monospace;
   font-size: 15px;
   line-height: 21px;
@@ -22,6 +24,19 @@ const Container = styled.pre`
 
   padding: 24px;
   padding-left: 64px;
+
+  @media ${CONTENT_BREAKPOINT} {
+    margin-left: -32px;
+    margin-right: -32px;
+    border-radius: 0px;
+
+    padding: 32px;
+    font-size: 14px;
+
+    .line-numbers-rows {
+      display: none;
+    }
+  }
 
   .token.comment,
   .token.block-comment,

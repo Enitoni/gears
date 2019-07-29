@@ -25,6 +25,9 @@ const Container = styled.div<{ open: boolean }>`
   `}
 
   @media ${SIDEBAR_BREAKPOINT} {
+    pointer-events: all;
+    z-index: 1;
+
     position: fixed;
     margin: 0px;
 
@@ -39,6 +42,7 @@ const Container = styled.div<{ open: boolean }>`
       props.open === false &&
       `
       display: block;
+      pointer-events: none;
     `}
   }
 `

@@ -12,7 +12,8 @@ export interface InheritingRendererProps {
 
 const Container = styled.div`
   margin-top: 16px;
-  font-size: 18px;
+  font-size: 1em;
+  font-weight: 600;
 `
 
 const Comma = styled.span`

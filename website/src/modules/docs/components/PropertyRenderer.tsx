@@ -8,6 +8,7 @@ import {
   highlightedScrollAnchor
 } from "../../../common/react/useScrollAnchor"
 import { ModuleLinkMarkup } from "./ModuleLinkMarkup"
+import { Paragraph } from "../../../common/markdown/components/Paragraph"
 
 export interface PropertyRendererProps {
   name: string
@@ -37,19 +38,16 @@ const Title = styled.h5`
 
   font-family: Fira Mono, monospace;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.15em;
 `
 
 const Type = styled.span`
   margin-left: 8px;
-  font-size: 18px;
+  font-size: 1.15em;
 `
 
 const Description = styled.div`
   margin-top: 16px;
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.03em;
 `
 
 export function PropertyRenderer(props: PropertyRendererProps) {
@@ -61,7 +59,9 @@ export function PropertyRenderer(props: PropertyRendererProps) {
 
     return (
       <Description>
-        <ModuleLinkMarkup>{description}</ModuleLinkMarkup>
+        <Paragraph>
+          <ModuleLinkMarkup>{description}</ModuleLinkMarkup>
+        </Paragraph>
       </Description>
     )
   }

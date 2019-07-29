@@ -4,14 +4,11 @@ import { styled } from "../../../theming/themes"
 import { ModuleLink } from "../ModuleLink"
 import { Section } from "../../../../common/markdown/components/Section"
 import { ModuleLinkMarkup } from "../ModuleLinkMarkup"
+import { Paragraph } from "../../../../common/markdown/components/Paragraph"
 
 export interface DescriptionProps {
   descriptor: ModuleDescriptor
 }
-
-const Container = styled.div`
-  font-size: 18px;
-`
 
 export function Description(props: DescriptionProps) {
   const { descriptor } = props
@@ -21,9 +18,9 @@ export function Description(props: DescriptionProps) {
 
   return (
     <Section icon="paragraph" title="Description">
-      <Container>
+      <Paragraph>
         <ModuleLinkMarkup>{description}</ModuleLinkMarkup>
-      </Container>
+      </Paragraph>
     </Section>
   )
 }
