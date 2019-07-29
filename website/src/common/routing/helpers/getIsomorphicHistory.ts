@@ -6,6 +6,7 @@ export const getIsomorphicHistory = () => {
     return {
       listen: () => {},
       push: () => {},
+      replace: () => {},
       location: {
         hash: "",
         pathname: "/",

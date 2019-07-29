@@ -14,7 +14,7 @@ export const useRedirect = (from: string, to: string) => {
     const pattern = new UrlPattern(safeFrom)
 
     if (pattern.match(safePathname)) {
-      routingStore.push(to)
+      routingStore.replace(to)
     }
   }, [safePathname, safeFrom, to])
 }
