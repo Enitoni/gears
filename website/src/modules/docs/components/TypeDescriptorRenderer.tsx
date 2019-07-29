@@ -73,9 +73,7 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
     return (
       <Container>
         <TypeDescriptorRenderer descriptor={descriptor.elementType} />
-        <ExternalLink className="intrinsic" to={nameToURL["array"]}>
-          []
-        </ExternalLink>
+        <span className="intrinsic">[]</span>
       </Container>
     )
   }
@@ -113,11 +111,7 @@ export function TypeDescriptorRenderer(props: TypeDescriptorRendererProps) {
   }
 
   if (descriptor.type === "tuple") {
-    const renderTuplePart = (part: string) => (
-      <ExternalLink className="intrinsic" to={nameToURL["tuple"]}>
-        {part}
-      </ExternalLink>
-    )
+    const renderTuplePart = (part: string) => <span className="intrinsic">{part}</span>
 
     return (
       <Container>
