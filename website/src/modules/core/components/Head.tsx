@@ -67,10 +67,6 @@ export function Head() {
     </>
   )
 
-  const mappedContent = React.Children.map(content.props.children, (child, i) => {
-    return React.cloneElement<any>(child, { key: i })
-  })
-
   useEffect(() => {
     if (IS_SERVER) return
 
@@ -82,8 +78,9 @@ export function Head() {
   if (IS_SERVER) {
     return (
       <>
-        {mappedContent.map(element =>
+        {React.Children.map(content.props.children, (element, i) =>
           React.cloneElement(element, {
+            key: i,
             "data-server-head": true
           })
         )}
