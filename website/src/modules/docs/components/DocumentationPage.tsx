@@ -50,7 +50,7 @@ export interface DocumentationPageProps {
 }
 
 export function DocumentationPage(props: DocumentationPageProps) {
-  const { documentationStore, ssrStore, routingStore } = useStores()
+  const { documentationStore, ssrStore } = useStores()
   const { status, selected } = useObserver(() => ({
     status: documentationStore.status,
     selected: documentationStore.selected
@@ -61,10 +61,6 @@ export function DocumentationPage(props: DocumentationPageProps) {
   useIsomorphicEffect(() => {
     if (!selected || selected.version !== version) {
       ssrStore.register(documentationStore.getVersion(version))
-    }
-
-    if (status === DocumentationStoreStatus.NotFound) {
-      routingStore.status = HttpStatus.NotFound
     }
   }, [version])
 
