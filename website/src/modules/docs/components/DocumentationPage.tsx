@@ -26,10 +26,6 @@ function DocumentationPageContent(props: DocumentationPageContentProps) {
   useSidebar(getDocumentationCategories(documentation))
   useRedirect(root, `${root}/${firstDescriptor.name}`)
 
-  useMeta({
-    title: `Documentation for ${documentation.data.version}`
-  })
-
   const renderRoutes = useRouter(
     documentation.modules.map(descriptor => ({
       pattern: `${root}/${descriptor.name}`,

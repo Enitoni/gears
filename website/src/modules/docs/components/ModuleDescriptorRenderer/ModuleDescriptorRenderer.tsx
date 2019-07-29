@@ -1,6 +1,6 @@
 import React from "react"
 import { ModuleDescriptor } from "../../types/ModuleDescriptor"
-import { Heading, ICON_SPACE } from "../../../../common/markdown/components/Heading"
+import { Heading } from "../../../../common/markdown/components/Heading"
 import { styled } from "../../../theming/themes"
 import { Description } from "./Description"
 import { InheritingRenderer } from "./InheritingRenderer"
@@ -14,6 +14,7 @@ import { FunctionDescriptorRenderer } from "../FunctionDescriptorRenderer"
 import { Genericing } from "../../types/Genericing"
 import { GenericDescriptorList } from "../GenericDescriptorList"
 import { Content } from "../../../../common/markdown/components/Content"
+import { useMeta } from "../../../core/hooks/useMeta"
 
 export interface ModuleDescriptorRendererProps {
   descriptor: ModuleDescriptor
@@ -25,6 +26,12 @@ const SpaceContainer = styled.div`
 
 export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
   const { descriptor } = props
+  const { name, description = "No description provided" } = descriptor
+
+  useMeta({
+    title: name,
+    description: description.replace(/\[\]/g, "")
+  })
 
   const renderWarningIfInternal = () => {
     if (descriptor.category !== "Internal") return null

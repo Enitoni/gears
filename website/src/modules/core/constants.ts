@@ -18,3 +18,5 @@ export const SERVER_SUPPORTED_ENCODINGS = {
   identity: () =>
     new Transform({ transform: (data, _, callback) => callback(null, data) })
 } as const
+
+export const CANONICAL_HOST = "https://gears.enitoni.com"

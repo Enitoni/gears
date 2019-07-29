@@ -1,21 +1,52 @@
 import React, { useEffect } from "react"
-import { IS_SERVER } from "../constants"
+import { IS_SERVER, CANONICAL_HOST } from "../constants"
 import ReactDOM from "react-dom"
 import { useObserver } from "mobx-react-lite"
 import { StoreSerializer } from "../../../common/state/components/StoreSerializer"
 import { useStores } from "../../../common/state/hooks/useStores"
+import { useTheme } from "../../theming/hooks/useTheme"
 
 const IMPORTED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz<>,."
 
 export function Head() {
-  const { metaStore } = useStores()
-  const { title } = useObserver(() => metaStore.value)
+  const { metaStore, routingStore } = useStores()
+  const { colors } = useTheme()
+
+  const { pathname } = useObserver(() => routingStore.location)
+  const { title, description } = useObserver(() => metaStore.value)
+
+  const keywords = ["javascript", "documentation", "gears", "bot", "library"]
+
+  const renderDescription = (description: string) => {
+    return (
+      <>
+        <meta name="description" content={description} />
+        <meta property="og:description" content={description} />
+      </>
+    )
+  }
+
+  const renderOGTags = () => {
+    return (
+      <>
+        <meta property="og:title" content={title} />
+        <meta property="og:url" content={`${CANONICAL_HOST}${pathname}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="" />
+        <meta property="og:site_name" content="Gears" />
+      </>
+    )
+  }
 
   const content = (
     <>
       <meta charSet="utf-8" />
+      <meta name="keywords" content={keywords.join(", ")} />
       <meta name="viewport" content="initial-scale=1" />
+      <meta name="theme-color" content={IS_SERVER ? colors.accent : colors.primary} />
       <title>{title !== "Gears" ? `${title} | Gears` : "Gears"}</title>
+      {renderDescription(description)}
+      {renderOGTags()}
       <link
         href={`https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:700&display=swap&text=${IMPORTED_CHARACTERS}`}
         rel="stylesheet"
@@ -27,6 +58,10 @@ export function Head() {
       <link
         href={`https://fonts.googleapis.com/css?family=Fira+Mono:400,500&display=swap&text=${IMPORTED_CHARACTERS}`}
         rel="stylesheet"
+      />
+      <meta
+        name="google-site-verification"
+        content="Xx_2p0o7xgQWffhd_sDrhZ6VzShNibeRUYZyoUK1-PQ"
       />
       <StoreSerializer />
     </>
@@ -42,7 +77,7 @@ export function Head() {
     document
       .querySelectorAll("[data-server-head=true]")
       .forEach(element => element.remove())
-  })
+  }, [])
 
   if (IS_SERVER) {
     return (

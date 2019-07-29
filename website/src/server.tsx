@@ -16,6 +16,7 @@ import { ManagerContext } from "./common/state/components/ManagerContext"
 import { promisifyPipe } from "./modules/core/helpers/promisifyPipe"
 import { getHTML } from "./modules/core/helpers/getHTML"
 import { createStateSettler } from "./modules/core/helpers/createStateSettler"
+import { Theme } from "./modules/theming/components/Theme"
 
 const app = new Koa()
 const router = new Router()
@@ -55,7 +56,11 @@ router.get("*", async context => {
   }
 
   const wrapInContext = (element: React.ReactNode) => {
-    return <ManagerContext.Provider value={manager}>{element}</ManagerContext.Provider>
+    return (
+      <ManagerContext.Provider value={manager}>
+        <Theme>{element}</Theme>
+      </ManagerContext.Provider>
+    )
   }
 
   const app = wrapInContext(<App />)

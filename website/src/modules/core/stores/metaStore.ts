@@ -3,10 +3,13 @@ import { InitializableStore } from "../../../common/state/types/InitializableSto
 
 export interface MetaInformation {
   title: string
+  description: string
 }
 
 const DEFAULT: MetaInformation = {
-  title: "Gears"
+  title: "Gears",
+  description:
+    "Gears is a library used to create command interfaces, such as chat bots and more"
 }
 
 class MetaStore implements InitializableStore {
