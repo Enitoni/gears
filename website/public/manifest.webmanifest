@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json.schemastore.org/web-manifest",
+  "name": "Gears",
+  "short_name": "Gears",
+  "start_url": "/",
+  "description": "Gears is a library used to create command interfaces, such as chat bots and more",
+  "display": "standalone",
+  "background_color": "#29274c",
+  "theme_color": "#e81e57",
+  "lang": "en-US"
+}
