@@ -102,7 +102,7 @@ export function MethodDescriptorRenderer(props: MethodDescriptorRendererProps) {
   }
 
   return (
-    <Container ref={ref} id={name}>
+    <Container ref={ref}>
       <Title highlighted={active}>
         {renderName()}
         <Type>

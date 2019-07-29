@@ -80,10 +80,6 @@ export const useScrollAnchor = (path: string, align: Alignment = "end") => {
     const { current: previousPath } = pathRef
     if (!element) return
 
-    const id = element.getAttribute("id")
-
-    if (!id) throw new Error("Can't useScrollAnchor on a tag without id")
-
     if (active && safePath !== previousPath) {
       scrollIntoView(element, {
         time: SCROLL_DURATION,

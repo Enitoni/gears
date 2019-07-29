@@ -67,7 +67,7 @@ export function PropertyRenderer(props: PropertyRendererProps) {
   }
 
   return (
-    <Container id={name} ref={ref}>
+    <Container ref={ref}>
       <Header highlighted={active}>
         <Title>{name}:</Title>
         <Type>
