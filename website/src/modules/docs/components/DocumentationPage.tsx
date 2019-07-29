@@ -12,6 +12,7 @@ import { DocumentationContext } from "./DocumentationContext"
 import { useSidebar } from "../../../common/navigation/hooks/useSidebar"
 import { getDocumentationCategories } from "../helpers/getDocumentationCategories"
 import { useRedirect } from "../../../common/routing/hooks/useRedirect"
+import { NotFoundPage } from "../../core/components/NotFoundPage"
 
 export interface DocumentationPageContentProps {
   documentation: DocumentationModel
@@ -26,12 +27,16 @@ function DocumentationPageContent(props: DocumentationPageContentProps) {
   useSidebar(getDocumentationCategories(documentation))
   useRedirect(root, `${root}/${firstDescriptor.name}`)
 
-  const renderRoutes = useRouter(
-    documentation.modules.map(descriptor => ({
+  const renderRoutes = useRouter([
+    ...documentation.modules.map(descriptor => ({
       pattern: `${root}/${descriptor.name}`,
       render: () => <ModuleDescriptorRenderer descriptor={descriptor} />
-    }))
-  )
+    })),
+    {
+      pattern: "*",
+      render: () => <NotFoundPage />
+    }
+  ])
 
   return (
     <DocumentationContext.Provider value={documentation}>
@@ -68,7 +73,7 @@ export function DocumentationPage(props: DocumentationPageProps) {
   }
 
   if (status === DocumentationStoreStatus.NotFound) {
-    return <>Not found</>
+    return <NotFoundPage />
   }
 
   return <>Fetching</>

@@ -6,6 +6,7 @@ import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
 import { DocumentationPage } from "../../docs/components/DocumentationPage"
 import { Version } from "../../docs/stores/documentationStore"
 import { Sidebar } from "../../../common/navigation/components/Sidebar"
+import { NotFoundPage } from "./NotFoundPage"
 
 const Container = styled.main`
   margin-top: ${parseInt(HEADER_HEIGHT) + 32}px;
@@ -45,6 +46,10 @@ const routes: Route[] = [
     render: (params: { version: Version }) => (
       <DocumentationPage version={params.version} />
     )
+  },
+  {
+    pattern: "*",
+    render: () => <NotFoundPage />
   }
 ]
 

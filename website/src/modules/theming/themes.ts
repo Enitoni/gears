@@ -3,29 +3,29 @@ import _styled, { CreateStyled } from "@emotion/styled"
 
 export const darkTheme: Theme = {
   colors: {
-    primary: "#29274c",
-    accent: "#e81e57"
+    primary: "#1a213b",
+    accent: "#f5c721"
   },
   fontColors: {
     normal: "#eeeeee",
     muted: "rgba(255, 255, 255, 0.6)"
   },
   stateColors: {
-    warning: "#ffe500",
-    danger: "#ff2b2b"
+    warning: "#1bbee2",
+    danger: "#ffe500"
   },
   syntaxColors: {
-    background: "rgba(0, 0, 0, 0.25)",
-    keyword: "#ff1c7b",
-    primitive: "#7593e8",
-    function: "#35d1e1",
-    class: "#f1d95f",
-    operator: "#67cd96",
-    comment: "#4e4b7d",
-    lineNumber: "rgba(78, 75, 125, 0.5)"
+    background: "#151a2f",
+    keyword: "#7dde31",
+    primitive: "#1bbee2",
+    function: "#fc58ff",
+    class: "#f5c721",
+    operator: "#eeeeee",
+    comment: "#444859",
+    lineNumber: "rgba(26, 33, 59, 0.5)"
   },
   transparencies: {
-    positive: "rgba(78, 75, 125, 0.5)",
+    positive: "rgba(26, 33, 59, 0.5)",
     negative: "rgba(0, 0, 0, 0.2)"
   },
   durations: {
