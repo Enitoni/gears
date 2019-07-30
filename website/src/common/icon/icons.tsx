@@ -94,3 +94,13 @@ export const paragraph = (
     <path d="M16 17H2V19H16V17Z" />
   </svg>
 )
+
+export const squaredT = (
+  <svg width="24" height="24" viewBox="0 0 24 24">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M2 2H22V22H2V2ZM4 4V20H20V4H4ZM8 7H16V9H13V17H11V9H8V7Z"
+    />
+  </svg>
+)

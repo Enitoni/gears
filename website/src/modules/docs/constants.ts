@@ -9,7 +9,7 @@ export const kindToIconMap: Record<DescriptorKind, IconType> = {
   Function: "doubleParens",
   Parameter: "placeholder",
   Constructor: "doubleParens",
-  "Type alias": "typeAlias",
+  "Type alias": "squaredT",
   "Type parameter": "generic",
   "Call signature": "doubleParens",
   "Constructor signature": "doubleParens"
