@@ -28,7 +28,23 @@ const baseConfig = {
     rules: [
       {
         test: /\.[jt]sx?$/,
-        use: "babel-loader"
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+              "@emotion/babel-preset-css-prop"
+            ],
+            plugins: [
+              ["@babel/plugin-proposal-decorators", { legacy: true }],
+              ["@babel/plugin-proposal-class-properties", { loose: true }],
+              "@babel/plugin-syntax-dynamic-import",
+              ["babel-plugin-prismjs", { languages: ["typescript"], css: false }]
+            ]
+          }
+        }
       },
       {
         enforce: "pre",
