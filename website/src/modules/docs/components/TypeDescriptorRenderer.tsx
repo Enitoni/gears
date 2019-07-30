@@ -22,7 +22,7 @@ const Container = styled.span`
 
 export const GenericContainer = styled.span`
   font-family: Fira Mono, monospace;
-  color: ${getSyntaxColor("class")};
+  color: ${getSyntaxColor("keyword")};
 `
 
 const infixSpan = <T extends any>(arr: T[], text: string) =>
