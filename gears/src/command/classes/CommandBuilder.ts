@@ -65,4 +65,4 @@ export class CommandBuilder<M, C, D = any, S extends object = {}> {
   }
 }
 
-export type CommandBuilderType<M, C, D> = new () => CommandBuilder<M, C, D>
+export type CommandBuilderType<M, C, D = unknown> = new () => CommandBuilder<M, C, D>

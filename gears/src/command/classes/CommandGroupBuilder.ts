@@ -78,4 +78,8 @@ export class CommandGroupBuilder<M, C, D = any, S extends object = {}> {
   }
 }
 
-export type CommandGroupBuilderType<M, C, D> = new () => CommandGroupBuilder<M, C, D>
+export type CommandGroupBuilderType<M, C, D = unknown> = new () => CommandGroupBuilder<
+  M,
+  C,
+  D
+>
