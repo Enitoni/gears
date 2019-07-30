@@ -1,7 +1,7 @@
 import { MockClient, MockClientMessage } from "../../bot/mocks"
-import { CommandGroup, CommandGroupClass } from "../classes"
+import { CommandGroup, CommandGroupType } from "../classes"
 
-export const MockCommandGroup: CommandGroupClass<
+export const MockCommandGroup: CommandGroupType<
   MockClientMessage,
   MockClient
 > = CommandGroup
