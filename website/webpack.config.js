@@ -34,8 +34,7 @@ const baseConfig = {
             presets: [
               "@babel/preset-env",
               "@babel/preset-react",
-              "@babel/preset-typescript",
-              "@emotion/babel-preset-css-prop"
+              "@babel/preset-typescript"
             ],
             plugins: [
               ["@babel/plugin-proposal-decorators", { legacy: true }],
