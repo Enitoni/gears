@@ -7,5 +7,37 @@
   "display": "standalone",
   "background_color": "#29274c",
   "theme_color": "#e81e57",
-  "lang": "en-US"
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/favicons/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "badge"
+    },
+    {
+      "src": "/favicons/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "badge"
+    },
+    {
+      "src": "/favicons/favicon-64.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "badge"
+    },
+    {
+      "src": "/favicons/favicon-256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "badge"
+    },
+    {
+      "src": "/thumbs/logo.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
