@@ -48,11 +48,11 @@ export function Head() {
       {renderDescription(description)}
       {renderOGTags()}
       <link
-        href={`https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:700&display=swap&text=${IMPORTED_CHARACTERS}`}
+        href={`https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:500,700&display=swap&text=${IMPORTED_CHARACTERS}`}
         rel="stylesheet"
       />
       <link
-        href={`https://fonts.googleapis.com/css?family=Barlow:400,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
+        href={`https://fonts.googleapis.com/css?family=Barlow:500,600,700&display=swap&text=${IMPORTED_CHARACTERS}`}
         rel="stylesheet"
       />
       <link

@@ -3,7 +3,7 @@ import React from "react"
 
 const Container = styled.p`
   font-size: 1em;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.03em;
 `
 

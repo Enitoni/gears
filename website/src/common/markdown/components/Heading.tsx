@@ -44,7 +44,7 @@ const Title = styled.h2`
 
   font-family: Barlow Semi Condensed;
   font-weight: bold;
-  font-size: 2.1em;
+  font-size: 2em;
   line-height: 0.9em;
 
   margin-right: 8px;

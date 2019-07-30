@@ -13,7 +13,7 @@ export interface SectionProps {
   icon?: IconType
 }
 
-export const SECTION_ICON_SIZE = "1.7em"
+export const SECTION_ICON_SIZE = "1.5em"
 export const SECTION_ICON_MARGIN = "16px"
 
 const Container = styled.section`

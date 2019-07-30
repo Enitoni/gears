@@ -18,15 +18,15 @@ export const darkTheme: Theme = {
     background: "#151a2f",
     keyword: "#7dde31",
     primitive: "#1bbee2",
-    function: "#fc58ff",
+    function: "#ff3767",
     class: "#f5c721",
     operator: "#eeeeee",
-    comment: "#444859",
-    lineNumber: "rgba(26, 33, 59, 0.5)"
+    comment: "#7b829d",
+    lineNumber: "#4c5267"
   },
   transparencies: {
     positive: "rgba(26, 33, 59, 0.5)",
-    negative: "rgba(0, 0, 0, 0.2)"
+    negative: "rgba(0, 0, 0, 0.3)"
   },
   durations: {
     normal: "200ms"

@@ -10,7 +10,7 @@ export const Container = styled.a`
   transition: ${getDuration("normal")} ease;
   transition-property: color;
 
-  &:hover {
+  &:hover:hover {
     color: ${getFontColor("normal")};
   }
 `
