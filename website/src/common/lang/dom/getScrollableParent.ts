@@ -9,7 +9,7 @@ const style = (node: Element, prop: string) =>
 
 const scroll = (node: Element) =>
   regex.test(
-    style(node, "overflow") + style(node, "overflow-y") + style(node, "overflow-x")
+    style(node, "overflow") + style(node, "overflow-y") + style(node, "overflow-x"),
   )
 
 export const getScrollableParent = (node: Element): Element | null =>

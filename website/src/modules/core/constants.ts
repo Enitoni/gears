@@ -16,7 +16,7 @@ export const SERVER_SUPPORTED_ENCODINGS = {
   // Identity encoding means the browser doesn't accept above compression modes.
   // Creates a transform stream that doesn't transform anything
   identity: () =>
-    new Transform({ transform: (data, _, callback) => callback(null, data) })
+    new Transform({ transform: (data, _, callback) => callback(null, data) }),
 } as const
 
 export const CANONICAL_HOST = "https://gears.enitoni.dev"

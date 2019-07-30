@@ -14,8 +14,8 @@ export class MockAdapter extends ClientAdapter<MockClientMessage, MockClient, un
       client,
       methods: {
         start: () => client.start(),
-        getMessageContent: (message: MockClientMessage) => message
-      }
+        getMessageContent: (message: MockClientMessage) => message,
+      },
     }
   }
 }

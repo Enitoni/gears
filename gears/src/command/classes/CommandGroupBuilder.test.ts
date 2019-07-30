@@ -13,7 +13,7 @@ test("CommandGroupBuilder", () => {
 
   builder = builder.setMetadata({
     name: "Test",
-    description: "This is a description"
+    description: "This is a description",
   })
 
   expect(() => builder.done()).toThrow()
@@ -35,6 +35,6 @@ test("CommandGroupBuilder", () => {
   expect(group).toBeInstanceOf(CommandGroup)
   expect(group.metadata).toMatchObject({
     name: "Test",
-    description: "This is a description"
+    description: "This is a description",
   })
 })

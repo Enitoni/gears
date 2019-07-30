@@ -3,7 +3,7 @@ import { useLayoutEffect } from "react"
 
 export const useIsomorphicLayoutEffect = (
   callback: () => void | (() => void),
-  deps?: any[]
+  deps?: any[],
 ) => {
   if (IS_SERVER) {
     const dispose = callback()

@@ -9,12 +9,12 @@ test("CommandGroup", async () => {
     matcher: context => {
       if (context.content === "b") return context
     },
-    action
+    action,
   })
 
   const group = new MockCommandGroup({
     matcher: matchPrefixes("a"),
-    commands: [command]
+    commands: [command],
   })
 
   expect(group.commands.length).toBe(1)

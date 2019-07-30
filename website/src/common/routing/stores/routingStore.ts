@@ -5,7 +5,7 @@ import { IS_SERVER } from "../../../modules/core/constants"
 
 export enum HttpStatus {
   OK = 200,
-  NotFound = 404
+  NotFound = 404,
 }
 
 class RoutingStore implements InitializableStore {

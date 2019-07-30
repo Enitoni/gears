@@ -3,37 +3,37 @@ import { CommandLineEntry } from "./components/CommandLine"
 export const INITIAL_HISTORY: CommandLineEntry[] = [
   {
     content: "This is a demo that features a running version of a Gears bot.",
-    type: "input"
+    type: "input",
   },
   {
     content:
       "Type some words and type !count to check how many times that word was said.",
-    type: "input"
+    type: "input",
   },
   {
     content: "Like this:",
-    type: "input"
+    type: "input",
   },
   {
     content: "!count Gears",
-    type: "input"
+    type: "input",
   },
   {
     content: 'The word "Gears" was said 1 times',
-    type: "response"
+    type: "response",
   },
   {
     content: "Gears is neat, huh?",
-    type: "input"
+    type: "input",
   },
   {
     content: "!count Gears",
-    type: "input"
+    type: "input",
   },
   {
     content: 'The word "Gears" was said 2 times',
-    type: "response"
-  }
+    type: "response",
+  },
 ]
 
 export const DEMO_REGEX = () => /(?:[a-z]'[a-z]|[a-z0-9\-])+/gi

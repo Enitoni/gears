@@ -22,8 +22,8 @@ test("composeChain", async () => {
       },
       () => {
         return output
-      }
-    ]
+      },
+    ],
   })
 
   const group = new MockCommandGroup({
@@ -37,9 +37,9 @@ test("composeChain", async () => {
 
         context.state.foo = "foo"
         return next()
-      }
+      },
     ],
-    commands: [command]
+    commands: [command],
   })
 
   const context = getMockContext(input)

@@ -22,7 +22,7 @@ test("response", async () => {
     },
     async () => {
       fn()
-    }
+    },
   ]
 
   const run = composeMiddleware(chain)
@@ -44,7 +44,7 @@ test("error", async () => {
     },
     async () => {
       throw "Stop it!"
-    }
+    },
   ]
 
   const run = composeMiddleware(chain)

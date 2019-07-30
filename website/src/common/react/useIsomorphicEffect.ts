@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react"
 
 export const useIsomorphicEffect = (
   callback: () => void | (() => void),
-  deps?: any[]
+  deps?: any[],
 ) => {
   const ref = useRef(false)
 

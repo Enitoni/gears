@@ -78,7 +78,7 @@ export abstract class ClientAdapter<M, C = unknown, CO = unknown>
       message: message => this.emit("message", message),
       ready: () => this.emit("ready", undefined),
       unready: () => this.emit("unready", undefined),
-      error: error => this.emit("error", error)
+      error: error => this.emit("error", error),
     })
 
     this.client = client

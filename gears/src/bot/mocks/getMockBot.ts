@@ -8,7 +8,7 @@ export interface MockBotOptions {
 }
 
 const defaultOptions = {
-  commands: []
+  commands: [],
 }
 
 export const getMockBot = (options?: MockBotOptions) => {

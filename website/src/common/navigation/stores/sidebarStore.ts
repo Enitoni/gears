@@ -16,7 +16,7 @@ class SidebarStore implements InitializableStore<SerializedSidebarStore> {
   public serialize() {
     return {
       open: this.open,
-      categories: this.categories
+      categories: this.categories,
     }
   }
 

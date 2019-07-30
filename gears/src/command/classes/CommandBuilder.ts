@@ -57,7 +57,7 @@ export class CommandBuilder<M, C, D = any, S extends object = {}> {
     assert(!!this.matcher, "No matcher specified. Set a matcher with match()")
     assert(
       this.middleware.length > 0,
-      "No middleware specified. Add middleware with use()"
+      "No middleware specified. Add middleware with use()",
     )
 
     const { matcher, metadata, middleware } = this

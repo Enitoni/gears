@@ -7,7 +7,7 @@ test("CommandBuilder", () => {
 
   builder = builder.setMetadata({
     name: "Test",
-    description: "This is a description"
+    description: "This is a description",
   })
 
   expect(() => builder.done()).toThrow()
@@ -25,6 +25,6 @@ test("CommandBuilder", () => {
   expect(command).toBeInstanceOf(Command)
   expect(command.metadata).toMatchObject({
     name: "Test",
-    description: "This is a description"
+    description: "This is a description",
   })
 })

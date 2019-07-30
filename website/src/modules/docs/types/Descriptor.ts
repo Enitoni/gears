@@ -1,7 +1,7 @@
 import {
   ClassDescriptor,
   MethodDescriptor,
-  ConstructorDescriptor
+  ConstructorDescriptor,
 } from "./ClassDescriptor"
 import { PropertyDescriptor } from "./PropertyDescriptor"
 import { Description } from "../components/ModuleDescriptorRenderer/Description"

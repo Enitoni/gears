@@ -10,7 +10,7 @@ export interface Middleware<D> extends CoreMiddleware<D, MockClientMessage, Mock
 test("Command matches", async () => {
   const command = new Command({
     matcher: matchPrefixes("Hi"),
-    middleware: () => {}
+    middleware: () => {},
   })
 
   const context = getMockContext("Hi")
@@ -22,7 +22,7 @@ test("Command matches", async () => {
 test("Command does not match", async () => {
   const command = new Command({
     matcher: matchPrefixes("Hi"),
-    middleware: () => {}
+    middleware: () => {},
   })
 
   const context = getMockContext("Bye")
@@ -42,7 +42,7 @@ test("Command has middleware", async () => {
 
   const command = new Command<MockClientMessage, MockClient>({
     matcher: matchPrefixes("fuuuuuck"),
-    middleware: [middlewareA, middlewareB, context => {}]
+    middleware: [middlewareA, middlewareB, context => {}],
   })
 
   const run = composeMiddleware(command.middleware)

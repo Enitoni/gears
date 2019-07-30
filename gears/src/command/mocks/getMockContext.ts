@@ -12,7 +12,7 @@ export const getMockContext = (message: MockClientMessage): MockContext => {
     state: {},
     manager,
     message,
-    bot
+    bot,
   } as MockContext
 }
 

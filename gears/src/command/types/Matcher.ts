@@ -24,5 +24,5 @@ import { Context } from "./Context"
  * @category Matching
  */
 export type Matcher<S = any, M = any, C = any> = (
-  context: Context<{}, M, C>
+  context: Context<{}, M, C>,
 ) => PromiseResolvable<Context<S, M, C> | void>

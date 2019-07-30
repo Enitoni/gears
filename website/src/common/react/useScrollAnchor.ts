@@ -50,12 +50,12 @@ export type Alignment = "center" | "end"
 const alignmentMap: Record<Alignment, __ScrollIntoView.Alignment> = {
   center: {
     left: 0.5,
-    top: 0.5
+    top: 0.5,
   },
   end: {
     left: 0.5,
-    top: 1
-  }
+    top: 1,
+  },
 }
 
 export const useScrollAnchor = (path: string, align: Alignment = "end") => {
@@ -89,7 +89,7 @@ export const useScrollAnchor = (path: string, align: Alignment = "end") => {
           const safeParent = parent === document.body ? window : parent
 
           return safeParent === target && scrolled < 2
-        }
+        },
       })
     }
 

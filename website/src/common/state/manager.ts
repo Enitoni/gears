@@ -14,7 +14,7 @@ const stores = {
   routingStore,
   sidebarStore,
   metaStore,
-  ssrStore
+  ssrStore,
 }
 
 export type Stores = StoreMapReturn<typeof stores>

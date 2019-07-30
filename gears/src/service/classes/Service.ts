@@ -4,7 +4,7 @@ import {
   SERVICE_CONSTRUCTOR,
   SERVICE_INITIALIZE,
   SERVICE_START,
-  SERVICE_STOP
+  SERVICE_STOP,
 } from "../symbols"
 import { assert } from "../../core/helpers"
 
@@ -65,7 +65,7 @@ export class Service<M, C> {
   constructor(options: ServiceOptions<M, C>, s: symbol) {
     assert(
       s === SERVICE_CONSTRUCTOR,
-      "Manually instantiating a service is not allowed, add your service class to the services array on your bot."
+      "Manually instantiating a service is not allowed, add your service class to the services array on your bot.",
     )
 
     const { bot, manager } = options

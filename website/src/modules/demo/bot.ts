@@ -52,8 +52,8 @@ class Adapter extends Gears.ClientAdapter<string, any, any> {
       client: {},
       methods: {
         start: async () => {},
-        getMessageContent: (message: string) => message
-      }
+        getMessageContent: (message: string) => message,
+      },
     }
   }
 }
@@ -62,6 +62,6 @@ export const buildBot = () => {
   return new Gears.Bot({
     adapter: new Adapter({}),
     commands: [countCommand, wordCounterCommand],
-    services: [WordCountService]
+    services: [WordCountService],
   })
 }

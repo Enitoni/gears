@@ -94,7 +94,7 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
       state: {},
       bot: this,
       message,
-      content
+      content,
     }
 
     const chain = await this.group.getChain(context)

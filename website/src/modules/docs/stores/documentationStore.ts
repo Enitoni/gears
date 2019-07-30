@@ -17,7 +17,7 @@ export enum DocumentationStoreStatus {
   Idle,
   Fetching,
   Error,
-  NotFound
+  NotFound,
 }
 
 class DocumentationStore implements InitializableStore<SerializedDocumentationStore> {
@@ -35,7 +35,7 @@ class DocumentationStore implements InitializableStore<SerializedDocumentationSt
 
     if (IS_SERVER) {
       return new DocumentationModel(
-        eval("require")(`../../../../../../../../doc-repo/${filename}`)
+        eval("require")(`../../../../../../../../doc-repo/${filename}`),
       )
     } else {
       // prettier-ignore
@@ -71,7 +71,7 @@ class DocumentationStore implements InitializableStore<SerializedDocumentationSt
   public serialize() {
     return {
       selected: this.selected && this.selected.data,
-      status: this.status
+      status: this.status,
     }
   }
 

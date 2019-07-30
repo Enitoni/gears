@@ -1,6 +1,6 @@
 import {
   Category,
-  CategoryLink
+  CategoryLink,
 } from "../../../common/navigation/components/CategoryNavigation"
 import { DocumentationModel } from "../models/DocumentationModel"
 import { DocumentationCategory } from "../types/DocumentationCategory"
@@ -18,7 +18,7 @@ export const getDocumentationCategories = (documentation: DocumentationModel) =>
     return {
       to: `${parentTo}#${name}`,
       label: name,
-      icon: kindToIconMap[kind]
+      icon: kindToIconMap[kind],
     }
   }
 
@@ -40,7 +40,7 @@ export const getDocumentationCategories = (documentation: DocumentationModel) =>
       to,
       children,
       label: name,
-      icon: kindToIconMap[kind]
+      icon: kindToIconMap[kind],
     }
   }
 
@@ -49,7 +49,7 @@ export const getDocumentationCategories = (documentation: DocumentationModel) =>
 
     return {
       name: category.name,
-      items: descriptors
+      items: descriptors,
     }
   }
 

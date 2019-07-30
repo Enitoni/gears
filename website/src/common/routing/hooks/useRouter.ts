@@ -16,7 +16,7 @@ export const useRouter = (routes: Route[]) => {
 
     for (const route of routes) {
       const match = new UrlPattern(route.pattern, {
-        segmentValueCharset: "a-zA-Z0-9-_~%."
+        segmentValueCharset: "a-zA-Z0-9-_~%.",
       }).match(pathname)
 
       if (match) {

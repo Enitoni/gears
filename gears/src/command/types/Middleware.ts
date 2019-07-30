@@ -34,5 +34,5 @@ export type NextFunction<R> = () => Promise<R>
  */
 export type Middleware<S = {}, M = any, C = any, R = any> = (
   context: Context<S, M, C>,
-  next: NextFunction<R>
+  next: NextFunction<R>,
 ) => PromiseResolvable<R> | undefined | void

@@ -6,7 +6,7 @@ import { Context, Middleware } from "../types"
  */
 export const composeMiddleware = (chain: Middleware[]) => async (
   context: Context,
-  next?: Middleware
+  next?: Middleware,
 ) => {
   let index = -1
 

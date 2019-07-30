@@ -66,11 +66,11 @@ export class CommandGroupBuilder<M, C, D = any, S extends object = {}> {
 
     assert(
       this.middleware.length > 0,
-      "No middleware specified. Add middleware with use()"
+      "No middleware specified. Add middleware with use()",
     )
     assert(
       this.commands.length > 0,
-      "No commands specified. Set commands with setCommands()"
+      "No commands specified. Set commands with setCommands()",
     )
 
     const { matcher, metadata, middleware, commands } = this

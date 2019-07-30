@@ -13,19 +13,19 @@ test("Bot", async () => {
 
   const command = new MockCommand({
     matcher: context => (context.content === "C" ? context : undefined),
-    action
+    action,
   })
 
   const errorCommand = new MockCommand({
     matcher: context => {
       return context
     },
-    action: errorAction
+    action: errorAction,
   })
 
   const group = new MockCommandGroup({
     matcher: matchPrefixes("AB"),
-    commands: [command, errorCommand]
+    commands: [command, errorCommand],
   })
 
   const handleError = jest.fn()

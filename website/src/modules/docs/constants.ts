@@ -12,14 +12,14 @@ export const kindToIconMap: Record<DescriptorKind, IconType> = {
   "Type alias": "squaredT",
   "Type parameter": "generic",
   "Call signature": "doubleParens",
-  "Constructor signature": "doubleParens"
+  "Constructor signature": "doubleParens",
 }
 
 export const kindToThumbMap: Partial<Record<DescriptorKind, string>> = {
   Class: "class",
   Interface: "interface",
   Function: "function",
-  "Type alias": "type"
+  "Type alias": "type",
 }
 
 const GLOBAL_OBJECTS =
@@ -39,5 +39,5 @@ export const nameToURL: Record<string, string> = {
   null: GLOBAL_OBJECTS + "/Null",
   any: BASIC_TYPES + "#any",
   void: BASIC_TYPES + "#void",
-  tuple: BASIC_TYPES + "#tuple"
+  tuple: BASIC_TYPES + "#tuple",
 }

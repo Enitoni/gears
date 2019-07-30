@@ -7,7 +7,7 @@ import {
   SERVICE_CONSTRUCTOR,
   MANAGER_INITIALIZE,
   MANAGER_START,
-  MANAGER_STOP
+  MANAGER_STOP,
 } from "../symbols"
 
 /**
@@ -16,7 +16,7 @@ import {
  */
 export type ServiceType<M, C, T = Service<M, C>> = new (
   options: ServiceOptions<M, C>,
-  s: symbol
+  s: symbol,
 ) => T
 
 /**
@@ -55,7 +55,7 @@ export class ServiceManager<M, C> {
    * @returns A [[Service]] instance
    */
   public getService = <T extends Service<M, C>>(
-    serviceClass: ServiceType<M, C, T>
+    serviceClass: ServiceType<M, C, T>,
   ): T => {
     const service = this.services.find(s => s instanceof serviceClass)
     if (!service) throw new Error(`Service "${serviceClass.name}" not found in manager`)

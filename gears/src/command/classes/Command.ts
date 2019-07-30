@@ -49,7 +49,7 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
 
     if (action) {
       console.warn(
-        `Warning: CommandOptions.action is deprecated. Use middleware instead.`
+        `Warning: CommandOptions.action is deprecated. Use middleware instead.`,
       )
     }
 
@@ -73,5 +73,5 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
 }
 
 export type CommandType<M, C, D = unknown> = new (
-  options: CommandOptions<M, C, D>
+  options: CommandOptions<M, C, D>,
 ) => Command<M, C, D>

@@ -60,7 +60,7 @@ describe("Emitter", () => {
 
     firstEmitter.pipe(
       "event",
-      secondEmitter
+      secondEmitter,
     )
     firstEmitter.emit("event", undefined)
   })

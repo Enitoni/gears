@@ -24,7 +24,7 @@ export interface RegexData {
  * @category Matching
  */
 export const matchRegex = (
-  regex: RegExpResolvable
+  regex: RegExpResolvable,
 ): Matcher<RegexData> => async context => {
   const match = (typeof regex === "function" ? regex() : regex).exec(context.content)
   if (!match) return

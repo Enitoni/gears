@@ -10,8 +10,8 @@ export const getIsomorphicHistory = () => {
       location: {
         hash: "",
         pathname: "/",
-        search: ""
-      } as Location
+        search: "",
+      } as Location,
     }
 
   return createBrowserHistory()
