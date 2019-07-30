@@ -1,7 +1,7 @@
 {
   "name": "@enitoni/gears",
   "description": "A library for creating command interfaces easily",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "repository": "https://gitlab.com/enitoni/gears.git",
@@ -9,7 +9,7 @@
   "license": "MIT",
   "files": [
     "build/*",
-    "../README.md"
+    "README.md"
   ],
   "scripts": {
     "build": "run-s test clean tsc",
