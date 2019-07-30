@@ -7,7 +7,7 @@ import { InheritingRenderer } from "./InheritingRenderer"
 import { Inheriting } from "../../types/Inheriting"
 import { ExampleRenderer } from "./ExampleRenderer"
 import { Alert } from "../../../../common/markdown/components/Alert"
-import { kindToIconMap } from "../../constants"
+import { kindToIconMap, kindToThumbMap } from "../../constants"
 import { ClassDescriptorRenderer } from "../ClassDescriptorRenderer/ClassDescriptorRenderer"
 import { InterfaceDescriptorRenderer } from "../InterfaceDescriptorRenderer"
 import { FunctionDescriptorRenderer } from "../FunctionDescriptorRenderer"
@@ -30,7 +30,8 @@ export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
 
   useMeta({
     title: name,
-    description: description.replace(/\[\]/g, "")
+    description: description.replace(/\[\]/g, ""),
+    thumb: kindToThumbMap[descriptor.kind]
   })
 
   const renderWarningIfInternal = () => {

@@ -15,6 +15,13 @@ export const kindToIconMap: Record<DescriptorKind, IconType> = {
   "Constructor signature": "doubleParens"
 }
 
+export const kindToThumbMap: Partial<Record<DescriptorKind, string>> = {
+  Class: "class",
+  Interface: "interface",
+  Function: "function",
+  "Type alias": "type"
+}
+
 const GLOBAL_OBJECTS =
   "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects"
 

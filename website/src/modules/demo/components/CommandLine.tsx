@@ -1,13 +1,8 @@
-import { styled } from "../../../theming/themes"
-import React, { useState, FormEvent, useRef, useLayoutEffect, useEffect } from "react"
-import {
-  getSyntaxColor,
-  getColor,
-  getTransparency,
-  getFontColor
-} from "../../../theming/helpers"
+import { styled } from "../../theming/themes"
+import { CONTENT_BREAKPOINT } from "../../../common/markdown/components/Content"
+import { getSyntaxColor, getColor, getFontColor } from "../../theming/helpers"
 import { darken } from "polished"
-import { CONTENT_BREAKPOINT } from "../../../../common/markdown/components/Content"
+import React, { useRef, useState, FormEvent, useLayoutEffect } from "react"
 
 export interface CommandLineEntry {
   content: string
@@ -125,6 +120,7 @@ export function CommandLine(props: CommandLineProps) {
       </Entries>
       <form onSubmit={submit}>
         <Input
+          aria-label="input"
           placeholder="Type a message"
           value={value}
           onChange={e => setValue(e.target.value)}

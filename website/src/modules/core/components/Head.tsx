@@ -13,7 +13,7 @@ export function Head() {
   const { colors } = useTheme()
 
   const { pathname } = useObserver(() => routingStore.location)
-  const { title, description } = useObserver(() => metaStore.value)
+  const { title, description, thumb } = useObserver(() => metaStore.value)
 
   const keywords = ["javascript", "documentation", "gears", "bot", "library"]
 
@@ -32,7 +32,7 @@ export function Head() {
         <meta property="og:title" content={title} />
         <meta property="og:url" content={`${CANONICAL_HOST}${pathname}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content={`${CANONICAL_HOST}/thumbs/${thumb}.png`} />
         <meta property="og:site_name" content="Gears" />
       </>
     )
@@ -59,6 +59,16 @@ export function Head() {
         href={`https://fonts.googleapis.com/css?family=Fira+Mono:400,500&display=swap`}
         rel="stylesheet"
       />
+      <link rel="icon" href="/favicons/favicon-16.png" sizes="16x16" type="image/png" />
+      <link rel="icon" href="/favicons/favicon-32.png" sizes="32x32" type="image/png" />
+      <link rel="icon" href="/favicons/favicon-64.png" sizes="64x64" type="image/png" />
+      <link
+        rel="icon"
+        href="/favicons/favicon-256.png"
+        sizes="256x256"
+        type="image/png"
+      />
+      <link rel="icon" href="/favicons/favicon.svg" sizes="any" type="image/svg+xml" />
       <meta
         name="google-site-verification"
         content="Xx_2p0o7xgQWffhd_sDrhZ6VzShNibeRUYZyoUK1-PQ"

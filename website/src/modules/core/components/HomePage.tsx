@@ -5,7 +5,8 @@ import { Paragraph } from "../../../common/markdown/components/Paragraph"
 import { Link } from "../../../common/navigation/components/Link"
 import { useStores } from "../../../common/state/hooks/useStores"
 import { Section } from "../../../common/markdown/components/Section"
-import { Demonstration } from "./Demonstration"
+import { Demonstration } from "../../demo/components/Demonstration"
+import { Code } from "../../../common/markdown/components/Code"
 
 export function HomePage() {
   const { documentationStore } = useStores()
@@ -22,6 +23,9 @@ export function HomePage() {
         <br />
         <Link to={`/docs/${latestVersion}`}>Check out the documentation</Link>
       </Paragraph>
+      <Section icon="book" title="Installing">
+        <Code>npm install @enitoni/gears</Code>
+      </Section>
       <Section icon="generic" title="Demo">
         <Demonstration />
       </Section>
