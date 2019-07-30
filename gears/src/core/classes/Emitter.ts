@@ -64,4 +64,12 @@ export class Emitter<Events extends object> {
   ) => {
     this.on(type, (value: Events[E]) => emitter.emit(type, value))
   }
+
+  public waitFor = <E extends keyof Events>(type: E) => {
+    return new Promise<Events[E]>(resolve => {
+      this.once(type, value => {
+        resolve(value)
+      })
+    })
+  }
 }
