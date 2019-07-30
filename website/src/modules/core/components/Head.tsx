@@ -71,7 +71,7 @@ export function Head() {
       <link rel="icon" href="/favicons/favicon.svg" sizes="any" type="image/svg+xml" />
       <meta
         name="google-site-verification"
-        content="Xx_2p0o7xgQWffhd_sDrhZ6VzShNibeRUYZyoUK1-PQ"
+        content="pFMZZcgp6UTNjy2LqrpfFBjRFCGKf5VTnCXw0W6lEKw"
       />
       <StoreSerializer />
     </>
@@ -91,8 +91,8 @@ export function Head() {
         {React.Children.map(content.props.children, (element, i) =>
           React.cloneElement(element, {
             key: i,
-            "data-server-head": true
-          })
+            "data-server-head": true,
+          }),
         )}
       </>
     )
