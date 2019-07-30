@@ -1,5 +1,5 @@
 import { styled } from "../../../theming/themes"
-import React, { useState, FormEvent, useRef, useLayoutEffect } from "react"
+import React, { useState, FormEvent, useRef, useLayoutEffect, useEffect } from "react"
 import {
   getSyntaxColor,
   getColor,
@@ -7,6 +7,7 @@ import {
   getFontColor
 } from "../../../theming/helpers"
 import { darken } from "polished"
+import { CONTENT_BREAKPOINT } from "../../../../common/markdown/components/Content"
 
 export interface CommandLineEntry {
   content: string
@@ -20,23 +21,37 @@ export interface CommandLineProps {
 
 const Container = styled.div`
   padding: 0px 24px;
+
+  @media ${CONTENT_BREAKPOINT} {
+    margin: 0px -32px;
+  }
 `
 
 const Entries = styled.div`
   margin: 0px -24px;
-
   padding: 24px;
-  padding-bottom: 38px;
+  padding-bottom: 0px;
 
   background: ${getSyntaxColor("background")};
   border-radius: 3px;
-
-  max-height: 350px;
   overflow-y: auto;
+
+  max-height: 270px;
+
+  @media ${CONTENT_BREAKPOINT} {
+    border-radius: 0px;
+  }
+
+  ::after {
+    content: "";
+    display: block;
+
+    height: 38px;
+  }
 `
 
 const Line = styled.div<{ response: boolean }>`
-  font-family: Fira Code, monospace;
+  font-family: Fira Mono, monospace;
   font-size: 1em;
 
   & ~ div {
@@ -57,7 +72,7 @@ const Input = styled.input`
   position: relative;
 
   font-size: 1em;
-  font-family: Fira Code, monospace;
+  font-family: Fira Mono, monospace;
 
   display: block;
 
@@ -66,7 +81,7 @@ const Input = styled.input`
 
   background: ${props => darken(0.05, props.theme.colors.primary)};
   border: solid 3px ${getColor("primary")};
-  border-radius: 3px;
+  border-radius: 6px;
 
   width: 100%;
   color: ${getFontColor("normal")};
