@@ -5,6 +5,8 @@ import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
 import { IconButton } from "../../../common/button/components/IconButton"
 import { useStores } from "../../../common/state/hooks/useStores"
 import { useObserver } from "mobx-react-lite"
+import { Icon } from "../../../common/icon/components/Icon"
+import { size } from "polished"
 
 export const HEADER_HEIGHT = "56px"
 
@@ -33,13 +35,13 @@ const Content = styled.div`
   align-items: center;
 `
 
-const Logo = styled.h1`
-  font-family: Barlow Semi Condensed, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
+const Logo = styled.div`
+  ${size(24)}
 
-  color: ${getColor("accent")};
+  > .icon {
+    ${size(24)}
+    fill: ${getColor("accent")}
+  }
 `
 
 const Nav = styled.nav`
@@ -57,7 +59,9 @@ export function Header() {
   return useObserver(() => (
     <Container>
       <Content>
-        <Logo>Gears</Logo>
+        <Logo>
+          <Icon className="icon" name="logo" />
+        </Logo>
         <Nav>
           <IconButton
             icon="menu"
