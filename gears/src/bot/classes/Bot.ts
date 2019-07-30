@@ -109,7 +109,10 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
         const response = await run()
 
         if (typeof response !== undefined) {
-          this.emit("response", { response, message, command })
+          const responseEvent = { response, message, command }
+          this.emit("response", responseEvent)
+
+          return responseEvent
         }
       } catch (error) {
         this.handleError(error)
