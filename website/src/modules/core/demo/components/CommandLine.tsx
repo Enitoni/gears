@@ -95,7 +95,7 @@ export function CommandLine(props: CommandLineProps) {
     const { current: element } = entryRef
 
     if (element) {
-      element.scrollTo(0, element.clientHeight)
+      element.scrollTo(0, element.scrollHeight)
     }
   }, [entries.length])
 
