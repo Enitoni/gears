@@ -67,6 +67,6 @@ export class CommandGroup<M, C, D = unknown> implements CommandLike<M, C> {
   }
 }
 
-export type CommandGroupClass<M, C, D = unknown> = new (
+export type CommandGroupType<M, C, D = unknown> = new (
   options: CommandGroupOptions<M, C, D>
 ) => CommandGroup<M, C, D>

@@ -64,3 +64,5 @@ export class CommandBuilder<M, C, D = any, S extends object = {}> {
     return new Command<M, C, D>({ matcher, middleware, metadata })
   }
 }
+
+export type CommandBuilderType<M, C, D> = new () => CommandBuilder<M, C, D>

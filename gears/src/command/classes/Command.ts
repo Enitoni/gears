@@ -72,6 +72,6 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
   }
 }
 
-export type CommandClass<M, C, D = unknown> = new (
+export type CommandType<M, C, D = unknown> = new (
   options: CommandOptions<M, C, D>
 ) => Command<M, C, D>

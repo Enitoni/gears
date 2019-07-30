@@ -77,3 +77,5 @@ export class CommandGroupBuilder<M, C, D = any, S extends object = {}> {
     return new CommandGroup<M, C, D>({ matcher, middleware, commands, metadata })
   }
 }
+
+export type CommandGroupBuilderType<M, C, D> = new () => CommandGroupBuilder<M, C, D>
