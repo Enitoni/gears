@@ -41,7 +41,7 @@ function flattenGenerics(generics: any[], comment: Comment) {
   if (!flattened) return
 
   const genericComments = Object.fromEntries(
-    getTags(comment, "template").map((x: string) => x.split(" "))
+    getTags(comment, "template").map((x: string) => x.split(/ (.*)/))
   )
 
   return flattened.map((generic: any) => ({

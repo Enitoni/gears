@@ -49,7 +49,7 @@ function flattenGenerics(generics, comment) {
     const flattened = flattenChildren(generics);
     if (!flattened)
         return;
-    const genericComments = Object.fromEntries(getTags(comment, "template").map((x) => x.split(" ")));
+    const genericComments = Object.fromEntries(getTags(comment, "template").map((x) => x.split(/ (.*)/)));
     return flattened.map((generic) => (Object.assign({}, generic, { description: genericComments[generic.name] })));
 }
 const flattenAccessor = (accessor) => {
