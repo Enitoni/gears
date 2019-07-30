@@ -56,7 +56,7 @@ export function Head() {
         rel="stylesheet"
       />
       <link
-        href={`https://fonts.googleapis.com/css?family=Fira+Mono:400,500&display=swap&text=${IMPORTED_CHARACTERS}`}
+        href={`https://fonts.googleapis.com/css?family=Fira+Mono:400,500&display=swap`}
         rel="stylesheet"
       />
       <meta
