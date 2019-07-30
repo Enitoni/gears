@@ -15,6 +15,8 @@ const Container = styled.pre`
   position: relative;
 
   white-space: pre-wrap;
+  word-break: break-word;
+
   font-family: Fira Mono, monospace;
   font-size: 15px;
   line-height: 21px;
