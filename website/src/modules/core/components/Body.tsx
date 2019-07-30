@@ -7,6 +7,7 @@ import { DocumentationPage } from "../../docs/components/DocumentationPage"
 import { Version } from "../../docs/stores/documentationStore"
 import { Sidebar } from "../../../common/navigation/components/Sidebar"
 import { NotFoundPage } from "./NotFoundPage"
+import { HomePage } from "./HomePage"
 
 const Container = styled.main`
   margin-top: ${parseInt(HEADER_HEIGHT) + 32}px;
@@ -39,7 +40,7 @@ const Content = styled.div`
 const routes: Route[] = [
   {
     pattern: "/",
-    render: () => <>Home</>
+    render: () => <HomePage />
   },
   {
     pattern: "/docs/:version(/*)",
