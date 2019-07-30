@@ -1,7 +1,7 @@
+import UrlPattern from "url-pattern"
 import { useStores } from "../../state/hooks/useStores"
 import { useObserver } from "mobx-react-lite"
-import { useIsomorphicEffect } from "../../react/useIsomorphicEffect"
-import UrlPattern from "url-pattern"
+import { useIsomorphicLayoutEffect } from "../../react/useIsomorphicLayoutEffect"
 
 export const useRedirect = (from: string, to: string) => {
   const { routingStore } = useStores()
@@ -10,7 +10,7 @@ export const useRedirect = (from: string, to: string) => {
   const safeFrom = from.replace(/\/$/, "")
   const safePathname = pathname.replace(/\/$/, "")
 
-  useIsomorphicEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const pattern = new UrlPattern(safeFrom)
 
     if (pattern.match(safePathname)) {
