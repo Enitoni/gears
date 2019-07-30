@@ -99,6 +99,7 @@ const Container = styled.pre`
   }
 
   .line-numbers-rows > span::before {
+    word-break: keep-all;
     content: counter(linenumber);
     color: ${getSyntaxColor("lineNumber")};
     display: block;
