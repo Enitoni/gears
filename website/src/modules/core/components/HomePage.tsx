@@ -4,6 +4,8 @@ import React from "react"
 import { Paragraph } from "../../../common/markdown/components/Paragraph"
 import { Link } from "../../../common/navigation/components/Link"
 import { useStores } from "../../../common/state/hooks/useStores"
+import { Section } from "../../../common/markdown/components/Section"
+import { Demonstration } from "./Demonstration"
 
 export function HomePage() {
   const { documentationStore } = useStores()
@@ -12,12 +14,17 @@ export function HomePage() {
   return (
     <Content>
       <Heading icon="home">Home</Heading>
+      <br />
       <Paragraph>
         {
           "Gears is a library used to create command interfaces, such as chat bots and more."
         }
+        <br />
+        <Link to={`/docs/${latestVersion}`}>Check out the documentation</Link>
       </Paragraph>
-      <Link to={`/docs/${latestVersion}`}>Check out the documentation</Link>
+      <Section icon="generic" title="Demo">
+        <Demonstration />
+      </Section>
     </Content>
   )
 }
