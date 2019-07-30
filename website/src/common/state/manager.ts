@@ -6,9 +6,11 @@ import { documentationStore } from "../../modules/docs/stores/documentationStore
 import { ssrStore } from "../../modules/core/stores/ssrStore"
 import { StoreMapReturn } from "./types/StoreMapReturn"
 import { sidebarStore } from "../navigation/stores/sidebarStore"
+import { settingsStore } from "../../modules/settings/stores/settingsStore"
 
 const stores = {
   documentationStore,
+  settingsStore,
   routingStore,
   sidebarStore,
   metaStore,
