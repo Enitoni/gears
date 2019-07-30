@@ -60,6 +60,7 @@ export interface AdapterResult<C, M> {
  *
  * const adapter = new Adapter(options)
  * const bot = new Bot({ adapter, ... })
+ * @template CO Client options
  * @template C Client
  * @template M Message
  * @category Bot
