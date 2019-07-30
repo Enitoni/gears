@@ -30,8 +30,8 @@ export function ModuleDescriptorRenderer(props: ModuleDescriptorRendererProps) {
 
   useMeta({
     title: name,
-    description: description.replace(/\[\]/g, ""),
-    thumb: kindToThumbMap[descriptor.kind]
+    description: description.replace(/[\[\]]/g, ""),
+    thumb: kindToThumbMap[descriptor.kind],
   })
 
   const renderWarningIfInternal = () => {
