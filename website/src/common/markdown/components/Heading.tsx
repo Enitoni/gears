@@ -16,6 +16,8 @@ export const NEGATIVE_ICON_SPACE = `calc(-${SECTION_ICON_SIZE} + -${SECTION_ICON
 export const POSITIVE_ICON_SPACE = `calc(${SECTION_ICON_SIZE} + ${SECTION_ICON_MARGIN})`
 
 const Container = styled.div<{ hasIcon: boolean }>`
+  margin-bottom: 16px;
+
   display: flex;
   align-items: flex-end;
 
