@@ -127,7 +127,7 @@ export function Sidebar() {
             <NavLink icon="home" to="/">
               Home
             </NavLink>
-            <NavLink icon="placeholder" to="/guides" activeTo="/guides(/*)">
+            <NavLink icon="compass" to="/guides" activeTo="/guides(/*)">
               Guides
             </NavLink>
             <NavLink icon="book" to={`/docs/${latestVersion}`} activeTo="/docs(/*)">
