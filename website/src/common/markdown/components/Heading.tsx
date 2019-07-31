@@ -39,7 +39,7 @@ const Container = styled.div<{ hasIcon: boolean }>`
   }
 `
 
-const Title = styled.h2`
+const Title = styled.h1`
   color: ${getColor("accent")};
 
   font-family: Barlow Semi Condensed;
