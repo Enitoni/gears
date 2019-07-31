@@ -8,6 +8,7 @@ import { Version } from "../../docs/stores/documentationStore"
 import { Sidebar } from "../../../common/navigation/components/Sidebar"
 import { NotFoundPage } from "./NotFoundPage"
 import { HomePage } from "./HomePage"
+import { GuidePage } from "../../guiding/components/GuidePage"
 
 const Container = styled.main`
   margin-top: ${parseInt(HEADER_HEIGHT) + 32}px;
@@ -40,18 +41,22 @@ const Content = styled.div`
 const routes: Route[] = [
   {
     pattern: "/",
-    render: () => <HomePage />
+    render: () => <HomePage />,
   },
   {
     pattern: "/docs/:version(/*)",
     render: (params: { version: Version }) => (
       <DocumentationPage version={params.version} />
-    )
+    ),
+  },
+  {
+    pattern: "/guides(/:slug)",
+    render: (params: { slug: string }) => <GuidePage slug={params.slug} />,
   },
   {
     pattern: "*",
-    render: () => <NotFoundPage />
-  }
+    render: () => <NotFoundPage />,
+  },
 ]
 
 export function Body() {

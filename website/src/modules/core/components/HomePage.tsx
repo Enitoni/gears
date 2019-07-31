@@ -15,7 +15,6 @@ export function HomePage() {
   return (
     <Content>
       <Heading icon="home">Home</Heading>
-      <br />
       <Paragraph>
         {
           "Gears is a library used to create command interfaces, such as chat bots and more."
