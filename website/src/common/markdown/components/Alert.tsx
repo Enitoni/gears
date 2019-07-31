@@ -20,6 +20,8 @@ const Container = styled.div<StyleProps>`
   border: solid 2px white;
   border-radius: 3px;
   border-color: ${props => props.theme.stateColors[typeToColorMap[props.type]]};
+
+  margin: 16px 0px;
 `
 
 const Title = styled.h4<StyleProps>`
@@ -36,7 +38,7 @@ const Title = styled.h4<StyleProps>`
 
 const typeToColorMap: Record<AlertType, keyof Theme["stateColors"]> = {
   note: "warning",
-  warning: "danger"
+  warning: "danger",
 }
 
 export function Alert(props: AlertProps) {

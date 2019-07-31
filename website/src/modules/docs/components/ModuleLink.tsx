@@ -1,18 +1,29 @@
 import { useDocumentation } from "../hooks/useDocumentation"
 import React from "react"
 import { Link } from "../../../common/navigation/components/Link"
+import { useStores } from "../../../common/state/hooks/useStores"
 
 export interface ModuleLinkProps {
   name: string
 }
 
 export function ModuleLink(props: ModuleLinkProps) {
-  const documentation = useDocumentation()
-  const descriptor = documentation.getModule(props.name)
+  const { documentationStore } = useStores()
 
-  if (!descriptor) return <>{props.name}</>
+  try {
+    const documentation = useDocumentation()
+    const descriptor = documentation.getModule(props.name)
 
-  const { name } = descriptor
+    if (!descriptor) return <>{props.name}</>
 
-  return <Link to={`/docs/${documentation.version}/${name}`}>{name}</Link>
+    const { name } = descriptor
+
+    return <Link to={`/docs/${documentation.version}/${name}`}>{name}</Link>
+  } catch {
+    return (
+      <Link to={`/docs/${documentationStore.latestVersion}/${props.name}`}>
+        {props.name}
+      </Link>
+    )
+  }
 }

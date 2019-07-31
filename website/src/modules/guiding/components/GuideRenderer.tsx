@@ -4,6 +4,7 @@ import React from "react"
 import { Heading } from "../../../common/markdown/components/Heading"
 import { Content } from "../../../common/markdown/components/Content"
 import { styled } from "../../theming/themes"
+import { getFontColor } from "../../theming/helpers"
 
 export interface GuideRendererProps {
   guide: Guide
@@ -11,7 +12,8 @@ export interface GuideRendererProps {
 
 const Subtitle = styled.h2`
   margin-top: -8px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
+  color: ${getFontColor("muted")};
 `
 
 export function GuideRenderer(props: GuideRendererProps) {

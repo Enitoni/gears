@@ -6,7 +6,7 @@ const Container = styled.p`
   font-weight: 500;
   letter-spacing: 0.03em;
 
-  margin: 0px;
+  margin: 16px 0px;
 `
 
 export function Paragraph(props: { children: React.ReactNode }) {
