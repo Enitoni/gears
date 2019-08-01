@@ -5,14 +5,11 @@ import { styled } from "../../../modules/theming/themes"
 
 import { IconType } from "../../icon/types/IconType"
 import { Icon } from "../../icon/components/Icon"
-import {
-  getTransparency,
-  getDuration,
-  getFontColor,
-} from "../../../modules/theming/helpers"
+import { getDuration } from "../../../modules/theming/helpers"
 
 export interface IconButtonProps extends ContainerProps {
   icon: IconType
+  name: string
   onClick: () => void
 }
 
@@ -67,10 +64,10 @@ const Inner = styled.span<ContainerProps>`
 `
 
 export function IconButton(props: IconButtonProps) {
-  const { icon, active, onClick } = props
+  const { icon, active, onClick, name } = props
 
   return (
-    <Container onClick={onClick}>
+    <Container aria-label={name} onClick={onClick}>
       <Inner active={active}>
         <Icon className="icon" name={icon} />
       </Inner>

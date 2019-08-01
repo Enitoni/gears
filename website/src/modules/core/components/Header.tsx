@@ -73,6 +73,7 @@ export function Header() {
           <MobileOnly>
             <IconButton
               icon="menu"
+              name="Menu button"
               active={sidebarStore.open}
               onClick={() => (sidebarStore.open = !sidebarStore.open)}
             />
