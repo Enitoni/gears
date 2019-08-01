@@ -14,9 +14,9 @@ export const useIsomorphicQuery = (entry: IsomorphicQuery) => {
 
   if (IS_SERVER) {
     const { width } = ssrStore.viewport
-    const { type, value } = entry
+    const { type, value: breakpoint } = entry
 
-    return type === "max" ? value < width : value > width
+    return type === "max" ? breakpoint > width : breakpoint < width
   }
 
   // eslint-disable-next-line
