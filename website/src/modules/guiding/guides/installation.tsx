@@ -6,7 +6,7 @@ import { Code } from "../../../common/markdown/components/Code"
 import { Section } from "../../../common/markdown/components/Section"
 import { ExternalLink } from "../../../common/navigation/components/ExternalLink"
 
-export const gettingStarted: Guide = {
+export const installation: Guide = {
   slug: "installation",
   category: BASIC_CATEGORY,
   title: "Installation",
