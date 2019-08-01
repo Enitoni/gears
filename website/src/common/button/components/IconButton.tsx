@@ -8,7 +8,7 @@ import { Icon } from "../../icon/components/Icon"
 import {
   getTransparency,
   getDuration,
-  getFontColor
+  getFontColor,
 } from "../../../modules/theming/helpers"
 
 export interface IconButtonProps extends ContainerProps {
@@ -20,7 +20,9 @@ export interface ContainerProps {
   active?: boolean
 }
 
-const Container = styled.a<ContainerProps>`
+const Container = styled.button``
+
+const Inner = styled.span<ContainerProps>`
   ${size(40)}
 
   display: flex;
@@ -39,24 +41,24 @@ const Container = styled.a<ContainerProps>`
     const { fontColors, colors, transparencies } = theme
 
     const inactive = `
-      &:hover {
-        cursor: pointer;
-        background: ${transparencies.positive};
-      }
-    
-      &:active {
-        background: ${transparencies.negative};
-      }
-    `
+    &:hover {
+      cursor: pointer;
+      background: ${transparencies.positive};
+    }
+  
+    &:active {
+      background: ${transparencies.negative};
+    }
+  `
 
     const active = `
-      background: ${fontColors.normal};
-      cursor: pointer;
+    background: ${fontColors.normal};
+    cursor: pointer;
 
-      > .icon {
-        fill: ${colors.primary};
-      }
-    `
+    > .icon {
+      fill: ${colors.primary};
+    }
+  `
 
     return props.active ? active : inactive
   }}
@@ -68,8 +70,10 @@ export function IconButton(props: IconButtonProps) {
   const { icon, active, onClick } = props
 
   return (
-    <Container active={active} onClick={onClick}>
-      <Icon className="icon" name={icon} />
+    <Container onClick={onClick}>
+      <Inner active={active}>
+        <Icon className="icon" name={icon} />
+      </Inner>
     </Container>
   )
 }
