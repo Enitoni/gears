@@ -1,14 +1,13 @@
 import React from "react"
 import { styled } from "../../theming/themes"
 import { getColor, getTransparency } from "../../theming/helpers"
-import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
+import { MAX_BODY_WIDTH, BODY_PADDING, HEADER_HEIGHT } from "../constants"
 import { IconButton } from "../../../common/button/components/IconButton"
 import { useStores } from "../../../common/state/hooks/useStores"
 import { useObserver } from "mobx-react-lite"
 import { Icon } from "../../../common/icon/components/Icon"
 import { size } from "polished"
-
-export const HEADER_HEIGHT = "56px"
+import { SIDEBAR_BREAKPOINT } from "../../../common/navigation/constants"
 
 const Container = styled.header`
   position: fixed;
@@ -53,6 +52,14 @@ const Nav = styled.nav`
   align-items: center;
 `
 
+const MobileOnly = styled.div`
+  display: none;
+
+  @media ${SIDEBAR_BREAKPOINT} {
+    display: block;
+  }
+`
+
 export function Header() {
   const { sidebarStore } = useStores()
 
@@ -63,11 +70,13 @@ export function Header() {
           <Icon className="icon" name="logo" />
         </Logo>
         <Nav>
-          <IconButton
-            icon="menu"
-            active={sidebarStore.open}
-            onClick={() => (sidebarStore.open = !sidebarStore.open)}
-          />
+          <MobileOnly>
+            <IconButton
+              icon="menu"
+              active={sidebarStore.open}
+              onClick={() => (sidebarStore.open = !sidebarStore.open)}
+            />
+          </MobileOnly>
         </Nav>
       </Content>
     </Container>

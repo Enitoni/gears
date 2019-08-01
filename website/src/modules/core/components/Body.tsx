@@ -1,7 +1,6 @@
 import React from "react"
 import { styled } from "../../theming/themes"
-import { HEADER_HEIGHT } from "./Header"
-import { MAX_BODY_WIDTH, BODY_PADDING } from "../constants"
+import { MAX_BODY_WIDTH, BODY_PADDING, HEADER_HEIGHT } from "../constants"
 import { Route, useRouter } from "../../../common/routing/hooks/useRouter"
 import { DocumentationPage } from "../../docs/components/DocumentationPage"
 import { Version } from "../../docs/stores/documentationStore"

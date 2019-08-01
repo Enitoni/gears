@@ -1,16 +1,15 @@
 import { styled } from "../../../modules/theming/themes"
 import React from "react"
-import { HEADER_HEIGHT } from "../../../modules/core/components/Header"
 import { useStores } from "../../state/hooks/useStores"
 import { CategoryNavigation } from "./CategoryNavigation"
 import { useObserver } from "mobx-react-lite"
 import { NavLink } from "../../../modules/core/components/NavLink"
 import { getTransparency, getColor, getDuration } from "../../../modules/theming/helpers"
 import { cover } from "polished"
-
-const SIDEBAR_WIDTH = "320px"
-
-export const SIDEBAR_BREAKPOINT = "(max-width: 1000px)"
+import { HEADER_HEIGHT } from "../../../modules/core/constants"
+import { SIDEBAR_WIDTH, SIDEBAR_BREAKPOINT, SIDEBAR_BREAKPOINT_WIDTH } from "../constants"
+import { useIsomorphicQuery } from "../../react/useIsomorphicQuery"
+import { useIsomorphicEffect } from "../../react/useIsomorphicEffect"
 
 const Container = styled.div<{ open: boolean }>`
   position: relative;
@@ -117,6 +116,19 @@ const Navigation = styled.nav`
 export function Sidebar() {
   const { sidebarStore, documentationStore } = useStores()
   const { latestVersion } = documentationStore
+
+  const mobile = useIsomorphicQuery({
+    value: SIDEBAR_BREAKPOINT_WIDTH,
+    type: "max",
+  })
+
+  useIsomorphicEffect(() => {
+    sidebarStore.open = !mobile
+
+    if (mobile) {
+      sidebarStore.autoDismiss = true
+    }
+  }, [mobile])
 
   return useObserver(() => (
     <>

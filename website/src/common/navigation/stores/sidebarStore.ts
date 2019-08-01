@@ -10,6 +10,7 @@ export interface SerializedSidebarStore {
 class SidebarStore implements InitializableStore<SerializedSidebarStore> {
   public init() {}
 
+  public autoDismiss = false
   @observable open = false
   @observable categories: Category[] = []
 
