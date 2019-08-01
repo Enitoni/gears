@@ -5,6 +5,7 @@ import { Heading } from "../../../common/markdown/components/Heading"
 import { Content } from "../../../common/markdown/components/Content"
 import { styled } from "../../theming/themes"
 import { getFontColor } from "../../theming/helpers"
+import { GuideNavigation } from "./GuideNavigation"
 
 export interface GuideRendererProps {
   guide: Guide
@@ -30,6 +31,7 @@ export function GuideRenderer(props: GuideRendererProps) {
       <Heading icon="book">{title}</Heading>
       <Subtitle>{description}</Subtitle>
       {render()}
+      <GuideNavigation guide={guide} />
     </Content>
   )
 }

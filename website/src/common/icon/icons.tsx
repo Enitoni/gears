@@ -129,3 +129,23 @@ export const compass = (
     />
   </svg>
 )
+
+export const leftArrow = (
+  <svg width="24" height="24" viewBox="0 0 24 24">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M13.4142 5L7.41421 11H20V13H7.41421L13.4142 19L12 20.4142L3.58578 12L12 3.58578L13.4142 5Z"
+    />
+  </svg>
+)
+
+export const rightArrow = (
+  <svg width="24" height="24" viewBox="0 0 24 24">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 3.58578L20.4142 12L12 20.4142L10.5858 19L16.5858 13H4V11H16.5858L10.5858 5L12 3.58578Z"
+    />
+  </svg>
+)
