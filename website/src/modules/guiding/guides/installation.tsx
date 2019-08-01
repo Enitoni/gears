@@ -22,15 +22,20 @@ export const installation: Guide = {
       <Code>yarn add @enitoni/gears</Code>
       <Section title="Using with third party libraries">
         <Paragraph>
-          Gears is designed so that it is fully generic and can work with anything that
-          has a messaging interface. A messaging interface refers to anything that outputs
-          a message, an example would be the demo on the home page, a Discord bot, or even
+          Gears is designed to be fully generic so it can work with anything that exposes
+          a messaging interface. A messaging interface refers to anything that emits a
+          message, an example would be the demo on the home page, a Discord bot, or even
           typing things in a command line.
         </Paragraph>
         <Paragraph>
           Currently, we provide these official libraries for working with Gears:
         </Paragraph>
         <ul>
+          <li>
+            <ExternalLink to="https://www.npmjs.com/package/@enitoni/gears-readline">
+              Node.js readline bindings
+            </ExternalLink>
+          </li>
           <li>
             <ExternalLink to="https://www.npmjs.com/package/@enitoni/gears-discordjs">
               Discord.js bindings
