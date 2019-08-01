@@ -42,6 +42,11 @@ const style = (theme: Theme) => css`
     fill: ${theme.fontColors.normal};
   }
 
+  li {
+    padding: 8px;
+    padding-left: 0px;
+  }
+
   * {
     box-sizing: border-box;
 
