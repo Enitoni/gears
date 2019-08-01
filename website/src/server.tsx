@@ -8,6 +8,10 @@ import { renderToNodeStream } from "react-dom/server"
 
 import serve from "koa-static"
 import conditional from "koa-conditional-get"
+
+import isBot from "isbot"
+import { isMobile } from "is-mobile"
+
 import { BUILD_PUBLIC_FOLDER, SERVER_SUPPORTED_ENCODINGS } from "./modules/core/constants"
 import { Head } from "./modules/core/components/Head"
 import { App } from "./modules/core/components/App"
@@ -21,18 +25,19 @@ import { Theme } from "./modules/theming/components/Theme"
 const app = new Koa()
 const router = new Router()
 
-const html = getHTML()
-
 router.use(conditional())
 
 router.use(
   serve(BUILD_PUBLIC_FOLDER, {
-    index: false
-  })
+    index: false,
+  }),
 )
 
 router.get("*", async context => {
   context.set("Content-Type", "text/html")
+
+  const userAgent = context.get("User-Agent")
+  const html = getHTML(isBot(userAgent))
 
   const encoding = context.acceptsEncodings(Object.keys(SERVER_SUPPORTED_ENCODINGS)) as
     | keyof typeof SERVER_SUPPORTED_ENCODINGS
@@ -44,7 +49,7 @@ router.get("*", async context => {
   const stream = SERVER_SUPPORTED_ENCODINGS[encoding]()
 
   const manager = createManager()
-  const { routingStore } = manager.stores
+  const { routingStore, ssrStore } = manager.stores
 
   await manager.init()
 
@@ -52,7 +57,18 @@ router.get("*", async context => {
     state: undefined,
     pathname: context.path,
     search: context.search,
-    hash: ""
+    hash: "",
+  }
+
+  if (
+    isMobile({
+      ua: userAgent,
+    })
+  ) {
+    ssrStore.viewport = {
+      width: 412,
+      height: 738,
+    }
   }
 
   const wrapInContext = (element: React.ReactNode) => {
