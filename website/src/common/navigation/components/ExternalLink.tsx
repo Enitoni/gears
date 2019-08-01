@@ -5,7 +5,7 @@ export function ExternalLink(props: LinkProps) {
   const { to, children, className } = props
 
   return (
-    <Container className={className} href={to} target="_blank">
+    <Container className={className} rel="noreferrer" href={to} target="_blank">
       {children}
     </Container>
   )
