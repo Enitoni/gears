@@ -20,7 +20,8 @@ export const understandingGears: Guide = {
     <>
       <Paragraph>
         Before we get started, you should know how Gears works as it will make it easier
-        to use the library.
+        to use the library. Don't worry if you can't understand this page right away. You
+        can come back to it after reading the other guides if you are confused.
       </Paragraph>
       <Section title="The adapter">
         <Paragraph>
