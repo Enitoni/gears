@@ -12,9 +12,10 @@ export interface GuideNavigationProps {
   guide: Guide
 }
 
+const BREAKPOINT = "(max-width: 529px)"
+
 const Container = styled.div`
   padding-top: 24px;
-
   margin-top: 24px;
 
   border-top: solid 1px ${getTransparency("negative")};
@@ -23,10 +24,19 @@ const Container = styled.div`
   > .space {
     flex: 1;
   }
+
+  @media ${BREAKPOINT} {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    > .space {
+      display: none;
+    }
+  }
 `
 
 const LinkContainer = styled.a`
-  margin: 0px -16px;
   display: flex;
   align-items: center;
 
@@ -34,12 +44,21 @@ const LinkContainer = styled.a`
     ${size(24)};
 
     fill: ${getColor("accent")};
-    margin: 0px 16px;
   }
 
   > .title {
     font-size: 1.2em;
     margin-bottom: 1px;
+  }
+
+  * ~ * {
+    margin-left: 16px;
+  }
+
+  @media ${BREAKPOINT} {
+    & ~ a {
+      margin-top: 16px;
+    }
   }
 `
 
