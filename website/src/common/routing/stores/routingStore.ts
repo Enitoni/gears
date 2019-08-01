@@ -23,6 +23,10 @@ class RoutingStore implements InitializableStore {
   public push = (path: string) => {
     if (path === this.location.pathname) return
     this.history.push(path)
+
+    if (!IS_SERVER) {
+      window.scrollTo(0, 0)
+    }
   }
 
   public replace = (path: string) => {
