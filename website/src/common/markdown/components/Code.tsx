@@ -109,9 +109,10 @@ const Container = styled.pre`
 `
 
 export function Code(props: { children: string }) {
-  const html = Prism.highlight(props.children, Prism.languages.typescript, "typescript")
+  const code = props.children.trim()
+  const html = Prism.highlight(code, Prism.languages.typescript, "typescript")
 
-  const lineCount = props.children.split("\n").length
+  const lineCount = code.split("\n").length
   const lines = Array(lineCount)
     .fill("<span></span>")
     .join("")
