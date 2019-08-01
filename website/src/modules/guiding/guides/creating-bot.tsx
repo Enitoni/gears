@@ -10,7 +10,7 @@ export const creatingBot: Guide = {
   slug: "creating-bot",
   category: GETTING_STARTED_CATEGORY,
   title: "Creating your first bot",
-  description: "A simple bot that can do mathematical operations",
+  description: "How to create your first bot using Gears",
   render: () => (
     <>
       <Paragraph>
@@ -38,7 +38,7 @@ export const creatingBot: Guide = {
         </Paragraph>
         <Code>
           {`
-import { Bot, Adapter } from "@enitoni/gears-readline"
+const { Bot, Adapter } = require("@enitoni/gears-readline")
 
 const adapter = new Adapter({})
 // This adapter takes no options,
@@ -50,8 +50,15 @@ const bot = new Bot({ adapter })
 bot.start().then(() => {
   console.log("Hello world!")
 })
-          `.trim()}
+          `}
         </Code>
+        <Paragraph>Now, if you run your code with:</Paragraph>
+        <Code>node index.js</Code>
+        <Paragraph>
+          You should see "Hello world!" being logged to the console, and you should be
+          able to input lines into the command-prompt. You've just successfully set up a
+          working Gears bot!
+        </Paragraph>
       </Section>
     </>
   ),

@@ -20,11 +20,10 @@ export function HomePage() {
           "Gears is a library used to create command interfaces, such as chat bots and more."
         }
         <br />
+        <Link to={`/guides/installation`}>Get started here</Link>
+        {" or "}
         <Link to={`/docs/${latestVersion}`}>Check out the documentation</Link>
       </Paragraph>
-      <Section icon="book" title="Installing">
-        <Code>npm install @enitoni/gears</Code>
-      </Section>
       <Section icon="generic" title="Demo">
         <Demonstration />
       </Section>

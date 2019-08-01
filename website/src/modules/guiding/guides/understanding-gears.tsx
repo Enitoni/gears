@@ -65,7 +65,7 @@ class Adapter extends ClientAdapter {
     }
   }
 }
-          `.trim()}
+          `}
         </Code>
       </Section>
       <Section title="The command tree">
@@ -100,7 +100,7 @@ const group = new CommandGroup({
 })
 
 const bot = new Bot({ commands: [group, c] })
-            `.trim()}
+            `}
         </Code>
         <Alert type="note">
           Be aware that the order is important. If for example "group" also matched on the
@@ -160,7 +160,7 @@ const a = new CommandBuilder()
     // The above log would be "n interesting message"
     // because the matcher removes the prefixed word from content.
   })
-              `.trim()}
+              `}
           </Code>
         </Subsection>
       </Section>
