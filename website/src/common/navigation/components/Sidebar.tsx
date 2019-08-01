@@ -1,5 +1,5 @@
 import { styled } from "../../../modules/theming/themes"
-import React from "react"
+import React, { useEffect, useCallback } from "react"
 import { useStores } from "../../state/hooks/useStores"
 import { CategoryNavigation } from "./CategoryNavigation"
 import { useObserver } from "mobx-react-lite"
@@ -114,13 +114,18 @@ const Navigation = styled.nav`
 `
 
 export function Sidebar() {
-  const { sidebarStore, documentationStore } = useStores()
+  const { sidebarStore, documentationStore, routingStore } = useStores()
+  const { pathname, hash } = useObserver(() => routingStore.location)
   const { latestVersion } = documentationStore
 
   const mobile = useIsomorphicQuery({
     value: SIDEBAR_BREAKPOINT_WIDTH,
     type: "max",
   })
+
+  const close = useCallback(() => {
+    sidebarStore.open = false
+  }, [sidebarStore])
 
   useIsomorphicEffect(() => {
     sidebarStore.open = !mobile
@@ -130,10 +135,16 @@ export function Sidebar() {
     }
   }, [mobile])
 
+  useEffect(() => {
+    if (sidebarStore.autoDismiss) {
+      close()
+    }
+  }, [pathname, hash, close, sidebarStore.autoDismiss])
+
   return useObserver(() => (
     <>
       <Container open={sidebarStore.open}>
-        <Filter open={sidebarStore.open} onClick={() => (sidebarStore.open = false)} />
+        <Filter open={sidebarStore.open} onClick={close} />
         <Fixed open={sidebarStore.open}>
           <Navigation>
             <NavLink icon="home" to="/">
