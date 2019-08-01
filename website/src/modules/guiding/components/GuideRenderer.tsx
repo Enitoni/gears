@@ -19,7 +19,7 @@ const Subtitle = styled.h2`
 
 export function GuideRenderer(props: GuideRendererProps) {
   const { guide } = props
-  const { title, description, render } = guide
+  const { title, category, description, render } = guide
 
   useMeta({
     title,
@@ -29,7 +29,7 @@ export function GuideRenderer(props: GuideRendererProps) {
   return (
     <Content>
       <Heading icon="book">{title}</Heading>
-      <Subtitle>{description}</Subtitle>
+      <Subtitle>{category}</Subtitle>
       {render()}
       <GuideNavigation guide={guide} />
     </Content>
