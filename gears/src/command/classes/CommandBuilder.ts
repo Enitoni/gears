@@ -1,6 +1,7 @@
 import { Matcher, Middleware } from "../types"
 import { assert } from "../../core/helpers"
 import { Command } from "./Command"
+import { matchPrefixes } from "../matchers"
 
 /**
  * A way to build a [[Command]] with the builder pattern.
@@ -32,8 +33,8 @@ export class CommandBuilder<M, C, D = any, S extends object = {}> {
    */
   public match<T extends object>(matcher: Matcher<T & S, M, C>) {
     assert(!this.matcher, "Cannot use match() more than once")
-    this.matcher = matcher
 
+    this.matcher = matcher as any
     return (this as any) as CommandBuilder<M, C, D, T & S>
   }
 

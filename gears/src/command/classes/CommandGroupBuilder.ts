@@ -35,7 +35,7 @@ export class CommandGroupBuilder<M, C, D = any, S extends object = {}> {
    */
   public match<T extends object>(matcher: Matcher<T & S, M, C>) {
     assert(!this.matcher, "Cannot use match() more than once")
-    this.matcher = matcher
+    this.matcher = matcher as any
 
     return (this as any) as CommandGroupBuilder<M, C, D, T & S>
   }

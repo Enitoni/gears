@@ -23,6 +23,6 @@ import { Context } from "./Context"
  * @template C Client
  * @category Matching
  */
-export type Matcher<S = any, M = any, C = any> = (
-  context: Context<{}, M, C>,
+export type Matcher<S extends object = {}, M = any, C = any> = (
+  context: Context<Partial<S>, M, C>,
 ) => PromiseResolvable<Context<S, M, C> | void>
