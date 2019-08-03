@@ -33,7 +33,7 @@ export interface BotEvents<M, C> {
   /**
    * An error occurred
    */
-  error: void
+  error: any
 }
 
 /**
