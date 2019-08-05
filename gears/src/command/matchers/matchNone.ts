@@ -9,7 +9,9 @@ import { Matcher } from "../types"
  * // Not matching: "Let me in!"
  * @category Matching
  */
-export const matchNone = (...matchers: Matcher[]): Matcher => async context => {
+export const matchNone = (
+  ...matchers: Matcher<any, any, any>[]
+): Matcher => async context => {
   for (const matcher of matchers) {
     const newContext = await matcher(context)
     if (newContext) return

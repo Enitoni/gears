@@ -9,7 +9,9 @@ import { Matcher, Context } from "../types"
  * // Not matching: "Gee,"
  * @category Matching
  */
-export const matchAll = (...matchers: Matcher[]): Matcher => async context => {
+export const matchAll = (
+  ...matchers: Matcher<any, any, any>[]
+): Matcher => async context => {
   let resultingContext: Context | void = context
 
   for (const matcher of matchers) {
