@@ -42,7 +42,7 @@ export interface BotEvents<M, C> {
  */
 export interface BotOptions<M, C> {
   adapter: ClientAdapter<M, C>
-  commands: CommandLike<M, C>[]
+  commands?: CommandLike<M, C>[]
   services?: ServiceType<M, C>[]
 }
 
@@ -63,7 +63,7 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
   constructor(options: BotOptions<M, C>) {
     super()
 
-    const { adapter, commands, services = [] } = options
+    const { adapter, commands = [], services = [] } = options
     this.adapter = adapter
 
     this.group = new CommandGroup({ matcher: matchAlways(), commands })
