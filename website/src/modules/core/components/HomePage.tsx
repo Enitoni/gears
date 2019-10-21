@@ -6,7 +6,6 @@ import { Link } from "../../../common/navigation/components/Link"
 import { useStores } from "../../../common/state/hooks/useStores"
 import { Section } from "../../../common/markdown/components/Section"
 import { Demonstration } from "../../demo/components/Demonstration"
-import { Code } from "../../../common/markdown/components/Code"
 import { ExternalLink } from "../../../common/navigation/components/ExternalLink"
 
 export function HomePage() {
