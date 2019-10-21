@@ -18,7 +18,6 @@ export function HomePage() {
       <Paragraph>
         {"Gears is a JavaScript library for building command powered bots."}
         <br />
-        <br />
         <Link to={`/guides/installation`}>Get started here</Link>
         {" or "}
         <Link to={`/docs/${latestVersion}`}>Check out the documentation</Link>
