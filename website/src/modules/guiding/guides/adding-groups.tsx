@@ -152,10 +152,6 @@ bot.start().then(() => {
           get <InlineCode>Result: 162</InlineCode> back in return.
         </Paragraph>
       </Section>
-      <Section title="Wrapping up">
-        Congratulations! You've finished the tutorial. There are more to come, but for now
-        play around with the concepts you've learned today and I hope you enjoy Gears!
-      </Section>
     </>
   ),
 }
