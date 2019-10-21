@@ -14,11 +14,10 @@ export function HomePage() {
 
   return (
     <Content>
-      <Heading icon="home">Home</Heading>
+      <Heading icon="home">Welcome</Heading>
       <Paragraph>
-        {
-          "Gears is a library used to create command interfaces, such as chat bots and more."
-        }
+        {"Gears is a JavaScript library for building command powered bots."}
+        <br />
         <br />
         <Link to={`/guides/installation`}>Get started here</Link>
         {" or "}
