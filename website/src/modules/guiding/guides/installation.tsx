@@ -41,6 +41,11 @@ export const installation: Guide = {
               Discord.js bindings
             </ExternalLink>
           </li>
+          <li>
+            <ExternalLink to="https://www.npmjs.com/package/@enitoni/gears-ws">
+              WebSocket bindings
+            </ExternalLink>
+          </li>
         </ul>
         <Paragraph>
           Keep in mind that if you're using TypeScript, you'll need to import the modules
