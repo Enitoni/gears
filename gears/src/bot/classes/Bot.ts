@@ -7,16 +7,7 @@ import { ServiceManager, ServiceType } from "../../service/classes"
 import { ClientAdapter } from "./ClientAdapter"
 import { MANAGER_INITIALIZE, MANAGER_START, MANAGER_STOP } from "../../service/symbols"
 import { matchAlways } from "../../command"
-
-/**
- * The data passed to a "repsonse" event
- * @category Bot
- */
-export interface CommandResponseEvent<M, C> {
-  response: any
-  command: Command<M, C>
-  message: M
-}
+import { CommandResponseEvent } from "../../command/types/CommandResponseEvent"
 
 /**
  * Events fired by a [[Bot]] instance
