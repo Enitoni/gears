@@ -92,7 +92,7 @@ export class Service<M, C> {
   }
 
   /**
-   * Hook called when the service has initialized, but the bot is ready
+   * Hook called when the service has initialized, but the bot is not ready yet
    */
   protected serviceDidInitialize(): Promise<void> | void {}
 
@@ -107,7 +107,7 @@ export class Service<M, C> {
   protected serviceDidRestart(): Promise<void> | void {}
 
   /**
-   * Hook called when the service has stopped and the bot is offline
+   * Hook called when the service has stopped and the bot has stopped
    */
   protected serviceDidStop(): Promise<void> | void {}
 }
