@@ -9,6 +9,16 @@ import { MANAGER_INITIALIZE, MANAGER_START, MANAGER_STOP } from "../../service/s
 import { matchAlways } from "../../command"
 
 /**
+ * The data passed to a "repsonse" event
+ * @category Bot
+ */
+export interface CommandResponseEvent<M, C> {
+  response: any
+  command: Command<M, C>
+  message: M
+}
+
+/**
  * Events fired by a [[Bot]] instance
  * @category Bot
  */
@@ -25,11 +35,7 @@ export interface BotEvents<M, C> {
   /**
    * A response was returned from the called [[Middleware]]
    */
-  response: {
-    response: any
-    command: Command<M, C>
-    message: M
-  }
+  response: CommandResponseEvent<M, C>
   /**
    * An error occurred
    */
