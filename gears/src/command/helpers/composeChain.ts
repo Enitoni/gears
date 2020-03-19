@@ -27,7 +27,7 @@ export const composeChain = (chain: Chain<any, any>) => {
 
   const composed = composeMiddleware(middleware)
 
-  return async () => {
+  return async (): Promise<any> => {
     return composed(globalContext)
   }
 }

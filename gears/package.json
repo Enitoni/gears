@@ -2,31 +2,33 @@
   "name": "@enitoni/gears",
   "description": "A library for creating command interfaces easily",
   "version": "3.0.4",
-  "main": "./build/index.js",
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm/index.js",
   "types": "./build/index.d.ts",
   "repository": "https://gitlab.com/enitoni/gears.git",
   "author": "enitoni <enitoni@gmail.com>",
   "license": "MIT",
   "files": [
-    "build/*",
     "README.md"
   ],
   "scripts": {
-    "build": "run-s test clean tsc",
+    "build": "run-s test clean compile",
     "clean": "rimraf build",
-    "tsc": "tsc --project tsconfig.build.json",
+    "compile": "rollup -c",
     "doc": "typedoc --options typedoc.json --tsconfig tsconfig.build.json && yarn process-docs",
     "process-docs": "node ../scripts/flattenDocs ../doc-repo/gears.json && cd ../ && node ./scripts/compileDocList",
     "test": "jest"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^4.0.0",
     "@types/jest": "^23.3.9",
     "@types/node": "^10.3.2",
+    "@wessberg/rollup-plugin-ts": "^1.2.21",
     "jest": "^23.6.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
     "typedoc": "^0.14.2",
-    "typescript": "^3.2.1"
+    "typescript": "^3.8.3"
   }
 }
