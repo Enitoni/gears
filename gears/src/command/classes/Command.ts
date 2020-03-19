@@ -1,6 +1,6 @@
 import { ArrayResolvable } from "../../core"
-import { assert, resolveToArray, xor } from "../../core/helpers"
-import { Chain, CommandLike, Matcher, Context, Middleware } from "../types"
+import { Chain, MiddlewareChainer, Matcher, Context, Middleware } from "../types"
+import { VALIDATE_BEFORE_ADD } from "../symbols"
 
 /**
  * Options passed to the [[Command]] constructor
@@ -36,26 +36,35 @@ export interface CommandOptions<M, C, D> {
  * @template D Metadata
  * @category Command
  */
-export class Command<M, C, D = unknown> implements CommandLike<M, C> {
-  public readonly metadata?: D
-  public middleware: Middleware<any, M, C>[]
-  private matcher: Matcher<any, M, C>
+export class Command<M, C, D = any, S extends object = {}>
+  implements MiddlewareChainer<M, C> {
+  public metadata?: D
+  public middleware: Middleware<any, M, C>[] = []
+  private matcher?: Matcher<any, M, C>
 
-  constructor(options: CommandOptions<M, C, D>) {
-    const { matcher, middleware, action, metadata } = options
-
-    assert(xor(middleware, action), "Pass either an action or middleware to a Command")
-    const safeMiddleware = resolveToArray(middleware! || action!)
-
-    if (action) {
-      console.warn(
-        `Warning: CommandOptions.action is deprecated. Use middleware instead.`,
-      )
+  /**
+   * Set [[Matcher]]
+   */
+  public match<T extends object>(matcher: Matcher<T & S, M, C>) {
+    if (this.matcher) {
+      throw new TypeError("Cannot use match() more than once")
     }
 
-    this.matcher = matcher
-    this.middleware = safeMiddleware
-    this.metadata = metadata
+    this.matcher = matcher as any
+    return (this as any) as Command<M, C, D, T & S>
+  }
+
+  public setMetadata<T extends D>(data: T) {
+    this.metadata = data
+    return (this as any) as Command<M, C, T, S>
+  }
+
+  /**
+   * Add [[Middleware]]. The order that you call this is the order the middleware will be in
+   */
+  public use<T extends object>(middleware: Middleware<T & S, M, C>) {
+    this.middleware.push(middleware as any)
+    return (this as any) as Command<M, C, D, T & S>
   }
 
   /**
@@ -63,15 +72,24 @@ export class Command<M, C, D = unknown> implements CommandLike<M, C> {
    */
   public async getChain(context: Context<any, M, C>): Promise<Chain<M, C> | void> {
     context.issuer = this
-
-    const resultContext = await this.matcher(context)
+    const resultContext = await this.matcher!(context)
 
     if (resultContext) {
-      return [{ command: this, context: { ...resultContext } }]
+      return [{ chainer: this, context: { ...resultContext } }]
+    }
+  }
+
+  public [VALIDATE_BEFORE_ADD]() {
+    if (!this.matcher) {
+      throw new TypeError("No matcher specified. Set a matcher with match()")
+    }
+
+    if (this.middleware.length === 0) {
+      throw new TypeError(
+        "No middleware specified. Middleware is required in commands. Add middleware with use()",
+      )
     }
   }
 }
 
-export type CommandType<M, C, D = unknown> = new (
-  options: CommandOptions<M, C, D>,
-) => Command<M, C, D>
+export type CommandType<M, C, D = unknown> = new () => Command<M, C, D>

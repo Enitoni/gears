@@ -1,4 +1,3 @@
-import { assert } from "../../core/helpers"
 import { Context, Middleware } from "../types"
 
 /**
@@ -11,7 +10,10 @@ export const composeMiddleware = (chain: Middleware[]) => async (
   let index = -1
 
   const run = async (i: number): Promise<any> => {
-    assert(index < i, "Do not call next() more than once")
+    if (index >= i) {
+      throw new Error("next() was called more than once")
+    }
+
     index = i
 
     let middleware: Middleware | undefined = chain[i]

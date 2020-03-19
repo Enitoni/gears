@@ -1,4 +1,4 @@
-import { Chain, Middleware, NextFunction } from "../types"
+import { Chain, NextFunction } from "../types"
 import { composeMiddleware } from "./composeMiddleware"
 
 /**
@@ -10,9 +10,9 @@ export const composeChain = (chain: Chain<any, any>) => {
   let globalContext = chain[0].context
 
   const middleware = chain.map(entry => {
-    const { command, context } = entry
+    const { chainer, context } = entry
 
-    const middleware = composeMiddleware(command.middleware)
+    const middleware = composeMiddleware(chainer.middleware)
     const safeContext = { ...globalContext, ...context }
 
     return async (_: any, next: NextFunction<any>) => {

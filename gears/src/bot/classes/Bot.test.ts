@@ -1,4 +1,4 @@
-import { matchPrefixes } from "../../command/matchers"
+import { matchPrefixes, matchAlways } from "../../command/matchers"
 import { MockCommand, MockCommandGroup } from "../../command/mocks"
 import { getMockBot, MockClient } from "../mocks"
 
@@ -11,22 +11,15 @@ test("Bot", async () => {
     throw new Error("Error!")
   })
 
-  const command = new MockCommand({
-    matcher: context => (context.content === "C" ? context : undefined),
-    action,
-  })
+  const command = new MockCommand()
+    .match(context => (context.content === "C" ? context : undefined))
+    .use(action)
 
-  const errorCommand = new MockCommand({
-    matcher: context => {
-      return context
-    },
-    action: errorAction,
-  })
+  const errorCommand = new MockCommand().match(matchAlways()).use(errorAction)
 
-  const group = new MockCommandGroup({
-    matcher: matchPrefixes("AB"),
-    commands: [command, errorCommand],
-  })
+  const group = new MockCommandGroup()
+    .match(matchPrefixes("AB"))
+    .setCommands(command, errorCommand)
 
   const handleError = jest.fn()
 

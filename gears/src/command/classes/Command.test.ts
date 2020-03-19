@@ -8,10 +8,9 @@ import { Command } from "./Command"
 export interface Middleware<D> extends CoreMiddleware<D, MockClientMessage, MockClient> {}
 
 test("Command matches", async () => {
-  const command = new Command({
-    matcher: matchPrefixes("Hi"),
-    middleware: () => {},
-  })
+  const command = new Command<MockClientMessage, MockClient>()
+    .match(matchPrefixes("Hi"))
+    .use(() => {})
 
   const context = getMockContext("Hi")
   const chain = await command.getChain(context)
@@ -20,10 +19,9 @@ test("Command matches", async () => {
 })
 
 test("Command does not match", async () => {
-  const command = new Command({
-    matcher: matchPrefixes("Hi"),
-    middleware: () => {},
-  })
+  const command = new Command<MockClientMessage, MockClient>()
+    .match(matchPrefixes("Hi"))
+    .use(() => {})
 
   const context = getMockContext("Bye")
   const result = await command.getChain(context)
@@ -40,10 +38,10 @@ test("Command has middleware", async () => {
     context.state.b = 5
   }
 
-  const command = new Command<MockClientMessage, MockClient>({
-    matcher: matchPrefixes("fuuuuuck"),
-    middleware: [middlewareA, middlewareB, context => {}],
-  })
+  const command = new Command<MockClientMessage, MockClient>()
+    .match(matchPrefixes("fuuuuuck"))
+    .use(middlewareA)
+    .use(middlewareB)
 
   const run = composeMiddleware(command.middleware)
   run(getMockContext("g"))

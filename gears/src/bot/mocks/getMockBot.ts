@@ -1,7 +1,7 @@
 import { Bot } from "../classes"
 import { MockAdapter } from "./MockAdapter"
-import { CommandLike } from "../../command"
 import { MockClient } from "./MockClient"
+import { CommandLike } from "../../command/types/CommandLike"
 
 export interface MockBotOptions {
   commands: CommandLike<string, MockClient>[]

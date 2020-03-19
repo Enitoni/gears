@@ -8,39 +8,33 @@ test("composeChain", async () => {
 
   let calls = 0
 
-  const command = new MockCommand({
-    matcher: matchPrefixes("b"),
-    middleware: [
-      (context, next) => {
-        expect(calls).toBe(1)
-        calls++
+  const command = new MockCommand()
+    .match(matchPrefixes("b"))
+    .use<{ foo: string }>((context, next) => {
+      expect(calls).toBe(1)
+      calls++
 
-        expect(context.content).toBe("c")
-        expect(context.state.foo).toBe("foo")
+      expect(context.content).toBe("c")
+      expect(context.state.foo).toBe("foo")
 
-        return next()
-      },
-      () => {
-        return output
-      },
-    ],
-  })
+      return next()
+    })
+    .use(() => {
+      return output
+    })
 
-  const group = new MockCommandGroup({
-    matcher: matchPrefixes("!a"),
-    middleware: [
-      (context, next) => {
-        expect(context.content).toBe("bc")
+  const group = new MockCommandGroup()
+    .match(matchPrefixes("!a"))
+    .setCommands(command)
+    .use<{ foo: string }>((context, next) => {
+      expect(context.content).toBe("bc")
 
-        expect(calls).toBe(0)
-        calls++
+      expect(calls).toBe(0)
+      calls++
 
-        context.state.foo = "foo"
-        return next()
-      },
-    ],
-    commands: [command],
-  })
+      context.state.foo = "foo"
+      return next()
+    })
 
   const context = getMockContext(input)
   const chain = await group.getChain(context)

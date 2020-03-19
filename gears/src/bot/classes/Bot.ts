@@ -1,6 +1,6 @@
 import { CommandGroup, Command } from "../../command/classes"
 import { composeChain } from "../../command/helpers"
-import { BaseContext, CommandLike } from "../../command/types"
+import { BaseContext } from "../../command/types"
 import { Emitter } from "../../core/classes"
 import { emitOrThrow } from "../../core/helpers"
 import { ServiceManager, ServiceType } from "../../service/classes"
@@ -8,6 +8,8 @@ import { ClientAdapter } from "./ClientAdapter"
 import { MANAGER_INITIALIZE, MANAGER_START, MANAGER_STOP } from "../../service/symbols"
 import { matchAlways } from "../../command"
 import { CommandResponseEvent } from "../../command/types/CommandResponseEvent"
+import { CommandLike } from "../../command/types/CommandLike"
+import { VALIDATE_BEFORE_ADD } from "../../command/symbols"
 
 /**
  * Events fired by a [[Bot]] instance
@@ -63,7 +65,13 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
     const { adapter, commands = [], services = [] } = options
     this.adapter = adapter
 
-    this.group = new CommandGroup({ matcher: matchAlways(), commands })
+    this.group = new CommandGroup<any, any>()
+      .match(matchAlways())
+      .setCommands(...commands)
+
+    // Validate the command group
+    this.group[VALIDATE_BEFORE_ADD]()
+
     this.manager = new ServiceManager<M, C>(this, services)
 
     this.adapter.on("message", this.processMessage)
@@ -99,7 +107,7 @@ export class Bot<M, C> extends Emitter<BotEvents<M, C>> {
     if (chain) {
       const run = composeChain(chain)
 
-      const command = chain[chain.length - 1].command as Command<M, C>
+      const command = chain[chain.length - 1].chainer as Command<M, C>
       this.emit("command", [command, message])
 
       try {
