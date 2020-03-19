@@ -1,10 +1,11 @@
 {
   "name": "@enitoni/gears",
-  "description": "A library for creating command interfaces easily",
-  "version": "3.0.4",
+  "description": "A library for building command powered bots",
+  "version": "4.0.0",
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
   "types": "./build/index.d.ts",
+  "sideEffects": false,
   "repository": "https://gitlab.com/enitoni/gears.git",
   "author": "enitoni <enitoni@gmail.com>",
   "license": "MIT",
