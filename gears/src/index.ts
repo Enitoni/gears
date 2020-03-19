@@ -1,11 +1,10 @@
-import * as bot from "./bot"
-import * as service from "./service"
-import * as command from "./command"
+import * as core from "./core.index"
+export { core }
 
-export * from "./command/matchers"
-
-export const core = {
-  ...bot,
-  ...service,
-  ...command,
-}
+export const matchAll = core.matchAll
+export const matchAlways = core.matchAlways
+export const matchAny = core.matchAny
+export const matchNone = core.matchNone
+export const matchPrefixes = core.matchPrefixes
+export const matchRandomly = core.matchRandomly
+export const matchRegex = core.matchRegex

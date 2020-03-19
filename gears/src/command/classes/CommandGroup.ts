@@ -111,7 +111,7 @@ export class CommandGroup<M, C, D = any, S extends object = {}>
     }
 
     console.assert(
-      this.commands.length === 0,
+      this.commands.length > 0,
       "Command group has no commands. Did you forget to call setCommands()?",
     )
 
