@@ -22,7 +22,7 @@ class WordCountService extends Service {
   }
 }
 
-const countCommand = new CommandBuilder()
+const countCommand = new Command()
   .match(matchPrefixes("!count "))
   .use(context => {
     const { content, manager } = context
@@ -38,7 +38,7 @@ const countCommand = new CommandBuilder()
     return \`The word "\${words[0]}" was said \${count} times\`
   })
 
-const wordCounterCommand = new CommandBuilder()
+const wordCounterCommand = new Command()
   .match(matchAlways())
   .use(context => {
     const { content, manager } = context
