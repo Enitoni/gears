@@ -20,22 +20,15 @@ export const addingCommands: Guide = {
       </Paragraph>
       <Section title="Adding our first command">
         <Paragraph>
-          <ModuleLinkMarkup>
-            In this guide we'll be using the [[CommandBuilder]], as it is more intuitive
-            and also fully typesafe if you're using TypeScript. If you don't want to do
-            that, you can still use the [[Command]] class in your own code.
-          </ModuleLinkMarkup>
-          <br />
-          <br />
           Let's create a simple command that just sums a list of numbers. We'll define it
           like so:
         </Paragraph>
         <Code>
           {`
 const { matchPrefixes } = require("@enitoni/gears")
-const { Bot, Adapter, CommandBuilder } = require("@enitoni/gears-readline")
+const { Bot, Adapter, Command } = require("@enitoni/gears-readline")
 
-const sumCommand = new CommandBuilder()
+const sumCommand = new Command()
   .match(matchPrefixes("sum "))
   .use(context => {
     const numbers = context.content.split(" ").map(n => Number(n))
@@ -43,7 +36,6 @@ const sumCommand = new CommandBuilder()
 
     console.log(summed)
   })
-  .done() // Calling done will return a Command instance, don't forget this!
 
 const adapter = new Adapter({})
 const bot = new Bot({ adapter, commands: [sumCommand] })
@@ -73,7 +65,7 @@ bot.start().then(() => {
         </Paragraph>
         <Code>
           {`
-const multiplyCommand = new CommandBuilder()
+const multiplyCommand = new Command()
   .match(matchPrefixes("multiply "))
   .use(context => {
     const numbers = context.content.split(" ").map(n => Number(n))
@@ -81,7 +73,6 @@ const multiplyCommand = new CommandBuilder()
 
     console.log(multiplied)
   })
-  .done()
           `}
         </Code>
         <Paragraph>

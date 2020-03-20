@@ -79,25 +79,21 @@ class Adapter extends ClientAdapter {
         </Paragraph>
         <Code>
           {`
-const a = new Command({
-  matcher: matchPrefixes("a"),
-  ...
-})
+const a = new Command()
+  .match(matchPrefixes("a"))
+  .use(...)
 
-const b = new Command({
-  matcher: matchPrefixes("b"),
-  ...
-})
+const b = new Command()
+  .match(matchPrefixes("b"))
+  .use(...)
 
-const c = new Command({
-  matcher: matchPrefixes("c"),
-  ...
-})
+const c = new Command()
+  .match(matchPrefixes("c"))
+  .use(...)
 
-const group = new CommandGroup({
-  matcher: matchPrefixes("!"),
-  commands: [a, b]
-})
+const group = new CommandGroup()
+  .match(matchPrefixes("!"))
+  .setCommands(a, b)
 
 const bot = new Bot({ commands: [group, c] })
             `}

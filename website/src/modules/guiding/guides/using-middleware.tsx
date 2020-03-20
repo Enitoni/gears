@@ -39,7 +39,7 @@ const numberMiddleware = (context, next) => {
         <Paragraph>Now, we can add this middleware to our commands:</Paragraph>
         <Code>
           {`
-const sumCommand = new CommandBuilder()
+const sumCommand = new Command()
   .match(matchPrefixes("sum "))
   .use(numberMiddleware)
   .use(context => {
@@ -48,9 +48,8 @@ const sumCommand = new CommandBuilder()
 
     console.log(summed)
   })
-  .done()
 
-const multiplyCommand = new CommandBuilder()
+const multiplyCommand = new Command()
   .match(matchPrefixes("multiply "))
   .use(numberMiddleware)
   .use(context => {
@@ -59,7 +58,6 @@ const multiplyCommand = new CommandBuilder()
 
     console.log(multiplied)
   })
-  .done()
 
           `}
         </Code>

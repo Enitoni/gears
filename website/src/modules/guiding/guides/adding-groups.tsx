@@ -30,19 +30,13 @@ export const addingGroups: Guide = {
       </Paragraph>
       <Section title="Creating the command group">
         <Paragraph>
-          <ModuleLinkMarkup>
-            This example will use the [[CommandGroupBuilder]], but like before, you can
-            use the [[CommandGroup]] class if you prefer that.
-          </ModuleLinkMarkup>
-          <br />
           Let's make our command group and make it match on "!", like this:
         </Paragraph>
         <Code>
           {`
-const group = new CommandGroupBuilder()
+const group = new CommandGroup()
   .match(matchPrefixes("!"))
   .setCommands(sumCommand, multiplyCommand)
-  .done()
           `}
         </Code>
         <Paragraph>And then, let's replace our bot's commands:</Paragraph>
@@ -87,8 +81,8 @@ const { matchPrefixes } = require("@enitoni/gears")
 const {
   Bot,
   Adapter,
-  CommandBuilder,
-  CommandGroupBuilder,
+  Command,
+  CommandGroup,
 } = require("@enitoni/gears-readline")
 
 const numberMiddleware = (context, next) => {
@@ -115,29 +109,26 @@ const loggingMiddleware = async (context, next) => {
   // will not be usable
 }
 
-const sumCommand = new CommandBuilder()
+const sumCommand = new Command()
   .match(matchPrefixes("sum "))
   .use(numberMiddleware)
   .use(context => {
     const { numbers } = context.state
     return numbers.reduce((a, b) => a + b)
   })
-  .done()
 
-const multiplyCommand = new CommandBuilder()
+const multiplyCommand = new Command()
   .match(matchPrefixes("multiply "))
   .use(numberMiddleware)
   .use(context => {
     const { numbers } = context.state
     return numbers.reduce((a, b) => a * b)
   })
-  .done()
 
-const group = new CommandGroupBuilder()
+const group = new CommandGroup()
   .match(matchPrefixes("!"))
   .use(loggingMiddleware)
   .setCommands(sumCommand, multiplyCommand)
-  .done()
 
 const adapter = new Adapter({})
 const bot = new Bot({ adapter, commands: [group] })

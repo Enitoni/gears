@@ -48,16 +48,14 @@ export const installation: Guide = {
           </li>
         </ul>
         <Paragraph>
-          Keep in mind that if you're using TypeScript, you'll need to import the modules
-          from that library. If you don't, then you'll have to deal with type arguments on
-          each module. Even if you're using JavaScript we strongly recommend importing
-          from the bindings library as your code editor may still use the types to aid in
-          IntelliSense.
+          When you need to import the classes, import them from the binding library not
+          Gears itself. You can import matchers from Gears itself since they will work
+          regardless.
         </Paragraph>
         <Paragraph>Correct example:</Paragraph>
-        <Code>{`import { Bot, Adapter, Command } from "@enitoni/gears-discordjs"`}</Code>
+        <Code>{`import { Bot, Adapter, Command } from "@enitoni/gears-readline"`}</Code>
         <Paragraph>Incorrect example:</Paragraph>
-        <Code>{`import { Bot, Adapter, Command } from "@enitoni/gears"`}</Code>
+        <Code>{`import { core } from "@enitoni/gears"`}</Code>
       </Section>
     </>
   ),

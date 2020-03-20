@@ -32,14 +32,13 @@ const myService = context.manager.getService(MyService)
       <Paragraph>Now, we can get the count from the service:</Paragraph>
       <Code>
         {`
-const command = new CommandBuilder()
+const command = new Command()
   .match(matchPrefixes("count"))
   .use((context) => {
     const myService = context.manager.getService(MyService)
 
     console.log(\`The count is \${myService.count}\`)
   })
-  .done()
 
 // Input: "count"
 // Output: "The count is 0"
@@ -65,7 +64,7 @@ class MyService extends Service {
         </Paragraph>
         <Code>
           {`
-const command = new CommandBuilder()
+const command = new Command()
   .match(matchPrefixes("count"))
   .use((context) => {
     const myService = context.manager.getService(MyService)
@@ -73,7 +72,6 @@ const command = new CommandBuilder()
     myService.increment()
     console.log(\`The count is \${myService.count}\`)
   })
-  .done()
 
 // Input: "count"
 // Output: "The count is 1"
