@@ -37,7 +37,6 @@ const countCommand = new CommandBuilder()
 
     return \`The word "\${words[0]}" was said \${count} times\`
   })
-  .done()
 
 const wordCounterCommand = new CommandBuilder()
   .match(matchAlways())
@@ -51,9 +50,8 @@ const wordCounterCommand = new CommandBuilder()
       service.incrementWordCount(word.toLowerCase())
     }
   })
-  .done()
 
-const bot = new Gears.Bot({
+const bot = new Bot({
   adapter: ...,
   commands: [countCommand, wordCounterCommand],
   services: [WordCountService]
@@ -67,7 +65,7 @@ export function Demonstration() {
 
   const addEntry = useCallback(
     (entry: CommandLineEntry) => setHistory(history => [...history, entry]),
-    [setHistory]
+    [setHistory],
   )
 
   const emitMessage = useCallback(
@@ -76,12 +74,12 @@ export function Demonstration() {
 
       addEntry({
         content: message,
-        type: "input"
+        type: "input",
       })
 
       await bot.processMessage(message)
     },
-    [addEntry, bot]
+    [addEntry, bot],
   )
 
   useEffect(() => {
@@ -90,7 +88,7 @@ export function Demonstration() {
 
       addEntry({
         content: response,
-        type: "response"
+        type: "response",
       })
     })
   }, [addEntry, bot, emitMessage])
