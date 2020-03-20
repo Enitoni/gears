@@ -12,24 +12,11 @@ import { VALIDATE_BEFORE_ADD } from "../symbols"
 import { CommandLike } from "../types/CommandLike"
 
 /**
- * Options passed to the [[CommandGroup]] constructor
- * @category Command
- */
-export interface CommandGroupOptions<M, C, D> {
-  matcher: Matcher<any, M, C>
-  commands: MiddlewareChainer<M, C>[]
-  middleware?: ArrayResolvable<Middleware<any, M, C>>
-  /** Custom metadata */
-  metadata?: D
-}
-
-/**
  * A group of [[Command]], which will only match if the [[Matcher]] and a command in the group matches
  * @example
- * const group = new CommandGroup({
- *   matcher: matchPrefixes("!"),
- *   commands: [sumCommand]
- * })
+ * const group = new CommandGroup()
+ *   .match(matchPrefixes("!"))
+ *   .setCommands(sumCommand)
  *
  * // Input: "!sum 2 2"
  * // Output: "The sum is: 4"

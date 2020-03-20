@@ -3,31 +3,18 @@ import { Chain, MiddlewareChainer, Matcher, Context, Middleware } from "../types
 import { VALIDATE_BEFORE_ADD } from "../symbols"
 
 /**
- * Options passed to the [[Command]] constructor
- * @category Command
- */
-export interface CommandOptions<M, C, D> {
-  matcher: Matcher<any, M, C>
-  middleware?: ArrayResolvable<Middleware<any, M, C>>
-  /** @deprecated Use middleware instead */
-  action?: Middleware<any, M, C>
-  metadata?: D
-}
-
-/**
  * An executable command which only executes if its [[Matcher]] is satisfied
  * @example
- * const command = new Command({
- *   matcher: matchPrefixes("sum"),
- *   middleware: (context) => {
+ * const command = new Command()
+ *   .match(matchPrefixes("sum"))
+ *   .use(context => {
  *     const { content } = context
  *
  *     const numbers = content.split(" ").map(n => Number(n))
  *     const result = numbers.reduce((a, b) => a + b)
  *
  *     console.log("The sum is:", result)
- *   }
- * })
+ *   })
  *
  * // Input: "sum 4 4"
  * // Output: "The sum is: 8"
