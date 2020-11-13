@@ -5,6 +5,7 @@ import { InitializableStore } from "../../../common/state/types/InitializableSto
 import { Documentation } from "../types/Documentation"
 import { DocumentationModel } from "../models/DocumentationModel"
 import { observable } from "mobx"
+import { compare } from "semver"
 
 export type Version = keyof typeof versions
 
@@ -22,7 +23,7 @@ export enum DocumentationStoreStatus {
 
 class DocumentationStore implements InitializableStore<SerializedDocumentationStore> {
   public versionMap = versions
-  public versions = Object.keys(versions) as Version[]
+  public versions = Object.keys(versions).sort((a, b) => compare(b, a)) as Version[]
 
   @observable public status = DocumentationStoreStatus.Idle
   @observable public selected?: DocumentationModel
